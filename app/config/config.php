@@ -1,6 +1,6 @@
 <?php
 
-define('BASEURL','https://localhost/siprak/public');
+define('BASEURL','https://localhost/sistem-informasi-praktikum/public');
 
 // DB
 define('DB_HOST', 'localhost');
