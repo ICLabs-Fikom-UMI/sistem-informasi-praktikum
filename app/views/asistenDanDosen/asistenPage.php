@@ -3,7 +3,7 @@
     <div class="tambah-asisten">
     </div>
     <div class="tabel-asisten">
-      <table id="example" class="table table-striped" style="width:100%">
+      <table id="dataTable" class="table table-striped" style="width:100%">
         <thead>
             <tr>
                 <th>NIM</th>

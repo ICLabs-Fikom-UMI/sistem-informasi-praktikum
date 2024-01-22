@@ -2,7 +2,7 @@
     <div class="tambah-dosen">
     </div>
     <div class="tabel-dosen">
-      <table id="example" class="table table-striped" style="width:100%">
+      <table id="dataTable" class="table table-striped" style="width:100%">
         <thead>
             <tr>
                 <th>NIDN</th>
