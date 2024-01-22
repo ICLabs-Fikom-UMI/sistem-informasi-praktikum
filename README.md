@@ -1,5 +1,5 @@
 
-# NAMA APLIAKSI
+# SIPRAK - Sistem Informasi Praktikum
 > [!NOTE]
 > Nasrullah - 13020210134
 
