@@ -6,6 +6,7 @@ class DataFrekuensi extends Controller {
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
+        $this->view('templates/headerProfile', $data);
         $this->view('dataFrekuensi/index');
         $this->view('templates/footer');
     }
