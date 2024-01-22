@@ -31,7 +31,7 @@ class Login extends Controller {
                 exit();
             }
             else {
-                header('Location: ' . BASEURL . '/home');
+                header('Location: ' . BASEURL . '/daftarNilai');
                 exit;
             }
         }
