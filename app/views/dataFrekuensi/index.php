@@ -5,21 +5,27 @@
       <table id="example" class="table table-striped" style="width:100%">
         <thead>
             <tr>
-                <th>NIDN</th>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Total Frekuensi</th>
-                <th>Action</th>
+                <th>Kode Frekuensi</th>
+                <th>Mata Kuliah</th>
+                <th>Jadwal</th>
+                <th>Ruangan</th>
+                <th>Dosen</th>
+                <th>Asisten 1</th>
+                <th>Asisten 2</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach($data['dosen'] as $dosen) : ?>
+            <?php foreach($data['frekuensi'] as $frekuensi) : ?>
                 <tr>
-                    <td><?= $dosen['nidn']?></td>
-                    <td><?= $dosen['nama']?></td>
-                    <td><?= $dosen['email']?></td>
-                    <td>-</td>
-                    <td>-</td>
+                    <td><?= $frekuensi['kode_frekuensi']?></td>
+                    <td><?= $frekuensi['nama_matkul']?></td>
+                    <td><?= $frekuensi['hari'] . ',' . $frekuensi['jam_mulai'] . ' - ' . $frekuensi['jam_selesai'];?></td>
+                    <td><?= $frekuensi['nama_laboratorium']?></td>
+                    <td><?= $frekuensi['nama_dosen']?></td>
+                    <td><?= $frekuensi['asisten1']?></td>
+                    <td><?= $frekuensi['asisten2']?></td>
+                    <td><?= $frekuensi['status']?></td>
                 </tr>
             <?php endforeach;?>
         </tbody>
