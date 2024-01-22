@@ -1,10 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
 .container {
     display: flex;
     margin: 0 -15px;
-    
-    width: 100vw;
-    
+    width: 100%;
 }
 
 
@@ -31,23 +30,45 @@
 }
 
 .main {
-    flex: 1;
-    
     padding: 20px;
-    
+    width: 100%;    
 }
-
 
 .header {
     display: flex;
     background-color: #f8f9fa;
     padding: 10px;
     margin-bottom: 15px;
+    width: 100%;
 }
-
 
 .content {
     background-color: #fff;
     padding: 15px;
     border: 1px solid #ddd;
+}
+
+.nama-user {
+    color: var(--Dark-500, #16151C);
+    /* Body-1 Regular */
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 24px; /* 150% */
+}
+
+ul li {
+    list-style-type: none;
+}
+
+.jumlah-frekuensi {
+    color: var(--Gray-500, #A2A1A8);
+
+    /* Caption Regular */
+    font-family: Poppins;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 18px; /* 150% */
 }

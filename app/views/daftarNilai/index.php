@@ -1,25 +1,3 @@
-<div class="main">
-  <!-- Header -->
-  <div class="header">
-    <div class="title-profile">
-        <div class="title">
-            <h3><?= $data['title']?></h3>
-            <h5><?= $data['detail']?></h5>
-        </div>
-        <div class="profile">
-            <div class="btn-group">
-            <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="profile-name">Kak Fatimah</span><br>
-                <span class="profile-role">Admin</span>
-            </button>
-            <ul class="dropdown-menu">
-                ...
-            </ul>
-            </div>
-        </div>
-    </div>
-  </div>
-
   <!-- Content -->
   <div class="content">
     <h2>Content</h2>

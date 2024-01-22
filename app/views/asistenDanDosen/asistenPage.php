@@ -1,11 +1,12 @@
+
 <div class="content d-flex">
-    <div class="tambah-dosen">
+    <div class="tambah-asisten">
     </div>
-    <div class="tabel-dosen">
+    <div class="tabel-asisten">
       <table id="example" class="table table-striped" style="width:100%">
         <thead>
             <tr>
-                <th>NIDN</th>
+                <th>NIM</th>
                 <th>Nama</th>
                 <th>Email</th>
                 <th>Total Frekuensi</th>
@@ -13,11 +14,11 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($data['dosen'] as $dosen) : ?>
+            <?php foreach($data['asisten'] as $asisten) : ?>
                 <tr>
-                    <td><?= $dosen['nidn']?></td>
-                    <td><?= $dosen['nama']?></td>
-                    <td><?= $dosen['email']?></td>
+                    <td><?= $asisten['nim']?></td>
+                    <td><?= $asisten['nama']?></td>
+                    <td><?= $asisten['email']?></td>
                     <td>-</td>
                     <td>-</td>
                 </tr>
@@ -25,7 +26,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <th>NIDN</th>
+                <th>NIM</th>
                 <th>Nama</th>
                 <th>Email</th>
                 <th>Total Frekuensi</th>
