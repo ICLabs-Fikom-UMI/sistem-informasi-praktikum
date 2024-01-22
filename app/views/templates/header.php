@@ -9,9 +9,4 @@
     <link rel="stylesheet" href="<?= BASEURL; ?>/css/style.css">
 </head>
 <body>
-    <div id="container">
-        <header>
-            <!-- Your header content here -->
-        </header>
-        <div id="content-container">
-            <!-- Sidebar will be added here -->
+    <div class="container">
