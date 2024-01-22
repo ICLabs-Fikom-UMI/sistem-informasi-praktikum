@@ -3,8 +3,22 @@
 > Nasrullah - 13020210134
 
 
-Penjelasan aplikasi ...
+### Deskripsi Aplikasi
+- Aplikasi 
+- Tujuan dari Aplikasi Anda 
+- Teknologi yang digunakan
 
+
+### Fitur MVP Aplikasi
+- Pengisian Nilai Praktikum
+- Generate Jadwal Tiap Frekuensi
+- Pembobotan Nilai Akhir
+
+
+### Penjelasan Mengenai Arsitektur MVC
+...
+...
+...
 
 
 ### LINK UML [Click here](https://drive.google.com/file/d/1f8IS6r13hGTsoHEPrlGKfqRiTcy7Nvp6/view?usp=sharing)
