@@ -26,6 +26,7 @@ class DataFrekuensi_model {
                     asisten2.nama AS asisten2,
                     laboratorium.nama_laboratorium,
                     mata_kuliah.nama_matkul,
+                    mata_kuliah.kode_matkul,
                     ' . $this->table . '.hari,
                     ' . $this->table . '.jam_mulai,
                     ' . $this->table . '.jam_selesai,

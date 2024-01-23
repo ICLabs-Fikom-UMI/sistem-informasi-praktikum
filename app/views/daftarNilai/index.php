@@ -13,6 +13,7 @@
         </div>
     </div>
     <div class="frekuensi border p-2 rounded">
+        <?php foreach($data['frekuensi'] as $frek) : ?>
         <div class="data-frekuensi d-flex flex-row justify-content-between mb-4">
             <div class="column-1 d-flex flex-row gap-3">
                 <div class="frek-header d-flex flex-column">
@@ -22,28 +23,28 @@
                     <span>Hari / Jam</span> 
                 </div>
                 <div class="frek-value d-flex flex-column">
-                    <span>Kode Matakuliah</span> 
-                    <span>Nama Matakuliah</span> 
-                    <span>Frekuensi</span> 
-                    <span>Hari / Jam</span> 
+                    <span><?= $frek['kode_matkul']?></span> 
+                    <span><?= $frek['nama_matkul']?></span> 
+                    <span><?= $frek['kode_frekuensi']?></span> 
+                    <span><?= $frek['hari'] . ', ' . $frek['jam_mulai'] . ' - ' . $frek['jam_selesai'];?></span>
                 </div>
             </div>
             <div class="column-2 d-flex flex-row gap-3">
                 <div class="frek-header d-flex flex-column">
-                    <span>Kode Matakuliah</span> 
-                    <span>Nama Matakuliah</span> 
-                    <span>Frekuensi</span> 
-                    <span>Hari / Jam</span> 
+                    <span>Ruangan</span> 
+                    <span>Dosen</span> 
+                    <span>Asisten 1</span> 
+                    <span>Asisten 2</span> 
                 </div>
                 <div class="frek-value d-flex flex-column">
-                    <span>Kode Matakuliah</span> 
-                    <span>Nama Matakuliah</span> 
-                    <span>Frekuensi</span> 
-                    <span>Hari / Jam</span> 
+                    <span><?= $frek['nama_laboratorium']?></span> 
+                    <span><?= $frek['nama_dosen']?></span> 
+                    <span><?= $frek['assiten1']?></span> 
+                    <span><?= $frek['asisten2']?></span> 
                 </div>
             </div>
             <div class="column-2 d-flex align-items-center">
-                <button type="button" class="btn btn-dark">Dark</button>
+                <button type="button" class="btn btn-dark">Kirim</button>
             </div>
         </div>
         <div class="nilai-frekuensi">
@@ -97,5 +98,7 @@
         </table>
 
         </div>
+        <div class="line-stright"></div>
+        <?php endforeach;?>
     </div>
 </div>

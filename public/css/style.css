@@ -98,6 +98,14 @@ input[type="number"]::-webkit-outer-spin-button {
     background-color: #e0e0e0;
 }
 
+.line-stright {
+    background-color: #A2A1A8;
+    height: 5px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .jumlah-frekuensi {
     color: var(--Gray-500, #A2A1A8);
 

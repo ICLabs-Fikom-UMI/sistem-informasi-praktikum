@@ -17,7 +17,7 @@
                             <i class="fa fa-eye-slash" aria-hidden="true"></i>
                         </span>
                     </div>
-               UML </div>
+                    </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary btn-block" style="width: 360px">Login</button>
                 </div>
@@ -25,4 +25,3 @@
         </div>
     </form>
 </div>
-w to share localhost htdosc
