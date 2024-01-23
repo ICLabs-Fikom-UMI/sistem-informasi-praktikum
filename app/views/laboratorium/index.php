@@ -5,7 +5,7 @@
     <div class="laboratorium-card">
         <div class="row d-flex align-items-stretch">
             <?php foreach($data['laboratorium'] as $lab) : ?>
-            <div class="col-sm-4 mb-4">
+            <div class="col-sm-4 mb-4 min-">
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title d-flex justify-content-between p-2">

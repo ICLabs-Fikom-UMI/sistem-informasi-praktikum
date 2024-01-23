@@ -1,7 +1,17 @@
 <div class="sidenav">
-  <a href="<?= BASEURL?>/DaftarNilai">Daftar Nilai</a>
-  <a href="<?= BASEURL?>/AsistenDanDosen">Asisten dan Dosen</a>
-  <a href="<?= BASEURL?>/DataFrekuensi">Data Frekuensi</a>
-  <a href="<?= BASEURL?>/laboratorium">Laboratorium</a>
-  <a href="<?= BASEURL?>/Settings">Settings</a>
+  <div class="menu-item">
+    <a href="<?= BASEURL?>/DaftarNilai">Daftar Nilai</a>
+  </div>
+  <div class="menu-item">
+    <a href="<?= BASEURL?>/AsistenDanDosen">Asisten dan Dosen</a>
+  </div>
+  <div class="menu-item">
+    <a href="<?= BASEURL?>/DataFrekuensi">Data Frekuensi</a>
+  </div>
+  <div class="menu-item">
+    <a href="<?= BASEURL?>/laboratorium">Laboratorium</a>
+  </div>
+  <div class="menu-item">
+    <a href="<?= BASEURL?>/Settings">Settings</a>
+  </div>
 </div>

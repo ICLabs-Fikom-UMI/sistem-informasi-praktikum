@@ -1,51 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
-
-.container {
-    display: flex;
-    margin: 0 -15px;
-    width: 100%;
-}
-
-
 .sidenav {
     width: 280px;
-    background-color: #111;
+    height: auto;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background-color: var(--menu-background, rgba(162, 161, 168, 0.05));
+    margin: 20px;
+}
+
+#main {
+    flex: 1;
+    padding: 10px;
     padding-top: 20px;
-    min-height: 100vh;
-    
-    color: #818181;
+
 }
 
-
-.sidenav a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 25px;
-    display: block;
-}
-
-
-.sidenav a:hover {
-    color: #f1f1f1;
-}
-
-.main {
-    padding: 20px;
-    width: 100%;    
-}
 
 .header {
-    display: flex;
-    background-color: #f8f9fa;
-    padding: 10px;
-    margin-bottom: 15px;
-    width: 100%;
+    
 }
 
 .content {
-    background-color: #fff;
-    padding: 15px;
-    border: 1px solid #ddd;
+    
+}
+
+.span {
+    font-family: Poppins;
 }
 
 .nama-user {
@@ -60,6 +40,25 @@
 
 ul li {
     list-style-type: none;
+}
+
+.tabel-nilai {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tabel-nilai th {
+    background-color: #f2f2f2;
+}
+
+.tabel-nilai th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.tabel-nilai .td-3 {
+    text-align: left;
 }
 
 .jumlah-frekuensi {

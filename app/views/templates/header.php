@@ -12,4 +12,4 @@
     <link rel="stylesheet" href="<?= BASEURL; ?>/css/style.css">
 </head>
 <body>
-    <div class="container">
+    <div id="container" class="d-flex">
