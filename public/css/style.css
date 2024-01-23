@@ -42,23 +42,60 @@ ul li {
     list-style-type: none;
 }
 
+.frekuensi {
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
+
+}
+
 .tabel-nilai {
     border-collapse: collapse;
     width: 100%;
+}
+
+.tabel-nilai th, .tabel-nilai td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
 }
 
 .tabel-nilai th {
     background-color: #f2f2f2;
 }
 
-.tabel-nilai th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
+.tabel-nilai td {
+    padding: 0;
 }
 
 .tabel-nilai .td-3 {
     text-align: left;
+}
+
+.tabel-nilai input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    margin: 0;
+    outline: none;
+    border: none;
+}
+
+.tabel-nilai input {
+    text-align: center;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.tabel-nilai tbody tr input:hover {
+    background-color: #e0e0e0;
+}
+
+.tabel-nilai tbody tr:hover {
+    background-color: #e0e0e0;
 }
 
 .jumlah-frekuensi {
