@@ -1,23 +1,3 @@
-<!-- <div class="sidenav">
-  <div class="menu-item">
-    <a href="<?= BASEURL?>/DaftarNilai">Daftar Nilai</a>
-  </div>
-  <div class="menu-item">
-    <a href="<?= BASEURL?>/AsistenDanDosen">Asisten dan Dosen</a>
-  </div>
-  <div class="menu-item">
-    <a href="<?= BASEURL?>/DataFrekuensi">Data Frekuensi</a>
-  </div>
-  <div class="menu-item">
-    <a href="<?= BASEURL?>/laboratorium">Laboratorium</a>
-  </div>
-  <div class="menu-item">
-    <a href="<?= BASEURL?>/Settings">Settings</a>
-  </div>
-</div> -->
-
-<link rel="stylesheet" href="<?= BASEURL ?>/assets/css/sidebar.css" />
-<body?>
   <div class="container-fluid">
     <div class="row">
       <nav class="col-md-2 d-none d-md-block sidebar">
@@ -47,6 +27,3 @@
           </li>
         </ul>
       </nav>
-
-      <!-- Content area -->
-      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
