@@ -8,6 +8,10 @@ class Laboratorium_model {
         $this->db = new Database;
     }
 
+    public function getTable() {
+        return $this->table;
+    }
+
     public function getAllLaboratorium() {
         $this->db->query('SELECT * FROM ' . $this->table);
         

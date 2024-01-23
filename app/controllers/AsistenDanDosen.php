@@ -5,8 +5,10 @@ class AsistenDanDosen extends Controller {
         $data['title'] = 'Asisten dan Dosen';
         $data['header'] = 'Daftar Dosen dan Asisten Laboratorium';
         $data['detail'] = 'Dapat mengedit data Dosen dan Asisten Laboratorium';
-        $data['dosen'] = $this->model('Dosen_model')->getSeveralDosen(5);
-        $data['asisten'] = $this->model('Asisten_model')->getSeveralAsisten(5);
+        $data['dosen'] = $this->model('Dosen_model')->getSeveralDosenWithFrekuensi(5);
+        $data['asisten'] = $this->model('Asisten_model')->getSeveralAsistenWithFrekuensi(5);
+        $data['total_dosen'] = $this->model('Dosen_model')->numOfData();
+        $data['total_asisten'] = $this->model('Asisten_model')->numOfData();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);

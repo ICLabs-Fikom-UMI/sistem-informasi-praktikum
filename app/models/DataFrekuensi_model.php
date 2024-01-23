@@ -8,6 +8,10 @@ class DataFrekuensi_model {
         $this->db = new Database;
     }
 
+    public function getTable() {
+        return $this->table;
+    }
+
     public function getAllFrekuensi() {
         $this->db->query('SELECT * FROM ' . $this->table);
 

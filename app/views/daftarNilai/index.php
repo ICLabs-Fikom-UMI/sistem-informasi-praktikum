@@ -47,54 +47,54 @@
             </div>
         </div>
         <div class="nilai-frekuensi">
-<table class="tabel-nilai">
-    <thead>
-        <tr>
-            <th rowspan="2">No</th>
-            <th rowspan="2">Stambuk</th>
-            <th rowspan="2">Nama Mahasiswa</th>
-            <th rowspan="2">Kelas</th>
-            <th colspan="10">Jumlah Pertemuan</th>
-            <th colspan="8">Nilai Tugas</th>
-            <th rowspan="2">MID</th>
-            <th rowspan="2">Project</th>
-        </tr>
-        <tr>
-            <!-- Kolom untuk JUMLAH PERTEMUAN -->
-            <?php for ($i = 1; $i <= 10; $i++) { ?>
-                <th><?php echo $i; ?></th>
-            <?php } ?>
-            <!-- Kolom untuk NILAI TUGAS -->
-            <?php for ($i = 1; $i <= 8; $i++) { ?>
-                <th><?php echo $i; ?></th>
-            <?php } ?>
-        </tr>
-    </thead>
-    <tbody>
-        <?php for ($i = 0; $i < 25; $i++) { ?>
-            <tr>
-                <td><?= $i+1;?></td>
-                <td><input type="text" value="123456"></td>
-                <td class="td-3"><input type="text" value="John Doe"></td>
-                <td><input type="text" value="TI01"></td>
-                <!-- Kolom JUMLAH PERTEMUAN -->
-                <?php for ($j = 0; $j < 10; $j++) { ?>
-                    <td><input type="text" value="H"></td>
+        <table class="tabel-nilai">
+            <thead>
+                <tr>
+                    <th rowspan="2">No</th>
+                    <th rowspan="2">Stambuk</th>
+                    <th rowspan="2">Nama Mahasiswa</th>
+                    <th rowspan="2">Kelas</th>
+                    <th colspan="10">Jumlah Pertemuan</th>
+                    <th colspan="8">Nilai Tugas</th>
+                    <th rowspan="2">MID</th>
+                    <th rowspan="2">Project</th>
+                </tr>
+                <tr>
+                    <!-- Kolom untuk JUMLAH PERTEMUAN -->
+                    <?php for ($i = 1; $i <= 10; $i++) { ?>
+                        <th><?php echo $i; ?></th>
+                    <?php } ?>
+                    <!-- Kolom untuk NILAI TUGAS -->
+                    <?php for ($i = 1; $i <= 8; $i++) { ?>
+                        <th><?php echo $i; ?></th>
+                    <?php } ?>
+                </tr>
+            </thead>
+            <tbody>
+                <?php for ($i = 0; $i < 25; $i++) { ?>
+                    <tr>
+                        <td><?= $i+1;?></td>
+                        <td><input type="text" value="123456"></td>
+                        <td class="td-3"><input type="text" value="Muhammad Ahmad Rendi"></td>
+                        <td><input type="text" value="TI01"></td>
+                        <!-- Kolom JUMLAH PERTEMUAN -->
+                        <?php for ($j = 0; $j < 10; $j++) { ?>
+                            <td><input type="text" value="H"></td>
+                        <?php } ?>
+                        <!-- Kolom NILAI TUGAS -->
+                        <?php for ($k = 0; $k < 8; $k++) { ?>
+                            <td><input type="number" value="85"></td>
+                        <?php } ?>
+                        <td><input type="number" value="82"></td>
+                        <td><input type="number" value="82"></td>
+                    </tr>
                 <?php } ?>
-                <!-- Kolom NILAI TUGAS -->
-                <?php for ($k = 0; $k < 8; $k++) { ?>
-                    <td><input type="number" value="85"></td>
-                <?php } ?>
-                <td><input type="number" value="82"></td>
-                <td><input type="number" value="82"></td>
-            </tr>
-        <?php } ?>
-        <!-- Tambahkan baris sesuai dengan data mahasiswa yang ada -->
-        <tr>
-            <!-- ... -->
-        </tr>
-    </tbody>
-</table>
+                <!-- Tambahkan baris sesuai dengan data mahasiswa yang ada -->
+                <tr>
+                    <!-- ... -->
+                </tr>
+            </tbody>
+        </table>
 
         </div>
     </div>
