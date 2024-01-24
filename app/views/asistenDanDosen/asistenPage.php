@@ -2,7 +2,7 @@
 <div class="content d-flex">
     <div class="tambah-asisten">
     </div>
-    <div class="tabel-asisten">
+    <div class="tabel-asisten" style="width: 100%">
       <table id="dataTable" class="table table-striped" style="width:100%">
         <thead>
             <tr>

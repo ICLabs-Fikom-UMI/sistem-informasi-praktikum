@@ -9,7 +9,7 @@
             SIPRAK
           </h5>
         </div>
-        <ul class="sidebar-menu">
+        <ul class="sidebar-menu" style="width: 200px">
           <li>
             <a href="<?= BASEURL?>/DaftarNilai"><img src="<?= BASEURL ?>/icons/daftar-nilai.svg" alt="Icon 1" />Beranda</a>
           </li>

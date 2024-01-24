@@ -27,6 +27,7 @@ class DataFrekuensi_model {
                     laboratorium.nama_laboratorium,
                     mata_kuliah.nama_matkul,
                     mata_kuliah.kode_matkul,
+                    mata_kuliah.id_matkul,
                     ' . $this->table . '.hari,
                     ' . $this->table . '.jam_mulai,
                     ' . $this->table . '.jam_selesai,

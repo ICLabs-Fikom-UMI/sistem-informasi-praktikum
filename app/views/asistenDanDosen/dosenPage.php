@@ -1,8 +1,8 @@
 <div class="content d-flex">
     <div class="tambah-dosen">
     </div>
-    <div class="tabel-dosen">
-      <table id="dataTable" class="table table-striped" style="width:100%">
+    <div class="tabel-dosen" style="width: 100%">
+      <table id="dataTable" class="table table-striped">
         <thead>
             <tr>
                 <th>NIDN</th>

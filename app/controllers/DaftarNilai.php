@@ -6,6 +6,7 @@ class DaftarNilai extends Controller {
         $data['header'] = 'Daftar Nilai Praktikum';
         $data['detail'] = 'Semua Daftar Nilai';
         $data['frekuensi'] = $this->model('DataFrekuensi_model')->getDataFrekuensi();
+        $data['mata_kuliah'] = $this->model('MataKuliah_model')->getAllMataKuliah();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
