@@ -10,6 +10,17 @@ class AsistenDanDosen extends Controller {
         $data['total_dosen'] = $this->model('Dosen_model')->numOfData();
         $data['total_asisten'] = $this->model('Asisten_model')->numOfData();
 
+        if (!isset($_SESSION['id_user'])) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+        else {
+            if ($_SESSION['role_user'] != 'admin') {
+                header('Location: ' . BASEURL . '/daftarnilai');
+                exit;
+            }
+        }
+
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
         $this->view('templates/headerProfile', $data);

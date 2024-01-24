@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 class DaftarNilai extends Controller {
     public function index() {
@@ -7,6 +8,14 @@ class DaftarNilai extends Controller {
         $data['detail'] = 'Semua Daftar Nilai';
         $data['frekuensi'] = $this->model('DataFrekuensi_model')->getDataFrekuensiByIdMatkul(10);
         $data['mata_kuliah'] = $this->model('MataKuliah_model')->getAllMataKuliah();
+
+        var_dump($_SESSION['id_user']);
+        var_dump($_SESSION['role_user']);
+        
+        if (!isset($_SESSION['id_user'])) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -31,12 +40,12 @@ class DaftarNilai extends Controller {
 
     public function changeStatus($id_frek) {
         if ($this->model('DataFrekuensi_model')->changeStatus($id_frek) > 0) {
-            Flasher::setFlash('berhasil', 'diganti', 'success');
+            // Flasher::setFlash('berhasil', 'diganti', 'success');
             header('Location: ' . BASEURL . '/daftarnilai');
             exit;
         }
         else {
-            Flasher::setFlash('gagal', 'diganti', 'danger');
+            // Flasher::setFlash('gagal', 'diganti', 'danger');
             header('Location: ' . BASEURL . '/daftarnilai');
             exit;
         }

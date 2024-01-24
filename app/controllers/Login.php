@@ -1,8 +1,14 @@
 <?php
+session_start();
 
 class Login extends Controller {
     public function index() {
         $data['title'] = 'Login';
+
+        if (isset($_SESSION['id_user'])) {
+            header('Location: ' . BASEURL . '/daftarnilai');
+            exit;
+        }
 
         $this->view('templates/header', $data);
         $this->view('login/index');
@@ -31,6 +37,8 @@ class Login extends Controller {
                 exit();
             }
             else {
+                $_SESSION['id_user'] = $id_user;
+                $_SESSION['role_user'] = $role['role'];
                 header('Location: ' . BASEURL . '/daftarNilai');
                 exit;
             }
@@ -39,5 +47,13 @@ class Login extends Controller {
             echo "Email Atau Password Salah";
         }
     }
+    
+    public function logout() {
+        session_start();
+        session_unset();
+        session_destroy();
 
+        header('Location: ' . BASEURL . '/login');
+        exit;
+    }
 }
