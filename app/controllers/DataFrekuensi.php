@@ -5,7 +5,7 @@ class DataFrekuensi extends Controller {
         $data['title'] = 'Data Frekuensi';
         $data['header'] = 'Daftar Frekuensi';
         $data['detail'] = 'Dapat mengedit data Frekuensi';
-        $data['frekuensi'] = $this->model('DataFrekuensi_model')->getDataFrekuensi();
+        $data['frekuensi'] = $this->model('DataFrekuensi_model')->getAllDataFrekuensi();
         
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -13,5 +13,4 @@ class DataFrekuensi extends Controller {
         $this->view('dataFrekuensi/index', $data);
         $this->view('templates/footer');
     }
-
 }

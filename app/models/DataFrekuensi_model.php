@@ -18,34 +18,25 @@ class DataFrekuensi_model {
         return $this->db->resultSet();
     }
 
-    public function getDataFrekuensi() {
-        $query = 'SELECT
-                    ' . $this->table . '.kode_frekuensi,
-                    dosen.nama AS nama_dosen,
-                    asisten1.nama AS asisten1,
-                    asisten2.nama AS asisten2,
-                    laboratorium.nama_laboratorium,
-                    mata_kuliah.nama_matkul,
-                    mata_kuliah.kode_matkul,
-                    mata_kuliah.id_matkul,
-                    ' . $this->table . '.hari,
-                    ' . $this->table . '.jam_mulai,
-                    ' . $this->table . '.jam_selesai,
-                    ' . $this->table . '.status
-                FROM
-                    ' . $this->table . '
-                JOIN
-                    dosen ON ' . $this->table . '.id_dosen = dosen.id_dosen
-                JOIN
-                    asisten AS asisten1 ON ' . $this->table . '.id_asisten1 = asisten1.id_asisten
-                JOIN
-                    asisten AS asisten2 ON ' . $this->table . '.id_asisten2 = asisten2.id_asisten
-                JOIN
-                    laboratorium ON ' . $this->table . '.id_laboratorium = laboratorium.id_laboratorium
-                JOIN
-                    mata_kuliah ON ' . $this->table . '.id_matkul = mata_kuliah.id_matkul;';
+    public function getAllDataFrekuensi() {
+        $this->db->query('SELECT * FROM vw_frek_data');
+
+        return $this->db->resultSet();
+    }
+
+    public function getAllFrekuensiByIdMatkul($id_matkul) {
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id_matkul = :id_matkul');
+
+        $this->db->bind('id_matkul', $id_matkul);
+
+        return $this->db->resultSet();
+    }
+
+    public function getDataFrekuensiByIdMatkul($id_matkul) {
+        $query = 'CALL proc_frek_filter_id_matkul(:id_matkul)';
         
         $this->db->query($query);
+        $this->db->bind('id_matkul', $id_matkul);
         
         return $this->db->resultSet();
     }
