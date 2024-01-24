@@ -1,7 +1,9 @@
-<div class="content d-flex">
-    <div class="tambah-dosen">
+<div class="content d-flex flex-column">
+    <div class="tambah-asisten d-flex justify-content-end mb-4 p-2">
+        <a href="#"><button type="button" class="btn btn-primary">Tambah Dosen</button></a>
     </div>
-    <div class="tabel-dosen" style="width: 100%">
+
+    <div class="tabel-dosen border p-2 rounded" style="width: 100%">
       <table id="dataTable" class="table table-striped">
         <thead>
             <tr>
@@ -18,7 +20,7 @@
                     <td><?= $dosen['nidn']?></td>
                     <td><?= $dosen['nama']?></td>
                     <td><?= $dosen['email']?></td>
-                    <td>-</td>
+                    <td><?= $dosen['total_frekuensi']?></td>
                     <td>-</td>
                 </tr>
             <?php endforeach;?>

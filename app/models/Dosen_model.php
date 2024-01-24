@@ -28,20 +28,20 @@ class Dosen_model {
     }
 
     public function getAllDosenWithFrekuensi() {
-        $query = 'SELECT ' . $this->table . '.nama, COUNT(*) AS total_frekuensi
+        $query = 'SELECT ' . $this->table . '.id_dosen, ' . $this->table . '.nidn, ' . $this->table . '.nama, ' . $this->table . '.email, COUNT(*) AS total_frekuensi
                     FROM ' . $this->table . '
-                    LEFT JOIN frekuensi ON ' . $this->table . '.id_asisten = frekuensi.id_asisten1 OR ' . $this->table . '.id_asisten = frekuensi.id_asisten2
-                    GROUP BY ' . $this->table . '.nama;';
+                    LEFT JOIN frekuensi ON ' . $this->table . '.id_dosen = frekuensi.id_dosen
+                    GROUP BY ' . $this->table . '.id_dosen;';
         $this->db->query($query);
         
         return $this->db->resultSet();
     }
 
     public function getSeveralDosenWithFrekuensi($limit) {
-        $query = 'SELECT ' . $this->table . '.nama, COUNT(*) AS total_frekuensi
+        $query = 'SELECT ' . $this->table . '.id_dosen, ' . $this->table . '.nidn, ' . $this->table . '.nama, ' . $this->table . '.email, COUNT(*) AS total_frekuensi
                     FROM ' . $this->table . '
                     LEFT JOIN frekuensi ON ' . $this->table . '.id_dosen = frekuensi.id_dosen
-                    GROUP BY ' . $this->table . '.nama LIMIT ' . $limit . ';';
+                    GROUP BY ' . $this->table . '.id_dosen LIMIT ' . $limit . ';';
         $this->db->query($query);
         
         return $this->db->resultSet();

@@ -11,7 +11,7 @@
         </div>
         <ul class="sidebar-menu" style="width: 200px">
           <li>
-            <a href="<?= BASEURL?>/DaftarNilai"><img src="<?= BASEURL ?>/icons/daftar-nilai.svg" alt="Icon 1" />Beranda</a>
+            <a href="<?= BASEURL?>/DaftarNilai"><img src="<?= BASEURL ?>/icons/daftar-nilai.svg" alt="Icon 1" />Daftar Nilai</a>
           </li>
           <li>
             <a href="<?= BASEURL?>/AsistenDanDosen"><img src="<?= BASEURL ?>/icons/asisten-dan-dosen.svg" alt="Icon 1" />Asisten dan Dosen</a>

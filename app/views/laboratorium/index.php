@@ -1,5 +1,5 @@
-<div class="content">
-    <div class="tambah-lab">
+<div class="content d-flex flex-column">
+    <div class="tambah-lab d-flex justify-content-end mb-4 p-2">
         <button type="button" class="btn btn-primary">Tambah Lab</button>
     </div>
     <div class="laboratorium-card">

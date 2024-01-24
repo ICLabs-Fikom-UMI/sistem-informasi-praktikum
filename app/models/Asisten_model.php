@@ -28,20 +28,20 @@ class Asisten_model {
     }
 
     public function getAllAsistenWithFrekuensi() {
-        $query = 'SELECT ' . $this->tabel . '.id_' . $this->tabel . ', ' . $this->tabel . '.nim, ' . $this->tabel . '.nama, ' . $this->tabel . '.email, COUNT(*) AS total_frekuensi
-                    FROM ' . $this->tabel . '
-                    LEFT JOIN frekuensi ON ' . $this->tabel . '.id_' . $this->tabel . ' = frekuensi.id_' . $this->tabel . '1 OR ' . $this->tabel . '.id_' . $this->tabel . ' = frekuensi.id_' . $this->tabel . '2
-                    GROUP BY ' . $this->tabel . '.nama;';
+        $query = 'SELECT ' . $this->table . '.id_asisten, ' . $this->table . '.nim, ' . $this->table . '.nama, ' . $this->table . '.email, COUNT(*) AS total_frekuensi
+                    FROM ' . $this->table . '
+                    LEFT JOIN frekuensi ON ' . $this->table . '.id_asisten = frekuensi.id_asisten1 OR ' . $this->table . '.id_asisten = frekuensi.id_asisten2
+                    GROUP BY ' . $this->table . '.id_asisten;';
         $this->db->query($query);
         
         return $this->db->resultSet();
     }
 
     public function getSeveralAsistenWithFrekuensi($limit) {
-        $query = 'SELECT ' . $this->table . '.nama, COUNT(*) AS total_frekuensi
+        $query = 'SELECT ' . $this->table . '.id_asisten, ' . $this->table . '.nim, ' . $this->table . '.nama, ' . $this->table . '.email, COUNT(*) AS total_frekuensi
                     FROM ' . $this->table . '
                     LEFT JOIN frekuensi ON ' . $this->table . '.id_asisten = frekuensi.id_asisten1 OR ' . $this->table . '.id_asisten = frekuensi.id_asisten2
-                    GROUP BY ' . $this->table . '.nama LIMIT ' . $limit . ';';
+                    GROUP BY ' . $this->table . '.id_asisten LIMIT ' . $limit . ';';
         $this->db->query($query);
         
         return $this->db->resultSet();
