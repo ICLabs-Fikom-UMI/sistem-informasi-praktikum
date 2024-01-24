@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2024 at 10:48 PM
+-- Generation Time: Jan 24, 2024 at 07:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.3.2
 
@@ -20,6 +20,42 @@ SET time_zone = "+00:00";
 --
 -- Database: `siprak_db`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_frek_filter_id_matkul` (IN `id_matkul_param` INT)   BEGIN
+    SELECT
+        frekuensi.kode_frekuensi,
+        dosen.nama AS nama_dosen,
+        asisten1.nama AS asisten1,
+        asisten2.nama AS asisten2,
+        laboratorium.nama_laboratorium,
+        mata_kuliah.nama_matkul,
+        mata_kuliah.kode_matkul,
+        mata_kuliah.id_matkul,
+        frekuensi.hari,
+        frekuensi.jam_mulai,
+        frekuensi.jam_selesai,
+        frekuensi.status
+    FROM
+        frekuensi
+    JOIN
+        dosen ON frekuensi.id_dosen = dosen.id_dosen
+    JOIN
+        asisten AS asisten1 ON frekuensi.id_asisten1 = asisten1.id_asisten
+    JOIN
+        asisten AS asisten2 ON frekuensi.id_asisten2 = asisten2.id_asisten
+    JOIN
+        laboratorium ON frekuensi.id_laboratorium = laboratorium.id_laboratorium
+    JOIN
+        mata_kuliah ON frekuensi.id_matkul = mata_kuliah.id_matkul
+    WHERE
+        mata_kuliah.id_matkul = id_matkul_param;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -1502,6 +1538,36 @@ INSERT INTO `user` (`id_user`, `email`, `password`, `role`) VALUES
 (53, '13120210004@umi.ac.id', '*51117F55AF7589B9DD630C762EDDE8C3183873EF', 'asisten'),
 (54, '13020200318@umi.ac.id', '*51117F55AF7589B9DD630C762EDDE8C3183873EF', 'asisten'),
 (55, '13020210053@umi.ac.id', '*51117F55AF7589B9DD630C762EDDE8C3183873EF', 'asisten');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vw_frek_data`
+-- (See below for the actual view)
+--
+CREATE TABLE `vw_frek_data` (
+`kode_frekuensi` varchar(20)
+,`nama_dosen` varchar(100)
+,`asisten1` varchar(100)
+,`asisten2` varchar(100)
+,`nama_laboratorium` varchar(100)
+,`nama_matkul` varchar(100)
+,`kode_matkul` char(10)
+,`id_matkul` int(11)
+,`hari` varchar(10)
+,`jam_mulai` time
+,`jam_selesai` time
+,`status` enum('Belum','Selesai')
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_frek_data`
+--
+DROP TABLE IF EXISTS `vw_frek_data`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_frek_data`  AS SELECT `frekuensi`.`kode_frekuensi` AS `kode_frekuensi`, `dosen`.`nama` AS `nama_dosen`, `asisten1`.`nama` AS `asisten1`, `asisten2`.`nama` AS `asisten2`, `laboratorium`.`nama_laboratorium` AS `nama_laboratorium`, `mata_kuliah`.`nama_matkul` AS `nama_matkul`, `mata_kuliah`.`kode_matkul` AS `kode_matkul`, `mata_kuliah`.`id_matkul` AS `id_matkul`, `frekuensi`.`hari` AS `hari`, `frekuensi`.`jam_mulai` AS `jam_mulai`, `frekuensi`.`jam_selesai` AS `jam_selesai`, `frekuensi`.`status` AS `status` FROM (((((`frekuensi` join `dosen` on(`frekuensi`.`id_dosen` = `dosen`.`id_dosen`)) join `asisten` `asisten1` on(`frekuensi`.`id_asisten1` = `asisten1`.`id_asisten`)) join `asisten` `asisten2` on(`frekuensi`.`id_asisten2` = `asisten2`.`id_asisten`)) join `laboratorium` on(`frekuensi`.`id_laboratorium` = `laboratorium`.`id_laboratorium`)) join `mata_kuliah` on(`frekuensi`.`id_matkul` = `mata_kuliah`.`id_matkul`)) ;
 
 --
 -- Indexes for dumped tables
