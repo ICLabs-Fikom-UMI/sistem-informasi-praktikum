@@ -45,7 +45,7 @@ $selectedMatkul = 'Algoritma & Pemrograman 1';
                 <div class="frek-value d-flex flex-column">
                     <span><?= $frek['nama_laboratorium']?></span> 
                     <span><?= $frek['nama_dosen']?></span> 
-                    <span><?= $frek['assiten1']?></span> 
+                    <span><?= $frek['asisten1']?></span> 
                     <span><?= $frek['asisten2']?></span> 
                 </div>
             </div>
