@@ -1,5 +1,4 @@
 <div class="content">
-    <div style="display: none;" id="selectedMatkul">selectedMatkul</div>
     <div class="daftar-matkul d-flex flex-column mb-4 p-2">
         <span class="text-matkul mb-2">Mata Kuliah</span>
         <div class="dropdown">
@@ -50,7 +49,7 @@
                 </div>
             </div>
             <div class="column-2 d-flex align-items-center">
-                <button type="button" class="btn btn-dark">Kirim</button>
+                <a href="<?= BASEURL;?>/daftarnilai/changeStatus/<?= $frek['id_frekuensi'];?>" type="button" class="btn btn-dark" onclick="return confirm('yakin?');"><?= ($frek['status'] === "Belum" ? "Kirim": "Batalkan")?></a>
             </div>
         </div>
         <div class="nilai-frekuensi">

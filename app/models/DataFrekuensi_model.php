@@ -40,4 +40,14 @@ class DataFrekuensi_model {
         
         return $this->db->resultSet();
     }
+
+    public function changeStatus($id_frekuensi) {
+        $query = 'UPDATE ' . $this->table . ' SET status = IF(status = "Belum", "Selesai", "Belum") WHERE id_frekuensi = :id_frekuensi';
+
+        $this->db->query($query);
+        $this->db->bind('id_frekuensi', $id_frekuensi);
+        $this->db->execute();
+        
+        return $this->db->rowCount();
+    }
 }

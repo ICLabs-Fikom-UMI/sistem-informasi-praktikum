@@ -28,4 +28,17 @@ class DaftarNilai extends Controller {
         $this->view('daftarNilai/index', $data);
         $this->view('templates/footer');
     }
+
+    public function changeStatus($id_frek) {
+        if ($this->model('DataFrekuensi_model')->changeStatus($id_frek) > 0) {
+            Flasher::setFlash('berhasil', 'diganti', 'success');
+            header('Location: ' . BASEURL . '/daftarnilai');
+            exit;
+        }
+        else {
+            Flasher::setFlash('gagal', 'diganti', 'danger');
+            header('Location: ' . BASEURL . '/daftarnilai');
+            exit;
+        }
+    }
 }
