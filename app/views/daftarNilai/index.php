@@ -1,4 +1,5 @@
 <div class="content">
+    <?php if($_SESSION['role_user'] != 'dosen') {?>
     <div class="daftar-matkul d-flex flex-column mb-4 p-2">
         <span class="text-matkul mb-2">Mata Kuliah</span>
         <div class="dropdown">
@@ -17,7 +18,8 @@
             </ul>
         </div>
     </div>
-    <div class="frekuensi border p-2 rounded">
+    <?php }?>
+    <div class="frekuensi border p-2 rounded" <?php if ($_SESSION['role_user'] == 'dosen') echo 'style="max-height: calc(100vh - 130px)"'?>>
         <?php foreach($data['frekuensi'] as $frek) :?>
         <div class="data-frekuensi d-flex flex-row justify-content-between mb-4">
             <div class="column-1 d-flex flex-row gap-3">
@@ -48,9 +50,11 @@
                     <span><?= $frek['asisten2']?></span> 
                 </div>
             </div>
+            <?php if($_SESSION['role_user'] != 'dosen') {?>
             <div class="column-2 d-flex align-items-center">
                 <a href="<?= BASEURL;?>/daftarnilai/changeStatus/<?= $frek['id_frekuensi'];?>" type="button" class="btn btn-dark" onclick="return confirm('yakin?');"><?= ($frek['status'] === "Belum" ? "Kirim": "Batalkan")?></a>
             </div>
+            <?php }?>
         </div>
         <div class="nilai-frekuensi">
         <table class="tabel-nilai">
@@ -80,19 +84,19 @@
                 <?php for ($i = 0; $i < 25; $i++) { ?>
                     <tr>
                         <td><?= $i+1;?></td>
-                        <td><input type="text" value="123456"></td>
-                        <td class="td-3"><input type="text" value="Muhammad Ahmad Rendi"></td>
+                        <td><input type="text" <?php if($_SESSION['role_user'] == 'dosen') echo "readonly" ?> value="1302021034"></td>
+                        <td><input type="text" <?php if($_SESSION['role_user'] == 'dosen') echo "readonly" ?> value="Muhammad Imran Rendi"></td>
                         <td><input type="text" value="TI01"></td>
                         <!-- Kolom JUMLAH PERTEMUAN -->
                         <?php for ($j = 0; $j < 10; $j++) { ?>
-                            <td><input type="text" value="H"></td>
+                            <td><input type="text" <?php if($_SESSION['role_user'] == 'dosen') echo "readonly" ?> value="H"></td>
                         <?php } ?>
                         <!-- Kolom NILAI TUGAS -->
                         <?php for ($k = 0; $k < 8; $k++) { ?>
-                            <td><input type="number" value="85"></td>
+                            <td><input type="number" <?php if($_SESSION['role_user'] == 'dosen') echo "readonly" ?> value="85"></td>
                         <?php } ?>
-                        <td><input type="number" value="82"></td>
-                        <td><input type="number" value="82"></td>
+                        <td><input type="number" <?php if($_SESSION['role_user'] == 'dosen') echo "readonly" ?> value="90"></td>
+                        <td><input type="number" <?php if($_SESSION['role_user'] == 'dosen') echo "readonly" ?> value="100"></td>
                     </tr>
                 <?php } ?>
                 <!-- Tambahkan baris sesuai dengan data mahasiswa yang ada -->

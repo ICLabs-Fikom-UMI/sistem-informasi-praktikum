@@ -11,13 +11,15 @@ class DaftarNilai extends Controller {
         $data['frekuensi'] = $this->model('DataFrekuensi_model')->getDataFrekuensiByIdMatkul(10);
         $data['mata_kuliah'] = $this->model('MataKuliah_model')->getAllMataKuliah();
 
-        var_dump($_SESSION['id_user']);
-        var_dump($_SESSION['role_user']);
-        var_dump($_GET['url']);
+        // var_dump($_SESSION); var_dump($_GET['url']);
         
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
         $this->view('templates/headerProfile', $data);
+        if ($_SESSION['role_user'] == 'dosen') {
+            $id_dosen = $this->model('Dosen_model')->getIdDosen($_SESSION['id_user']);
+            $data['frekuensi'] = $this->model('DataFrekuensi_model')->getDataFrekuensiByIdDosen($id_dosen['id_dosen']);
+        }
         $this->view('daftarNilai/index', $data);
         $this->view('templates/footer');
     }

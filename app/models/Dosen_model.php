@@ -12,6 +12,13 @@ class Dosen_model {
         return $this->table;
     }
 
+    public function getIdDosen($id_user) {
+        $this->db->query('SELECT id_dosen FROM ' . $this->table . ' WHERE id_user = :id_user');
+        $this->db->bind('id_user', $id_user);
+
+        return $this->db->single();
+    }
+
     public function numOfData() {
         $this->db->query('SELECT count(*) as total FROM ' . $this->table);
         return $this->db->single();
