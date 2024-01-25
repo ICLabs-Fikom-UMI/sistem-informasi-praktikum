@@ -22,7 +22,13 @@
                     <td><?= $asisten['nama']?></td>
                     <td><?= $asisten['email']?></td>
                     <td><?= $asisten['total_frekuensi']?></td>
-                    <td>-</td>
+                    <td>
+                        <div class="d-flex flex-row align-items-center gap-3">
+                            <a href="<?= BASEURL?>/"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
+                            <a href=""><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
+                            <a href=""><img src="<?= BASEURL;?>/icons/reset.svg" alt=""></a>
+                        </div>
+                    </td>
                 </tr>
             <?php endforeach;?>
         </tbody>
