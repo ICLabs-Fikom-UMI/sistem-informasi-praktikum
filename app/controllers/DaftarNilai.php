@@ -3,6 +3,8 @@ session_start();
 
 class DaftarNilai extends Controller {
     public function index() {
+        $this->checkLoginSession();
+
         $data['title'] = 'Daftar Nilai';
         $data['header'] = 'Daftar Nilai Praktikum';
         $data['detail'] = 'Semua Daftar Nilai';
@@ -11,12 +13,8 @@ class DaftarNilai extends Controller {
 
         var_dump($_SESSION['id_user']);
         var_dump($_SESSION['role_user']);
+        var_dump($_GET['url']);
         
-        if (!isset($_SESSION['id_user'])) {
-            header('Location: ' . BASEURL . '/login');
-            exit;
-        }
-
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
         $this->view('templates/headerProfile', $data);
@@ -25,6 +23,8 @@ class DaftarNilai extends Controller {
     }
 
     public function selectMatkul($id_matkul) {
+        $this->checkLoginSession();
+
         $data['title'] = 'Daftar Nilai';
         $data['header'] = 'Daftar Nilai Praktikum';
         $data['detail'] = 'Semua Daftar Nilai';

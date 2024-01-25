@@ -16,8 +16,8 @@ session_start();
             <span class="profile-role"><?= $_SESSION['role_user']?></span>
           </button>
           <ul class="dropdown-menu">
-            <li><a href="<?= BASEURL?>/login/changePassword">changePassword</a></li>
-            <li><a href="<?= BASEURL?>/login/logout">Logout</a></li>
+            <li><a href="<?= BASEURL?>/login/changePassword" class="dropdown-item dropdown-item-data">changePassword</a></li>
+            <li><a href="<?= BASEURL?>/login/logout" class="dropdown-item dropdown-item-data">Logout</a></li>
           </ul>
         </div>
       </div>

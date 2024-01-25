@@ -2,6 +2,9 @@
 
 class AsistenDanDosen extends Controller {
     public function index() {
+        $this->checkLoginSession();
+        $this->checkRoleAndRedirect('admin', '/daftarnilai');
+
         $data['title'] = 'Asisten dan Dosen';
         $data['header'] = 'Daftar Dosen dan Asisten Laboratorium';
         $data['detail'] = 'Dapat mengedit data Dosen dan Asisten Laboratorium';
@@ -9,17 +12,6 @@ class AsistenDanDosen extends Controller {
         $data['asisten'] = $this->model('Asisten_model')->getSeveralAsistenWithFrekuensi(5);
         $data['total_dosen'] = $this->model('Dosen_model')->numOfData();
         $data['total_asisten'] = $this->model('Asisten_model')->numOfData();
-
-        if (!isset($_SESSION['id_user'])) {
-            header('Location: ' . BASEURL . '/login');
-            exit;
-        }
-        else {
-            if ($_SESSION['role_user'] != 'admin') {
-                header('Location: ' . BASEURL . '/daftarnilai');
-                exit;
-            }
-        }
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -29,6 +21,9 @@ class AsistenDanDosen extends Controller {
     }
 
     public function dosenPage() {
+        $this->checkLoginSession();
+        $this->checkRoleAndRedirect('admin', '/daftarnilai');
+
         $data['title'] = 'Daftar Dosen';
         $data['header'] = 'Daftar Dosen';
         $data['detail'] = 'Dapat mengedit data Dosen';
@@ -42,6 +37,9 @@ class AsistenDanDosen extends Controller {
     }
 
     public function asistenPage() {
+        $this->checkLoginSession();
+        $this->checkRoleAndRedirect('admin', '/daftarnilai');
+
         $data['title'] = 'Daftar Asisten';
         $data['header'] = 'Daftar Asisten';
         $data['detail'] = 'Dapat mengedit data Asisten';

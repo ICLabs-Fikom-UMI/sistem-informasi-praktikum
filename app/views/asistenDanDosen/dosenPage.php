@@ -21,7 +21,13 @@
                     <td><?= $dosen['nama']?></td>
                     <td><?= $dosen['email']?></td>
                     <td><?= $dosen['total_frekuensi']?></td>
-                    <td>-</td>
+                    <td>
+                        <div class="d-flex flex-row align-items-center gap-3">
+                            <a href=""><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
+                            <a href=""><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
+                            <a href=""><img src="<?= BASEURL;?>/icons/reset.svg" alt=""></a>
+                        </div>
+                    </td>
                 </tr>
             <?php endforeach;?>
         </tbody>

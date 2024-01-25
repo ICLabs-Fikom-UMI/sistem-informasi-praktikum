@@ -13,6 +13,7 @@
           <li>
             <a href="<?= BASEURL?>/DaftarNilai"><img src="<?= BASEURL ?>/icons/daftar-nilai.svg" alt="Icon 1" />Daftar Nilai</a>
           </li>
+          <?php //if ($_SESSION['role_user'] == 'admin') : ?>
           <li>
             <a href="<?= BASEURL?>/AsistenDanDosen"><img src="<?= BASEURL ?>/icons/asisten-dan-dosen.svg" alt="Icon 1" />Asisten dan Dosen</a>
           </li>
@@ -25,5 +26,6 @@
           <li>
             <a href="<?= BASEURL?>/Settings"><img src="<?= BASEURL ?>/icons/settings.svg" alt="Icon 1" />Settings</a>
           </li>
+          <?php //endif?>
         </ul>
       </nav>

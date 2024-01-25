@@ -56,4 +56,12 @@ class Login extends Controller {
         header('Location: ' . BASEURL . '/login');
         exit;
     }
+
+    public function resetPassword($id_user) {
+        if ($this->model('Login_model')->changeStatus($id_user) > 0) {
+            // Flasher::setFlash('berhasil', 'diganti', 'success');
+            header('Location: ' . BASEURL . '/');
+            exit;
+        }
+    }
 }
