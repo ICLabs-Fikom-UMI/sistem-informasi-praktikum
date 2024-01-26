@@ -65,12 +65,12 @@
           <input type="hidden" name="id" id="id">
           <div class="form-group">
             <label for="nidn">NIDN</label>
-            <input type="text" class="form-control" id="nidn" name="nidn" autocomplete="off" required>
+            <input type="number" class="form-control" id="nidn" name="nidn" autocomplete="off" required>
           </div>
 
           <div class="form-group">
             <label for="nama">Nama</label>
-            <input type="number" class="form-control" id="nama" name="nama" autocomplete="off">
+            <input type="text" class="form-control" id="nama" name="nama" autocomplete="off">
           </div>
 
           <div class="form-group">

@@ -12,16 +12,16 @@ class Dosen_model {
         return $this->table;
     }
 
-    public function addDosenWithUser($nidn, $nama, $email) {
+    public function addDosenWithUser($data) {
         $passwordDefault = 'dosen';
         $role = 'dosen';
 
         $query = 'CALL add_dosen_with_user(:nidn, :nama, :email, :password_default, :role)';
         
         $this->db->query($query);
-        $this->db->bind('nidn', $nidn);
-        $this->db->bind('nama', $nama);
-        $this->db->bind('email', $email);
+        $this->db->bind('nidn', $data['nama']);
+        $this->db->bind('nama', $data['nama']);
+        $this->db->bind('email', $data['email']);
         $this->db->bind('password_default', $passwordDefault);
         $this->db->bind('role', $role);
 

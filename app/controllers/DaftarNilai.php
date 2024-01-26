@@ -42,12 +42,12 @@ class DaftarNilai extends Controller {
 
     public function changeStatus($id_frek) {
         if ($this->model('DataFrekuensi_model')->changeStatus($id_frek) > 0) {
-            // Flasher::setFlash('berhasil', 'diganti', 'success');
+            Flasher::setFlash('berhasil', 'diganti', 'success');
             header('Location: ' . BASEURL . '/daftarnilai');
             exit;
         }
         else {
-            // Flasher::setFlash('gagal', 'diganti', 'danger');
+            Flasher::setFlash('gagal', 'diganti', 'danger');
             header('Location: ' . BASEURL . '/daftarnilai');
             exit;
         }

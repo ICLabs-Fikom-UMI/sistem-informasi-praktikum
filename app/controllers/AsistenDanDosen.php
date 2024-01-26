@@ -24,14 +24,16 @@ class AsistenDanDosen extends Controller {
         $this->checkLoginSession();
         $this->checkRoleAndRedirect('admin', '/daftarnilai');
 
-        if ($this->model('Dosen_model')->addDosenWithUser($_POST) > 0) {
+        $addAccount = $this->model('Dosen_model')->addDosenWithUser($_POST);
+
+        if ($addAddAccountj > 0) {
             Flasher::setFlash('berhasil', 'ditambahkan', 'success');
-            header('Location: ' . BASEURL . '/asistendandosen/dosenPage');
+            header('Location: ' . BASEURL . '/asistendandosen');
             exit;
         }
         else {
             Flasher::setFlash('gagal', 'ditambahkan', 'danger');
-            header('Location: ' . BASEURL . '/asistendandosen/dosenPage');
+            header('Location: ' . BASEURL . '/asistendandosen');
             exit;
         }
 
