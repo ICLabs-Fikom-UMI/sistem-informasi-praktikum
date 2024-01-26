@@ -18,17 +18,17 @@ class Login extends Controller {
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        $role = $this->model('Login_model')->getRole($email);
+        $role = $this->model('User_model')->getRoleByEmail($email);
 
         echo var_dump($_POST);
         echo "<br></br>";
 
-        $id_user = $this->model('Login_model')->validateLogin($email, $password);
+        $id_user = $this->model('User_model')->validateLogin($email, $password);
 
         if ($id_user) {
             echo "Berhasil Login";
 
-            $is_password_default = $this->model('Login_model')->isDefaultPassword($password);
+            $is_password_default = $this->model('User_model')->isDefaultPassword($password);
             // [PENTINGJ] hapus tanda (!) negasi untuk sementara untuk mengabaikan password default
             if (!$is_password_default) {
                 // header('Location: change-default-password.php');
@@ -57,7 +57,7 @@ class Login extends Controller {
     }
 
     public function resetPassword($id_user) {
-        if ($this->model('Login_model')->changeStatus($id_user) > 0) {
+        if ($this->model('User_model')->resetPassword($id_user) > 0) {
             // Flasher::setFlash('berhasil', 'diganti', 'success');
             header('Location: ' . BASEURL . '/');
             exit;

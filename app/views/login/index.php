@@ -1,4 +1,4 @@
-<div class="login d-flex align-items-center">
+<div class="login card border-0">
     <form action="<?= BASEURL?>/login/login" method="post">
         <div class="login mw-360 d-flex flex-column align-items-center justify-content-center vh-100">
             <div class="p-2 text-center">

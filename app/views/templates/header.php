@@ -15,4 +15,4 @@ session_start();
     <link rel="stylesheet" href="<?= BASEURL; ?>/css/style.css">
 </head>
 <body>
-    <div id="container" class="d-flex flex-row">
+    <div id="container" class="d-flex justify-content-center">
