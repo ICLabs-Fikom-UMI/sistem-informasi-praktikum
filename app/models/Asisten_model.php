@@ -57,7 +57,7 @@ class Asisten_model {
     }
 
     public function getAllAsistenWithFrekuensi() {
-        $query = 'SELECT ' $this->table . '.id_user, ' . $this->table . '.id_asisten, ' . $this->table . '.nim, ' . $this->table . '.nama, ' . $this->table . '.email, COUNT(*) AS total_frekuensi
+        $query = 'SELECT ' . $this->table . '.id_user, ' . $this->table . '.id_asisten, ' . $this->table . '.nim, ' . $this->table . '.nama, ' . $this->table . '.email, COUNT(*) AS total_frekuensi
                     FROM ' . $this->table . '
                     LEFT JOIN frekuensi ON ' . $this->table . '.id_asisten = frekuensi.id_asisten1 OR ' . $this->table . '.id_asisten = frekuensi.id_asisten2
                     GROUP BY ' . $this->table . '.id_asisten;';
