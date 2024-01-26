@@ -27,6 +27,24 @@ class Asisten_model {
         return $this->db->resultSet();
     }
 
+    public function addAsistenWithUser($data) {
+        $passwordDefault = 'asisten';
+        $role = 'asisten';
+
+        $query = 'CALL add_asisten_with_user(:nim, :nama, :email, :password_default, :role)';
+        
+        $this->db->query($query);
+        $this->db->bind('nim', $data['nim']);
+        $this->db->bind('nama', $data['nama']);
+        $this->db->bind('email', $data['email']);
+        $this->db->bind('password_default', $passwordDefault);
+        $this->db->bind('role', $role);
+
+        $this->db->execute();
+        
+        return $this->db->rowCount();
+    }
+
     public function getAllAsistenWithFrekuensi() {
         $query = 'SELECT ' . $this->table . '.id_asisten, ' . $this->table . '.nim, ' . $this->table . '.nama, ' . $this->table . '.email, COUNT(*) AS total_frekuensi
                     FROM ' . $this->table . '

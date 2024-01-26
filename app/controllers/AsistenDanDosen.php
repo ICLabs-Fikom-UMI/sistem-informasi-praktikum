@@ -20,23 +20,60 @@ class AsistenDanDosen extends Controller {
         $this->view('templates/footer');
     }
 
-    public function tambahDosen() {
+    public function addDosen() {
         $this->checkLoginSession();
         $this->checkRoleAndRedirect('admin', '/daftarnilai');
 
         $addAccount = $this->model('Dosen_model')->addDosenWithUser($_POST);
 
-        if ($addAddAccountj > 0) {
+        if ($addAccount > 0) {
             Flasher::setFlash('berhasil', 'ditambahkan', 'success');
-            header('Location: ' . BASEURL . '/asistendandosen');
+            header('Location: ' . BASEURL . '/asistendandosen/dosenpage');
             exit;
         }
         else {
             Flasher::setFlash('gagal', 'ditambahkan', 'danger');
-            header('Location: ' . BASEURL . '/asistendandosen');
+            header('Location: ' . BASEURL . '/asistendandosen/dosenpage');
             exit;
         }
 
+    }
+
+
+    public function addAsisten() {
+        $this->checkLoginSession();
+        $this->checkRoleAndRedirect('admin', '/daftarnilai');
+
+        $addAccount = $this->model('Asisten_model')->addAsistenWithUser($_POST);
+
+        if ($addAccount > 0) {
+            Flasher::setFlash('berhasil', 'ditambahkan', 'success');
+            header('Location: ' . BASEURL . '/asistendandosen/asistenpage');
+            exit;
+        }
+        else {
+            Flasher::setFlash('gagal', 'ditambahkan', 'danger');
+            header('Location: ' . BASEURL . '/asistendandosen/asistenpage');
+            exit;
+        }
+    }
+
+    public function deleteDosen($id_user) {
+        $this->checkLoginSession();
+        $this->checkRoleAndRedirect('admin', '/daftarnilai');
+
+        $deleteAccount = $this->model('Dosen_model')->deleteDosenWithUser($id_user);
+
+        if ($deleteAccount > 0) {
+            Flasher::setFlash('berhasil', 'dihapus', 'success');
+            header('Location: ' . BASEURL . '/asistendandosen/dosenpage');
+            exit;
+        }
+        else {
+            Flasher::setFlash('gagal', 'dihapus', 'danger');
+            header('Location: ' . BASEURL . '/asistendandosen/dosenpage');
+            exit;
+        }
     }
 
     public function dosenPage() {

@@ -1,5 +1,5 @@
 <div class="content d-flex flex-column">
-    <div class="tambah-asisten d-flex justify-content-between mb-4 p-2">
+    <div class="tambah-dosen d-flex justify-content-between mb-4 p-2">
         <div class="row">
             <div class="col-lg-6">
                 <?php Flasher::flash(); ?>
@@ -61,7 +61,7 @@
       </div>
       <div class="modal-body">
         
-        <form action="<?= BASEURL; ?>/asistendandosen/tambahdosen" method="post">
+        <form action="<?= BASEURL; ?>/asistendandosen/adddosen" method="post">
           <input type="hidden" name="id" id="id">
           <div class="form-group">
             <label for="nidn">NIDN</label>

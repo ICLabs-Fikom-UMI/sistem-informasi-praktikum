@@ -19,7 +19,7 @@ class Dosen_model {
         $query = 'CALL add_dosen_with_user(:nidn, :nama, :email, :password_default, :role)';
         
         $this->db->query($query);
-        $this->db->bind('nidn', $data['nama']);
+        $this->db->bind('nidn', $data['nidn']);
         $this->db->bind('nama', $data['nama']);
         $this->db->bind('email', $data['email']);
         $this->db->bind('password_default', $passwordDefault);
@@ -29,6 +29,7 @@ class Dosen_model {
         
         return $this->db->rowCount();
     }
+
 
     public function getNamaDosenByIdUser($id_user) {
         $this->db->query('SELECT nama FROM ' . $this->table . ' WHERE id_user = :id_user');
