@@ -20,6 +20,23 @@ class AsistenDanDosen extends Controller {
         $this->view('templates/footer');
     }
 
+    public function tambahDosen() {
+        $this->checkLoginSession();
+        $this->checkRoleAndRedirect('admin', '/daftarnilai');
+
+        if ($this->model('Dosen_model')->addDosenWithUser($_POST) > 0) {
+            Flasher::setFlash('berhasil', 'ditambahkan', 'success');
+            header('Location: ' . BASEURL . '/asistendandosen/dosenPage');
+            exit;
+        }
+        else {
+            Flasher::setFlash('gagal', 'ditambahkan', 'danger');
+            header('Location: ' . BASEURL . '/asistendandosen/dosenPage');
+            exit;
+        }
+
+    }
+
     public function dosenPage() {
         $this->checkLoginSession();
         $this->checkRoleAndRedirect('admin', '/daftarnilai');

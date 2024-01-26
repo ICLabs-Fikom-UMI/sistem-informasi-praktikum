@@ -1,6 +1,11 @@
 <div class="content d-flex flex-column">
-    <div class="tambah-asisten d-flex justify-content-end mb-4 p-2">
-        <a href="#"><button type="button" class="btn btn-primary">Tambah Dosen</button></a>
+    <div class="tambah-asisten d-flex justify-content-between mb-4 p-2">
+        <div class="row">
+            <div class="col-lg-6">
+                <?php Flasher::flash(); ?>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" data-bs-dismis="modal" data-bs-toggle="modal" data-bs-target="#formModal">Tambah Dosen</button>
     </div>
 
     <div class="tabel-dosen border p-2 rounded" style="width: 100%">
@@ -42,4 +47,43 @@
         </tfoot>
     </table>
     </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="formModalLabel">Tambah Data Dan Akun Dosen</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <form action="<?= BASEURL; ?>/asistendandosen/tambahdosen" method="post">
+          <input type="hidden" name="id" id="id">
+          <div class="form-group">
+            <label for="nidn">NIDN</label>
+            <input type="text" class="form-control" id="nidn" name="nidn" autocomplete="off" required>
+          </div>
+
+          <div class="form-group">
+            <label for="nama">Nama</label>
+            <input type="number" class="form-control" id="nama" name="nama" autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="email@umi.ac.id">
+          </div>
+
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Tambah Data</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
