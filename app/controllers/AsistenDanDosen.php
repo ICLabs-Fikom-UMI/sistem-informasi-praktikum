@@ -76,6 +76,24 @@ class AsistenDanDosen extends Controller {
         }
     }
 
+    public function deleteAsisten($id_user) {
+        $this->checkLoginSession();
+        $this->checkRoleAndRedirect('admin', '/daftarnilai');
+
+        $deleteAccount = $this->model('Asisten_model')->deleteAsistenWithUser($id_user);
+
+        if ($deleteAccount > 0) {
+            Flasher::setFlash('berhasil', 'dihapus', 'success');
+            header('Location: ' . BASEURL . '/asistendandosen/asistenpage');
+            exit;
+        }
+        else {
+            Flasher::setFlash('gagal', 'dihapus', 'danger');
+            header('Location: ' . BASEURL . '/asistendandosen/asistenpage');
+            exit;
+        }
+    }
+
     public function dosenPage() {
         $this->checkLoginSession();
         $this->checkRoleAndRedirect('admin', '/daftarnilai');
