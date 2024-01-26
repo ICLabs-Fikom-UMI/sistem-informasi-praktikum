@@ -84,25 +84,21 @@
                 <?php for ($i = 0; $i < 25; $i++) { ?>
                     <tr>
                         <td><?= $i+1;?></td>
-                        <td><input type="text" <?php if($_SESSION['role_user'] == 'dosen') echo "readonly" ?> value="1302021034"></td>
-                        <td><input type="text" <?php if($_SESSION['role_user'] == 'dosen') echo "readonly" ?> value="Muhammad Imran Rendi"></td>
-                        <td><input type="text" value="TI01"></td>
+                        <td><?= ($_SESSION['role_user'] != 'dosen') ? "<input type='text' value='13020210134'>" : "13020210134"; ?></td>
+                        <td><?= ($_SESSION['role_user'] != 'dosen') ? "<input type='text' value='Muhammad Rendi Syaputra'>" : "Muhammad Rendi Syaputra"; ?></td>
+                        <td><?= ($_SESSION['role_user'] != 'dosen') ? "<input type='text' value='A1'>" : "A1"; ?></td>
                         <!-- Kolom JUMLAH PERTEMUAN -->
                         <?php for ($j = 0; $j < 10; $j++) { ?>
-                            <td><input type="text" <?php if($_SESSION['role_user'] == 'dosen') echo "readonly" ?> value="H"></td>
+                            <td><?= ($_SESSION['role_user'] != 'dosen') ? "<input type='text' value='H'>" : "H"; ?></td>
                         <?php } ?>
-                        <!-- Kolom NILAI TUGAS -->
+                            <!-- Kolom NILAI TUGAS -->
                         <?php for ($k = 0; $k < 8; $k++) { ?>
-                            <td><input type="number" <?php if($_SESSION['role_user'] == 'dosen') echo "readonly" ?> value="85"></td>
+                            <td><?= ($_SESSION['role_user'] != 'dosen') ? "<input type='number' value='85'>" : "85"; ?></td>
                         <?php } ?>
-                        <td><input type="number" <?php if($_SESSION['role_user'] == 'dosen') echo "readonly" ?> value="90"></td>
-                        <td><input type="number" <?php if($_SESSION['role_user'] == 'dosen') echo "readonly" ?> value="100"></td>
+                        <td><?= ($_SESSION['role_user'] != 'dosen') ? "<input type='number' value='90'>" : "90"; ?></td>
+                        <td><?= ($_SESSION['role_user'] != 'dosen') ? "<input type='number' value='100'>" : "100"; ?></td>
                     </tr>
                 <?php } ?>
-                <!-- Tambahkan baris sesuai dengan data mahasiswa yang ada -->
-                <tr>
-                    <!-- ... -->
-                </tr>
             </tbody>
         </table>
 

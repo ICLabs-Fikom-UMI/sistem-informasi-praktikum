@@ -3,13 +3,12 @@ session_start();
 
 class Login extends Controller {
     public function index() {
-        $data['title'] = 'Login';
-
         if (isset($_SESSION['id_user'])) {
             header('Location: ' . BASEURL . '/daftarnilai');
             exit;
         }
-
+        
+        $data['title'] = 'Login';
         $this->view('templates/header', $data);
         $this->view('login/index');
         $this->view('templates/footer');
