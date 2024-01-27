@@ -18,7 +18,7 @@
                             
                             <div class="icon-action d-flex gap-2">
                                 <a href="<?= BASEURL?>/"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
-                                <a href="<?= BASEURL?>/laboratorium/deletelab/<?= $lab['id_laboratorium']?>"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
+                                <a href="<?= BASEURL?>/laboratorium/deletelaboratorium/<?= $lab['id_laboratorium']?>"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
                             </div>
                         </div>
                         <div class="card-text d-flex justify-content-between p-2">

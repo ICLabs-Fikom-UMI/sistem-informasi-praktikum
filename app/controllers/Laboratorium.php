@@ -34,4 +34,23 @@ class Laboratorium extends Controller {
             exit;
         }
     }
+
+
+    public function deleteLaboratorium($id_laboratorium) {
+        $this->checkLoginSession();
+        $this->checkRoleAndRedirect('admin', '/daftarnilai');
+
+        $deleteLab = $this->model('Laboratorium_model')->deleteLaboratorium($id_laboratorium);
+
+        if ($deleteLab > 0) {
+            Flasher::setFlash('berhasil', 'dihapus', 'success');
+            header('Location: ' . BASEURL . '/laboratorium');
+            exit;
+        }
+        else {
+            Flasher::setFlash('gagal', 'dihapus', 'danger');
+            header('Location: ' . BASEURL . '/laboratorium');
+            exit;
+        }
+    }
 }

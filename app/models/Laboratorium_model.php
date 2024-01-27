@@ -30,4 +30,15 @@ class Laboratorium_model {
 
         return $this->db->rowCount();
     }
+
+    public function deleteLaboratorium($id_laboratorium) {
+        $query = 'CALL delete_laboratorium(:id_laboratorium)';
+
+        $this->db->query($query);
+        $this->db->bind('id_laboratorium', $id_laboratorium);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
 }
