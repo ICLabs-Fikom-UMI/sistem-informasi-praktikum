@@ -16,4 +16,22 @@ class Laboratorium extends Controller {
         $this->view('laboratorium/index', $data);
         $this->view('templates/footer');
     }
+
+    public function addLaboratorium() {
+        $this->checkLoginSession();
+        $this->checkRoleAndRedirect('admin', '/daftarnilai');
+
+        $addLab = $this->model('Laboratorium_model')->addLaboratorium($_POST);
+
+        if ($addLab > 0) {
+            Flasher::setFlash('berhasil', 'ditambahkan', 'success');
+            header('Location: ' . BASEURL . '/laboratorium');
+            exit;
+        }
+        else {
+            Flasher::setFlash('gagal', 'ditambahkan', 'danger');
+            header('Location: ' . BASEURL . '/laboratorium');
+            exit;
+        }
+    }
 }

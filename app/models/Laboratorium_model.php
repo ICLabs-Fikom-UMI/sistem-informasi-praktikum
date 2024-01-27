@@ -17,4 +17,17 @@ class Laboratorium_model {
         
         return $this->db->resultSet();
     }
+
+    public function addLaboratorium($data) {
+        $query = 'INSERT INTO ' . $this->table . '(nama_laboratorium, kapasitas)
+                    VALUE (:nama_laboratorium, :kapasitas)';
+        
+        $this->db->query($query);
+        $this->db->bind('nama_laboratorium', $data['nama_laboratorium']);
+        $this->db->bind('kapasitas', $data['kapasitas']);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
 }
