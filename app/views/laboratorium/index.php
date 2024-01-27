@@ -15,7 +15,11 @@
                     <div class="card-body">
                         <div class="card-title d-flex justify-content-between p-2">
                             <h4><?= $lab['nama_laboratorium'];?></h4>
-                            <button type="button" class="btn btn-primary">O</button>
+                            
+                            <div class="icon-action d-flex gap-2">
+                                <a href="<?= BASEURL?>/"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
+                                <a href="<?= BASEURL?>/laboratorium/deletelab/<?= $lab['id_laboratorium']?>"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
+                            </div>
                         </div>
                         <div class="card-text d-flex justify-content-between p-2">
                             <span class="kapasitas-text">Kapasitas</span>
