@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2024 at 07:13 PM
+-- Generation Time: Jan 27, 2024 at 11:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.3.2
 
@@ -25,8 +25,87 @@ DELIMITER $$
 --
 -- Procedures
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `add_asisten_with_user` (IN `p_nim` VARCHAR(10), IN `p_nama` VARCHAR(100), IN `p_email` VARCHAR(50), IN `p_password` VARCHAR(100), IN `p_role` ENUM('admin','asisten','dosen'))   BEGIN
+    DECLARE v_user_id INT;
+
+    INSERT INTO user (email, password, role) VALUES (p_email, password(p_password), p_role);
+    
+    SET v_user_id = LAST_INSERT_ID();
+
+    INSERT INTO asisten (id_user, nim, email, nama) VALUES (v_user_id, p_nim, p_email, p_nama);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `add_dosen_with_user` (IN `p_nidn` VARCHAR(10), IN `p_nama` VARCHAR(100), IN `p_email` VARCHAR(50), IN `p_password` VARCHAR(100), IN `p_role` ENUM('admin','asisten','dosen'))   BEGIN
+    DECLARE v_user_id INT;
+
+    INSERT INTO user (email, password, role) VALUES (p_email, password(p_password), p_role);
+    
+    SET v_user_id = LAST_INSERT_ID();
+
+    INSERT INTO dosen (id_user, nidn, email, nama) VALUES (v_user_id, p_nidn, p_email, p_nama);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_asisten_with_user` (IN `p_id_user` INT)   BEGIN
+	SET foreign_key_checks = 0;
+    
+    DELETE FROM user WHERE id_user = p_id_user;
+    DELETE FROM asisten WHERE id_user = p_id_user;
+    
+    SET foreign_key_checks = 1;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_dosen_with_user` (IN `p_id_user` INT)   BEGIN
+	SET foreign_key_checks = 0;
+    
+    DELETE FROM user WHERE id_user = p_id_user;
+    DELETE FROM dosen WHERE id_user = p_id_user;
+    
+    SET foreign_key_checks = 1;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_laboratorium` (IN `p_id_laboratorium` INT)   BEGIN
+	SET foreign_key_checks = 0;
+    
+    DELETE FROM laboratorium WHERE id_laboratorium = p_id_laboratorium;
+    
+    SET foreign_key_checks = 1;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_frek_filter_id_dosen` (IN `id_dosen_param` INT)   BEGIN
+    SELECT
+		frekuensi.id_frekuensi,
+        frekuensi.kode_frekuensi,
+        dosen.nama AS nama_dosen,
+        dosen.id_dosen as id_dosen,
+        asisten1.nama AS asisten1,
+        asisten2.nama AS asisten2,
+        laboratorium.nama_laboratorium,
+        mata_kuliah.nama_matkul,
+        mata_kuliah.kode_matkul,
+        mata_kuliah.id_matkul,
+        frekuensi.hari,
+        frekuensi.jam_mulai,
+        frekuensi.jam_selesai,
+        frekuensi.status
+    FROM
+        frekuensi
+    JOIN
+        dosen ON frekuensi.id_dosen = dosen.id_dosen
+    JOIN
+        asisten AS asisten1 ON frekuensi.id_asisten1 = asisten1.id_asisten
+    JOIN
+        asisten AS asisten2 ON frekuensi.id_asisten2 = asisten2.id_asisten
+    JOIN
+        laboratorium ON frekuensi.id_laboratorium = laboratorium.id_laboratorium
+    JOIN
+        mata_kuliah ON frekuensi.id_matkul = mata_kuliah.id_matkul
+    WHERE
+        dosen.id_dosen = id_dosen_param;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_frek_filter_id_matkul` (IN `id_matkul_param` INT)   BEGIN
     SELECT
+		frekuensi.id_frekuensi,
         frekuensi.kode_frekuensi,
         dosen.nama AS nama_dosen,
         asisten1.nama AS asisten1,
@@ -108,7 +187,8 @@ INSERT INTO `asisten` (`id_asisten`, `id_user`, `nim`, `email`, `nama`) VALUES
 (10, 52, '13020200103', '13020200103@umi.ac.id', 'Adam Adnan'),
 (11, 53, '13120210004', '13120210004@umi.ac.id', 'Muhammad Dani Arya Putra'),
 (12, 54, '13020200318', '13020200318@umi.ac.id', 'As\'syahrin Nanda'),
-(13, 55, '13020210053', '13020210053@umi.ac.id', 'Imran Afdillah Dahlan');
+(13, 55, '13020210053', '13020210053@umi.ac.id', 'Imran Afdillah Dahlan'),
+(17, 89, '1919191919', 'kakawaltamppan@umi.ac.id', 'kak Awal');
 
 -- --------------------------------------------------------
 
@@ -129,7 +209,6 @@ CREATE TABLE `dosen` (
 --
 
 INSERT INTO `dosen` (`id_dosen`, `id_user`, `nidn`, `email`, `nama`) VALUES
-(1, 3, '123456789', 'dosen@gmail.com', 'nama dosen'),
 (2, 4, '919027301', 'purwansyah@umi.ac.id', 'Purnawansyah, S.Kom., M.Kom.'),
 (3, 5, '908089202', 'aulfah@umi.ac.id', 'A. Ulfah tenripada, S.Kom.,M.Kom.'),
 (4, 6, '918109501', 'sittirahmah@umi.ac.id', 'Sitti Rahmah Jabir, S.M.,M.Sc.'),
@@ -168,7 +247,11 @@ INSERT INTO `dosen` (`id_dosen`, `id_user`, `nidn`, `email`, `nama`) VALUES
 (37, 39, '924048501', 'sugiarti@umi.ac.id', 'Sugiarti, S.Kom.,M.Kom.'),
 (38, 40, '922078101', 'yulitasalim@umi.ac.id', 'Yulita Salim, S.Kom.,M.T.'),
 (39, 41, '31056905', 'hjharlindal@umi.ac.id', 'Dr. Hj. Harlinda L., S.Kom.,M.M.,M.Kom'),
-(40, 42, '916108403', 'poetrilokapitasari@umi.ac.id', 'Poetri Lestari Lokapitasari Belluano, S.Kom.,M.T');
+(40, 42, '916108403', 'poetrilokapitasari@umi.ac.id', 'Poetri Lestari Lokapitasari Belluano, S.Kom.,M.T'),
+(42, 57, '3123123', 'insert_email_2@umi.ac.id', 'insert_dosen_2'),
+(43, 59, '43214321', 'insert_email_3@umi.ac.id', 'insert_dosen_3'),
+(44, 60, 'insert_nam', 'insert_email_dosen_4@umi.ac.id', 'insert_nama_dosen_4'),
+(50, 74, 'inset_nama', 'inset_email_dosen_9@umi.ac.id', 'inset_nama_dosen_9');
 
 -- --------------------------------------------------------
 
@@ -1485,7 +1568,6 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id_user`, `email`, `password`, `role`) VALUES
 (1, 'admin@umi.ac.id', '*4ACFE3202A5FF5CF467898FC58AAB1D615029441', 'admin'),
 (2, 'asisten@umi.ac.id', '*51117F55AF7589B9DD630C762EDDE8C3183873EF', 'asisten'),
-(3, 'dosen@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
 (4, 'purwansyah@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
 (5, 'aulfah@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
 (6, 'sittirahmah@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
@@ -1537,7 +1619,19 @@ INSERT INTO `user` (`id_user`, `email`, `password`, `role`) VALUES
 (52, '13020200103@umi.ac.id', '*51117F55AF7589B9DD630C762EDDE8C3183873EF', 'asisten'),
 (53, '13120210004@umi.ac.id', '*51117F55AF7589B9DD630C762EDDE8C3183873EF', 'asisten'),
 (54, '13020200318@umi.ac.id', '*51117F55AF7589B9DD630C762EDDE8C3183873EF', 'asisten'),
-(55, '13020210053@umi.ac.id', '*51117F55AF7589B9DD630C762EDDE8C3183873EF', 'asisten');
+(55, '13020210053@umi.ac.id', '*51117F55AF7589B9DD630C762EDDE8C3183873EF', 'asisten'),
+(57, 'insert_email_2@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
+(59, 'insert_email_3@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
+(60, 'insert_email_dosen_4@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
+(65, 'insert_nama_dosen_5@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
+(68, 'insert_email_dosen_5@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
+(71, 'insert_email_dosen_6@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
+(73, 'insert_email_dosen_8@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
+(74, 'inset_email_dosen_9@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
+(75, 'insert_email_dosen_10@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
+(79, 'inset_email_dosen_10@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
+(80, 'inset_email_dosen_11@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
+(89, 'kakawaltamppan@umi.ac.id', '*51117F55AF7589B9DD630C762EDDE8C3183873EF', 'asisten');
 
 -- --------------------------------------------------------
 
@@ -1546,7 +1640,8 @@ INSERT INTO `user` (`id_user`, `email`, `password`, `role`) VALUES
 -- (See below for the actual view)
 --
 CREATE TABLE `vw_frek_data` (
-`kode_frekuensi` varchar(20)
+`id_frekuensi` int(11)
+,`kode_frekuensi` varchar(20)
 ,`nama_dosen` varchar(100)
 ,`asisten1` varchar(100)
 ,`asisten2` varchar(100)
@@ -1567,7 +1662,7 @@ CREATE TABLE `vw_frek_data` (
 --
 DROP TABLE IF EXISTS `vw_frek_data`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_frek_data`  AS SELECT `frekuensi`.`kode_frekuensi` AS `kode_frekuensi`, `dosen`.`nama` AS `nama_dosen`, `asisten1`.`nama` AS `asisten1`, `asisten2`.`nama` AS `asisten2`, `laboratorium`.`nama_laboratorium` AS `nama_laboratorium`, `mata_kuliah`.`nama_matkul` AS `nama_matkul`, `mata_kuliah`.`kode_matkul` AS `kode_matkul`, `mata_kuliah`.`id_matkul` AS `id_matkul`, `frekuensi`.`hari` AS `hari`, `frekuensi`.`jam_mulai` AS `jam_mulai`, `frekuensi`.`jam_selesai` AS `jam_selesai`, `frekuensi`.`status` AS `status` FROM (((((`frekuensi` join `dosen` on(`frekuensi`.`id_dosen` = `dosen`.`id_dosen`)) join `asisten` `asisten1` on(`frekuensi`.`id_asisten1` = `asisten1`.`id_asisten`)) join `asisten` `asisten2` on(`frekuensi`.`id_asisten2` = `asisten2`.`id_asisten`)) join `laboratorium` on(`frekuensi`.`id_laboratorium` = `laboratorium`.`id_laboratorium`)) join `mata_kuliah` on(`frekuensi`.`id_matkul` = `mata_kuliah`.`id_matkul`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_frek_data`  AS SELECT `frekuensi`.`id_frekuensi` AS `id_frekuensi`, `frekuensi`.`kode_frekuensi` AS `kode_frekuensi`, `dosen`.`nama` AS `nama_dosen`, `asisten1`.`nama` AS `asisten1`, `asisten2`.`nama` AS `asisten2`, `laboratorium`.`nama_laboratorium` AS `nama_laboratorium`, `mata_kuliah`.`nama_matkul` AS `nama_matkul`, `mata_kuliah`.`kode_matkul` AS `kode_matkul`, `mata_kuliah`.`id_matkul` AS `id_matkul`, `frekuensi`.`hari` AS `hari`, `frekuensi`.`jam_mulai` AS `jam_mulai`, `frekuensi`.`jam_selesai` AS `jam_selesai`, `frekuensi`.`status` AS `status` FROM (((((`frekuensi` join `dosen` on(`frekuensi`.`id_dosen` = `dosen`.`id_dosen`)) join `asisten` `asisten1` on(`frekuensi`.`id_asisten1` = `asisten1`.`id_asisten`)) join `asisten` `asisten2` on(`frekuensi`.`id_asisten2` = `asisten2`.`id_asisten`)) join `laboratorium` on(`frekuensi`.`id_laboratorium` = `laboratorium`.`id_laboratorium`)) join `mata_kuliah` on(`frekuensi`.`id_matkul` = `mata_kuliah`.`id_matkul`)) ;
 
 --
 -- Indexes for dumped tables
@@ -1690,13 +1785,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `asisten`
 --
 ALTER TABLE `asisten`
-  MODIFY `id_asisten` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_asisten` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `dosen`
 --
 ALTER TABLE `dosen`
-  MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `frekuensi`
@@ -1714,7 +1809,7 @@ ALTER TABLE `kehadiran`
 -- AUTO_INCREMENT for table `laboratorium`
 --
 ALTER TABLE `laboratorium`
-  MODIFY `id_laboratorium` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_laboratorium` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `mahasiswa`
@@ -1756,7 +1851,7 @@ ALTER TABLE `tugas`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- Constraints for dumped tables
