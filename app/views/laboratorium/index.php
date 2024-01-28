@@ -18,7 +18,7 @@
                             
                             <div class="icon-action d-flex">
                                 <a class="btn" role="button" href="<?= BASEURL?>/" data-bs-toggle="modal" data-bs-target="#myModal"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
-                                <a class="btn" role="button" onclick="deleteLaboratorium('<?= $lab['id_laboratorium']?>')" data-bs-toggle="modal" data-bs-target="#myModal"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
+                                <a class="btn" role="button" onclick="deleteData('laboratorium', 'deletelaboratorium', '<?= $lab['id_laboratorium']?>')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
                             </div>
                         </div>
                         <div class="card-text d-flex justify-content-between p-2">
