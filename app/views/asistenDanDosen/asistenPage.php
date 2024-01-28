@@ -6,7 +6,7 @@
                 <?php Flasher::flash(); ?>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" data-bs-dismis="modal" data-bs-toggle="modal" data-bs-target="#formModal">Tambah Asisten</button>
+        <button type="button" class="btn btn-primary" data-bs-dismis="modal" data-bs-toggle="modal" data-bs-target="#formAddAsistenModal">Tambah Asisten</button>
     </div>
 
     <div class="tabel-asisten border p-2 rounded" style="width: 100%">
@@ -28,10 +28,16 @@
                     <td><?= $asisten['email']?></td>
                     <td><?= $asisten['total_frekuensi']?></td>
                     <td>
-                        <div class="d-flex flex-row align-items-center gap-3">
-                            <a href="<?= BASEURL?>/"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
-                            <a href="<?= BASEURL?>/asistendandosen/deleteasisten/<?= $asisten['id_user']?>"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
-                            <a href=""><img src="<?= BASEURL;?>/icons/reset.svg" alt=""></a>
+                        <div class="d-flex flex-row align-items-center">
+                            <button type="button" class="btn btn-icon" data-bs-toggle="modal" data-bs-target="#editModal">
+                                <img src="<?= BASEURL;?>/icons/edit.svg" alt="" class="img-fluid">
+                            </button>
+                            <button type="button" class="btn btn-icon" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                <img src="<?= BASEURL;?>/icons/delete.svg" alt="" class="img-fluid">
+                            </button>
+                            <button type="button" class="btn btn-icon" data-bs-toggle="modal" data-bs-target="#resetModal">
+                                <img src="<?= BASEURL;?>/icons/reset.svg" alt="" class="img-fluid">
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -52,7 +58,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+<div class="modal fade" id="formAddAsistenModal" tabindex="-1" role="dialog" aria-labelledby="formAddAsistenModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -83,6 +89,26 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Tambah Data</button>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Konfirmasi Hapus Data -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+            <span>Apakah anda yakin ingin menghapus data ini?</span>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary w-25" data-bs-dismiss="modal">
+            Batal
+        </button>
+        <a class="btn btn-primary w-25" href="<?= BASEURL?>/asistendandosen/deleteasisten/<?= $asisten['id_user']?>">
+            Ya
+        </a>
       </div>
     </div>
   </div>
