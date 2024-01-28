@@ -29,7 +29,7 @@
                     <td>
                         <div class="d-flex flex-row align-items-center gap-3">
                             <a href=""><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
-                            <a href="<?= BASEURL?>/asistendandosen/deletedosen/<?= $dosen['id_user']?>"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
+                            <a class="btn" role="button" onclick="deleteData('asistendandosen', 'deletedosen', '<?= $dosen['id_user']?>')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
                             <a href=""><img src="<?= BASEURL;?>/icons/reset.svg" alt=""></a>
                         </div>
                     </td>
