@@ -5,7 +5,7 @@
                 <?php Flasher::flash(); ?>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" data-bs-dismis="modal" data-bs-toggle="modal" data-bs-target="#formModal">Tambah Laboratorium</button>
+        <button type="button" class="btn btn-primary" data-bs-dismis="modal" data-bs-toggle="modal" data-bs-target="#formAddLabModal">Tambah Laboratorium</button>
     </div>
     <div class="laboratorium-card">
         <div class="row d-flex align-items-stretch">
@@ -16,9 +16,13 @@
                         <div class="card-title d-flex justify-content-between p-2">
                             <h4><?= $lab['nama_laboratorium'];?></h4>
                             
-                            <div class="icon-action d-flex gap-2">
-                                <a href="<?= BASEURL?>/"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
-                                <a href="<?= BASEURL?>/laboratorium/deletelaboratorium/<?= $lab['id_laboratorium']?>"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
+                            <div class="icon-action d-flex">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteLabModal">
+                                    <a href="<?= BASEURL?>/"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
+                                </button>
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteLabModal">
+                                    <img src="<?= BASEURL;?>/icons/delete.svg" alt="">
+                                </button>
                             </div>
                         </div>
                         <div class="card-text d-flex justify-content-between p-2">
@@ -33,8 +37,8 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+<!-- Modal Tambah -->
+<div class="modal fade" id="formAddLabModal" tabindex="-1" role="dialog" aria-labelledby="formAddLabModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -60,6 +64,23 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Tambah Data</button>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Konfirmasi Hapus Data -->
+<div class="modal fade" id="deleteLabModal" tabindex="-1" aria-labelledby="deleteLabModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+            <span>Apakah anda yakin ingin menghapus data ini?</span>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary w-25" data-bs-dismiss="modal">Close</button>
+        <a href="<?= BASEURL?>/laboratorium/deletelaboratorium/<?= $lab['id_laboratorium']?>" class="btn btn-primary w-25">
+            Ya
+        </a>
       </div>
     </div>
   </div>
