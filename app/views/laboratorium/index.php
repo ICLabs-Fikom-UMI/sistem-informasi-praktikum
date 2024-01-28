@@ -17,12 +17,8 @@
                             <h4><?= $lab['nama_laboratorium'];?></h4>
                             
                             <div class="icon-action d-flex">
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteLabModal">
-                                    <a href="<?= BASEURL?>/"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
-                                </button>
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteLabModal">
-                                    <img src="<?= BASEURL;?>/icons/delete.svg" alt="">
-                                </button>
+                                <a class="btn" role="button" href="<?= BASEURL?>/" data-bs-toggle="modal" data-bs-target="#myModal"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
+                                <a class="btn" role="button" onclick="deleteLaboratorium('<?= $lab['id_laboratorium']?>')" data-bs-toggle="modal" data-bs-target="#myModal"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
                             </div>
                         </div>
                         <div class="card-text d-flex justify-content-between p-2">
@@ -64,23 +60,6 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Tambah Data</button>
         </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Konfirmasi Hapus Data -->
-<div class="modal fade" id="deleteLabModal" tabindex="-1" aria-labelledby="deleteLabModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body text-center">
-            <span>Apakah anda yakin ingin menghapus data ini?</span>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-secondary w-25" data-bs-dismiss="modal">Close</button>
-        <a href="<?= BASEURL?>/laboratorium/deletelaboratorium/<?= $lab['id_laboratorium']?>" class="btn btn-primary w-25">
-            Ya
-        </a>
       </div>
     </div>
   </div>
