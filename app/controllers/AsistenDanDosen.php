@@ -94,6 +94,24 @@ class AsistenDanDosen extends Controller {
         }
     }
 
+    public function resetPassword($id_user, $pass) {
+        $this->checkLoginSession();
+        $this->checkRoleAndRedirect('admin', '/daftarnilai');
+
+        $resetPass = $this->model('User_model')->resetPassword($id_user, $pass);
+
+        if ($resetPass > 0) {
+            Flasher::setFlash('berhasil', 'direset', 'success');
+            header('Location: ' . BASEURL . '/asistendandosen/' . $pass . 'page');
+            exit;
+        }
+        else {
+            Flasher::setFlash('gagal', 'direset', 'danger');
+            header('Location: ' . BASEURL . '/asistendandosen/'. $pass . 'page');
+            exit;
+        }
+    }
+
     public function dosenPage() {
         $this->checkLoginSession();
         $this->checkRoleAndRedirect('admin', '/daftarnilai');

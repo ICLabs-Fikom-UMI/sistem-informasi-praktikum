@@ -37,6 +37,18 @@ class User_model {
         return in_array($password, $defaultPasswords);
     }
 
+    public function resetPassword($id_user, $pass) {
+        $query = 'UPDATE user SET password = password(:pass) WHERE id_user = :id_user';
+
+        $this->db->query($query);
+        $this->db->bind('id_user', $id_user);
+        $this->db->bind('pass', $pass);
+        
+        $this->db->execute();
+        
+        return $this->db->rowCount();
+    }
+
     public function validateLogin($email, $password) {
         $query = 'SELECT id_user, password FROM ' . $this->table . ' WHERE email = :email and password = password(:password)';
 

@@ -17,11 +17,16 @@
         <script>
 
         function deleteData(controller, func, id){
-            console.log('Hlo');
             $('.modal-body').html('Apakah anda yakin ingin menghapus data ini?');       
             $('#confirm').attr('href', '<?= BASEURL?>/' + controller + '/' + func + '/' + id);
             $('#close').html('Batal');
         }  
+
+        function resetPass(controller, func, id) {
+            $('.modal-body').html('Apakah anda yakin ingin mereset password ini?');       
+            $('#confirm').attr('href', '<?= BASEURL?>/' + controller + '/' + func + '/' + id);
+            $('#close').html('Batal');
+        }
 
         </script>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
