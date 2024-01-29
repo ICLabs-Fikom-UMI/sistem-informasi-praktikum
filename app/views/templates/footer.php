@@ -22,9 +22,9 @@
             $('#close').html('Batal');
         }  
 
-        function resetPass(controller, func, id) {
+        function resetPassword(controller, func, id, pass) {
             $('.modal-body').html('Apakah anda yakin ingin mereset password ini?');       
-            $('#confirm').attr('href', '<?= BASEURL?>/' + controller + '/' + func + '/' + id);
+            $('#confirm').attr('href', '<?= BASEURL?>/' + controller + '/' + func + '/' + id + '/' + pass);
             $('#close').html('Batal');
         }
 

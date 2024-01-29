@@ -31,7 +31,7 @@
                         <div class="d-flex flex-row align-items-center gap-3">
                             <a href="<?= BASEURL?>/"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
                             <a class="btn" role="button" onclick="deleteData('asistendandosen', 'deleteasisten', '<?= $asisten['id_user']?>')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
-                            <a class="btn" role="button" onclick="resetPassword('<?= $asisten['id_user']?>', 'asistens')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/reset.svg" alt=""></a>
+                            <a class="btn" role="button" onclick="resetPassword('asistendandosen', 'resetpassword', '<?= $asisten['id_user']?>', 'asisten')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/reset.svg" alt=""></a>
                         </div>
                     </td>
                 </tr>
