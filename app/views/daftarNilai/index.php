@@ -68,6 +68,7 @@
                     <th colspan="8">Nilai Tugas</th>
                     <th rowspan="2">MID</th>
                     <th rowspan="2">Project</th>
+                    <th rowspan="2">Nilai Akhir</th>
                 </tr>
                 <tr>
                     <!-- Kolom untuk JUMLAH PERTEMUAN -->
@@ -93,10 +94,11 @@
                         <?php } ?>
                             <!-- Kolom NILAI TUGAS -->
                         <?php for ($k = 0; $k < 8; $k++) { ?>
-                            <td><?= ($_SESSION['role_user'] != 'dosen') ? "<input type='number' value='85'>" : "85"; ?></td>
+                            <td><?= ($_SESSION['role_user'] != 'dosen') ? "<input type='number' value='100'>" : "85"; ?></td>
                         <?php } ?>
                         <td><?= ($_SESSION['role_user'] != 'dosen') ? "<input type='number' value='90'>" : "90"; ?></td>
                         <td><?= ($_SESSION['role_user'] != 'dosen') ? "<input type='number' value='100'>" : "100"; ?></td>
+                        <td></td>
                     </tr>
                 <?php } ?>
             </tbody>
