@@ -46,6 +46,15 @@ class Login extends Controller {
             echo "Email Atau Password Salah";
         }
     }
+
+    public function changePassword() {
+        $this->checkLoginSession();
+        
+        $data['title'] = 'Login';
+        $this->view('templates/header', $data);
+        $this->view('login/changepassword');
+        $this->view('templates/footer');
+    }
     
     public function logout() {
         session_start();

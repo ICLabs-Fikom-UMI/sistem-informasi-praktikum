@@ -5,7 +5,7 @@
                 <?php Flasher::flash(); ?>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" data-bs-dismis="modal" data-bs-toggle="modal" data-bs-target="#formModal">Tambah Dosen</button>
+        <button id="btnAddDataDosen" type="button" class="btn btn-primary" data-bs-dismis="modal" data-bs-toggle="modal" data-bs-target="#formModal">Tambah Dosen</button>
     </div>
 
     <div class="tabel-dosen border p-2 rounded" style="width: 100%">
@@ -28,9 +28,9 @@
                     <td><?= $dosen['total_frekuensi']?></td>
                     <td>
                         <div class="d-flex flex-row align-items-center gap-3">
-                            <a href=""><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
+                            <a id="btnEditDataDosen" class="btn" role="button" data-bs-toggle="modal" data-bs-target="#formModal" data-id="<?= $dosen['id_user']?>"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
                             <a class="btn" role="button" onclick="deleteData('asistendandosen', 'deletedosen', '<?= $dosen['id_user']?>')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
-                            <a class="btn" role="button" onclick="resetPassword('asistendandosen', 'resetpassword', '<?= $dosen['id_user']?>', 'dosen')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/reset.svg" alt=""></a>
+                            <a class="btn" role="button" onclick="resetPassword('asistendandosen', 'resetpassword', '<?= $dosen['id_user']?>', 'asisten')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/reset.svg" alt=""></a>
                         </div>
                     </td>
                 </tr>

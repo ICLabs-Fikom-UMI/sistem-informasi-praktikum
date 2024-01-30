@@ -112,6 +112,28 @@ class AsistenDanDosen extends Controller {
         }
     }
 
+    public function getData() {
+        echo json_encode($this->model('Dosen_model')->getDataByIdUser($_POST['id']));
+    }
+
+    public function editData($role) {
+        $this->checkLoginSession();
+        $this->checkRoleAndRedirect('admin', '/daftarnilai');
+
+        $edited = $this->model($role . '_model')->editData($_POST);
+
+        if ($resetPass > 0) {
+            Flasher::setFlash('berhasil', 'diubah', 'success');
+            header('Location: ' . BASEURL . '/asistendandosen/' . $role . 'page');
+            exit;
+        }
+        else {
+            Flasher::setFlash('gagal', 'diubah', 'danger');
+            header('Location: ' . BASEURL . '/asistendandosen/'. $role . 'page');
+            exit;
+        }
+    }
+
     public function dosenPage() {
         $this->checkLoginSession();
         $this->checkRoleAndRedirect('admin', '/daftarnilai');

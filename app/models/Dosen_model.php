@@ -30,6 +30,15 @@ class Dosen_model {
         return $this->db->rowCount();
     }
 
+    public function getDataByIdUser($id_user) {
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE id_user = :id_user';
+
+        $this->db->query(query);
+        $this->db->bind('id_user', $id_user);
+
+        return $this->db->single();
+    }
+
     public function deleteDosenWithUser($id_user) {
         $query = 'CALL delete_dosen_with_user(:id_user)';
 
