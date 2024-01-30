@@ -46,21 +46,23 @@ $(document).ready(function() {
     $('.modal-footer button[type=submit]').html('Edit Data');
     $('.modal-body form').attr('action', 'http://localhost/sistem-informasi-praktikum/public/asistendandosen/editdata/dosen');
 
-    const id = $(this).data('id');
-    console.log(id);
+    const id_user = $(this).data('id');
+    console.log('halo');
     
     $.ajax({
-      url: 'http://localhost/sistem-informasi-praktikum/public/asistendandosen/getdata',
-      data: {id: id},
+      url: 'http://localhost/sistem-informasi-praktikum/public/asistendandosen/getdatabyiduser/dosen',
+      data: {id: id_user},
       method: 'post',
       dataType: 'json',
       success: function(data) {
-        $('#nidn').val(data.nidn);
-        $('#nama').val(data.nama);
-        $('#email').val(data.email);
-        $('#id').val(data.id);
+        console.log('halo');
+        // $('#nidn').val(data.nidn);
+        // $('#nama').val(data.nama);
+        // $('#email').val(data.email);
+        // $('#id').val(data.id_dosen);
       }
     });
+
   });
 
 });

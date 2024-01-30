@@ -33,7 +33,7 @@ class Dosen_model {
     public function getDataByIdUser($id_user) {
         $query = 'SELECT * FROM ' . $this->table . ' WHERE id_user = :id_user';
 
-        $this->db->query(query);
+        $this->db->query($query);
         $this->db->bind('id_user', $id_user);
 
         return $this->db->single();

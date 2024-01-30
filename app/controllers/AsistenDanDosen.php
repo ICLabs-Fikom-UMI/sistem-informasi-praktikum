@@ -112,8 +112,8 @@ class AsistenDanDosen extends Controller {
         }
     }
 
-    public function getData() {
-        echo json_encode($this->model('Dosen_model')->getDataByIdUser($_POST['id']));
+    public function getData($role) {
+        echo json_encode($this->model($role . '_model')->getDataByIdUser($_POST['id']));
     }
 
     public function editData($role) {
