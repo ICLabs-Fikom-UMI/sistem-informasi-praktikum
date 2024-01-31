@@ -6,7 +6,7 @@
                 <?php Flasher::flash(); ?>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" data-bs-dismis="modal" data-bs-toggle="modal" data-bs-target="#formAddAsistenModal">Tambah Asisten</button>
+        <button type="button" class="btn btn-primary" data-bs-dismis="modal" data-bs-toggle="modal" data-bs-target="#formModal">Tambah Asisten</button>
     </div>
 
     <div class="tabel-asisten border p-2 rounded" style="width: 100%">
@@ -29,7 +29,7 @@
                     <td><?= $asisten['total_frekuensi']?></td>
                     <td>
                         <div class="d-flex flex-row align-items-center gap-3">
-                            <a href="<?= BASEURL?>/"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
+                            <a class="btn btnEditDataAsisten" role="button" data-bs-toggle="modal" data-bs-target="#formModal" data-id="<?= $asisten['id_user']?>"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
                             <a class="btn" role="button" onclick="deleteData('asistendandosen', 'deleteasisten', '<?= $asisten['id_user']?>')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
                             <a class="btn" role="button" onclick="resetPassword('asistendandosen', 'resetpassword', '<?= $asisten['id_user']?>', 'asisten')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/reset.svg" alt=""></a>
                         </div>
@@ -52,7 +52,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="formAddAsistenModal" tabindex="-1" role="dialog" aria-labelledby="formAddAsistenModalLabel" aria-hidden="true">
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

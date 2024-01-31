@@ -121,7 +121,7 @@ class AsistenDanDosen extends Controller {
         $this->checkRoleAndRedirect('admin', '/daftarnilai');
 
         $edited = $this->model($role . '_model')->editData($_POST);
-
+        
         if ($edited > 0) {
             Flasher::setFlash('berhasil', 'diubah', 'success');
             header('Location: ' . BASEURL . '/' . 'asistendandosen/' . $role . 'page');

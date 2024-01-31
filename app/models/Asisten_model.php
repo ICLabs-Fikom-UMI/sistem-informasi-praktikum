@@ -85,4 +85,22 @@ class Asisten_model {
         return $this->db->resultSet();
     }
 
+    public function editData($data) {
+        try {
+            $query = 'CALL edit_asisten_with_user(:id_user, :nim, :email, :nama)';
+    
+            $this->db->query($query);
+            $this->db->bind('id_user', $data['id']);
+            $this->db->bind('nim', $data['nim']);
+            $this->db->bind('email', $data['email']);
+            $this->db->bind('nama', $data['nama']);
+    
+            $this->db->execute();
+    
+            return $this->db->rowCount();
+        }
+        catch (Exception $e) {
+            echo 'Error : ' . $e->getMessage();
+        }
+    }
 }

@@ -66,4 +66,34 @@ $(document).ready(function() {
       }
     });
   });
+
+  $('#btnAddDataAsisten').on('click', function() {
+    $('#formModalLabel').html('Tambah Data dan Akun Asisten');
+    $('.modal-footer button[type=submit]').html('Tambah Data');
+    $('#nim').val(null);
+    $('#nama').val('');
+    $('#email').val('');
+  });
+
+  $('.btnEditDataAsisten').on('click', function() {
+    $('#formModalLabel').html('Edit Data Asisten');
+    $('.modal-footer button[type=submit]').html('Edit Data');
+    $('.modal-body form').attr('action', 'http://localhost/sistem-informasi-praktikum/public/asistendandosen/editdata/Asisten');
+
+    const id_user = $(this).data('id');
+    console.log(id_user);
+    
+    $.ajax({
+      url: 'http://localhost/sistem-informasi-praktikum/public/asistendandosen/getdatabyiduser/Asisten',
+      data: {id : id_user},
+      method: 'post',
+      dataType: 'json',
+      success: function(data) {
+        $('#nim').val(data.nim);
+        $('#nama').val(data.nama);
+        $('#email').val(data.email);
+        $('#id').val(data.id_user);
+      }
+    });
+  });
 });
