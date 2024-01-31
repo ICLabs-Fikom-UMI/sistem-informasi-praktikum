@@ -31,7 +31,7 @@ class Login extends Controller {
             $is_password_default = $this->model('User_model')->isDefaultPassword($password);
             // [PENTINGJ] hapus tanda (!) negasi untuk sementara untuk mengabaikan password default
             if (!$is_password_default) {
-                // header('Location: change-default-password.php');
+                // header('Location: passworddefault.php');
                 echo "Password Default";
                 exit();
             }
