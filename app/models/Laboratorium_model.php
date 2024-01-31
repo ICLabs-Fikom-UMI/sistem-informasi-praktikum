@@ -18,6 +18,15 @@ class Laboratorium_model {
         return $this->db->resultSet();
     }
 
+    public function getDataById($id_laboratorium) {
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE id_laboratorium = :id_laboratorium';
+
+        $this->db->query($query);
+        $this->db->bind('id_laboratorium', $id_laboratorium);
+
+        return $this->db->single();
+    }
+
     public function addLaboratorium($data) {
         $query = 'INSERT INTO ' . $this->table . '(nama_laboratorium, kapasitas)
                     VALUE (:nama_laboratorium, :kapasitas)';
@@ -36,6 +45,24 @@ class Laboratorium_model {
 
         $this->db->query($query);
         $this->db->bind('id_laboratorium', $id_laboratorium);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
+    public function editData($data) {
+        $query = 'UPDATE ' . $this->table . 
+                    ' SET 
+                        nama_laboratorium = :nama_laboratorium,
+                        kapasitas = :kapasitas
+                      WHERE
+                        id_laboratorium = :id_laboratorium';
+
+        $this->db->query($query); 
+        $this->db->bind('nama_laboratorium', $data['nama_laboratorium']);
+        $this->db->bind('kapasitas', $data['kapasitas']);
+        $this->db->bind('id_laboratorium', $data['id'])
 
         $this->db->execute();
 

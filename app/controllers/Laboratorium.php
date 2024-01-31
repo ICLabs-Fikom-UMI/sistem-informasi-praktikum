@@ -53,4 +53,27 @@ class Laboratorium extends Controller {
             exit;
         }
     }
+
+    public function getDataById() {
+        echo json_encode($this->model('Laboratorium_model')->getDataById($_POST['id']));
+    }
+
+    public function editData() {
+        $this->checkLoginSession();
+        $this->checkRoleAndRedirect('admin', '/daftarnilai');
+
+        var_dump($_POST);
+        // $edited = $this->model('Laboratorium_model')->editData($_POST);
+        
+        // if ($edited > 0) {
+        //     Flasher::setFlash('berhasil', 'diubah', 'success');
+        //     header('Location: ' . BASEURL . '/laboratorium');
+        //     exit;
+        // }
+        // else {
+        //     Flasher::setFlash('gagal', 'diubah', 'danger');
+        //     header('Location: ' . BASEURL . '/laboratorium');
+        //     exit;
+        // }
+    }
 }

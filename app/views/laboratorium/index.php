@@ -5,7 +5,7 @@
                 <?php Flasher::flash(); ?>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" data-bs-dismis="modal" data-bs-toggle="modal" data-bs-target="#formAddLabModal">Tambah Laboratorium</button>
+        <button id="btnAddLab" type="button" class="btn btn-primary" data-bs-dismis="modal" data-bs-toggle="modal" data-bs-target="#formModal">Tambah Laboratorium</button>
     </div>
     <div class="laboratorium-card">
         <div class="row d-flex align-items-stretch">
@@ -17,8 +17,8 @@
                             <h4><?= $lab['nama_laboratorium'];?></h4>
                             
                             <div class="icon-action d-flex">
-                                <a class="btn" role="button" href="<?= BASEURL?>/" data-bs-toggle="modal" data-bs-target="#myModal"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
-                                <a class="btn" role="button" onclick="deleteData('laboratorium', 'deletelaboratorium', '<?= $lab['id_laboratorium']?>')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
+                                <a class="btn btnEditLab" role="button" data-bs-toggle="modal" data-bs-target="#formModal" data-id="<?= $lab['id_laboratorium']?>"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
+                                <a class="btn" role="button" onclick="deleteData('<?= $lab['id_laboratorium']?>')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
                             </div>
                         </div>
                         <div class="card-text d-flex justify-content-between p-2">
@@ -34,7 +34,7 @@
 </div>
 
 <!-- Modal Tambah -->
-<div class="modal fade" id="formAddLabModal" tabindex="-1" role="dialog" aria-labelledby="formAddLabModalLabel" aria-hidden="true">
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

@@ -96,4 +96,32 @@ $(document).ready(function() {
       }
     });
   });
+
+  $('#btnAddLab').on('click', function() {
+    $('#formModalLabel').html('Tambah Laboratorium');
+    $('.modal-footer button[type=submit]').html('Tambah Data');
+    $('#nama_laboratorium').val('');
+    $('#kapasitas').val(null);
+  });
+
+  $('.btnEditLab').on('click', function() {
+    $('#formModalLabel').html('Edit Data Laboratorium');
+    $('.modal-footer button[type=submit]').html('Edit Data');
+    $('.modal-body form').attr('action', 'http://localhost/sistem-informasi-praktikum/public/laboratorium/editdata');
+
+    const id = $(this).data('id');
+    console.log(id);
+
+    $.ajax({
+      url: 'http://localhost/sistem-informasi-praktikum/public/laboratorium/getdatabyid',
+      data: {id : id},
+      method: 'post',
+      dataType: 'json',
+      success: function(data) {
+        $('#nama_laboratorium').val(data.nama_laboratorium);
+        $('#kapasitas').val(data.kapasitas);
+        $('#id').val(data.id);
+      }
+    });
+  });
 });
