@@ -48,14 +48,14 @@ $(document).ready(function() {
   $('.btnEditDataDosen').on('click', function() {
     $('#formModalLabel').html('Edit Data Dosen');
     $('.modal-footer button[type=submit]').html('Edit Data');
-    $('.modal-body form').attr('action', 'http://localhost/sistem-informasi-praktikum/public/asistendandosen/editdata/dosen');
+    $('.modal-body form').attr('action', 'http://localhost/sistem-informasi-praktikum/public/asistendandosen/editdata/Dosen');
 
     const id_user = $(this).data('id');
     console.log(id_user);
     
     $.ajax({
       url: 'http://localhost/sistem-informasi-praktikum/public/asistendandosen/getdatabyiduser/dosen',
-      data: {id: id_user},
+      data: {id : id_user},
       method: 'post',
       dataType: 'json',
       success: function(data) {
@@ -63,14 +63,7 @@ $(document).ready(function() {
         $('#nama').val(data.nama);
         $('#email').val(data.email);
         $('#id').val(data.id_user);
-      },
-      error: function(xhr, textStatus, errorThrown) {
-          console.log("AJAX Error: ", textStatus);
-          console.log("Status Code: ", xhr.status);
-          console.log("Error: ", errorThrown);
-        }
+      }
     });
-
   });
-
 });

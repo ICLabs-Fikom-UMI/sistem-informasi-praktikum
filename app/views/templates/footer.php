@@ -37,6 +37,6 @@
         <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
         <script>new DataTable('#dataTable');</script>
         <script src="<?= BASEURL; ?>/js/bootstrap/bootstrap.js"></script>
-        <script src="<?= BASEURL; ?>/js/scripts.js"></script>
+        <script src="<?= BASEURL; ?>/js/script.js"></script>
     </body>
 </html>

@@ -112,7 +112,7 @@ class AsistenDanDosen extends Controller {
         }
     }
 
-    public function getData($role) {
+    public function getDataByIdUser($role) {
         echo json_encode($this->model($role . '_model')->getDataByIdUser($_POST['id']));
     }
 
@@ -122,14 +122,14 @@ class AsistenDanDosen extends Controller {
 
         $edited = $this->model($role . '_model')->editData($_POST);
 
-        if ($resetPass > 0) {
+        if ($edited > 0) {
             Flasher::setFlash('berhasil', 'diubah', 'success');
-            header('Location: ' . BASEURL . '/asistendandosen/' . $role . 'page');
+            header('Location: ' . BASEURL . '/' . 'asistendandosen/' . $role . 'page');
             exit;
         }
         else {
             Flasher::setFlash('gagal', 'diubah', 'danger');
-            header('Location: ' . BASEURL . '/asistendandosen/'. $role . 'page');
+            header('Location: ' . BASEURL . '/' . 'asistendandosen/' . $role . 'page');
             exit;
         }
     }

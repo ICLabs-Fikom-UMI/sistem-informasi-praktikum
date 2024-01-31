@@ -98,4 +98,18 @@ class Dosen_model {
         
         return $this->db->resultSet();
     }
+
+    public function editData($data) {
+        $query = 'CALL edit_dosen_with_user(:id_user, :nidn, :email, :nama)';
+
+        $this->db->query($query);
+        $this->db->bind('id_user', $data['id']);
+        $this->db->bind('nidn', $data['nidn']);
+        $this->db->bind('email', $data['email']);
+        $this->db->bind('nama', $data['nama']);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
 }
