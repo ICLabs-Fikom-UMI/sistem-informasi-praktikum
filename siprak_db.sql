@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2024 at 11:40 PM
+-- Generation Time: Feb 01, 2024 at 08:16 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.3.2
 
@@ -69,6 +69,47 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_laboratorium` (IN `p_id_labo
     DELETE FROM laboratorium WHERE id_laboratorium = p_id_laboratorium;
     
     SET foreign_key_checks = 1;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `edit_asisten_with_user` (IN `p_id_user` INT, IN `p_nim` CHAR(11), IN `p_email` VARCHAR(50), IN `p_nama` VARCHAR(100))   BEGIN
+	UPDATE asisten
+		SET 
+			nim = p_nim,
+			email = p_email,
+			nama = p_nama
+        WHERE
+			id_user = p_id_user;
+	
+    UPDATE user
+		SET
+			email = p_email
+		WHERE
+			id_user = p_id_user;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `edit_dosen_with_user` (IN `p_id_user` INT, IN `p_nidn` VARCHAR(10), IN `p_email` VARCHAR(50), IN `p_nama` VARCHAR(100))   BEGIN
+	UPDATE dosen 
+		SET 
+			nidn = p_nidn,
+			email = p_email,
+			nama = p_nama
+        WHERE
+			id_user = p_id_user;
+	
+    UPDATE user
+		SET
+			email = p_email
+		WHERE
+			id_user = p_id_user;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `edit_laboratorium` (IN `p_id_laboratorium` INT, IN `p_nama_laboratorium` VARCHAR(100), IN `p_kapasitas` INT(5))   BEGIN
+	UPDATE laboratorium
+		SET 
+			nama_laboratorium = p_nama_laboratorium,
+			kapasitas = p_kapasitas
+        WHERE
+			id_laboratorium = p_id_laboratorium;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_frek_filter_id_dosen` (IN `id_dosen_param` INT)   BEGIN
@@ -188,7 +229,7 @@ INSERT INTO `asisten` (`id_asisten`, `id_user`, `nim`, `email`, `nama`) VALUES
 (11, 53, '13120210004', '13120210004@umi.ac.id', 'Muhammad Dani Arya Putra'),
 (12, 54, '13020200318', '13020200318@umi.ac.id', 'As\'syahrin Nanda'),
 (13, 55, '13020210053', '13020210053@umi.ac.id', 'Imran Afdillah Dahlan'),
-(17, 89, '1919191919', 'kakawaltamppan@umi.ac.id', 'kak Awal');
+(17, 89, '1919191919', 'awalarifin_edited@umi.ac.id', 'Muh. Awal Arifin_edited');
 
 -- --------------------------------------------------------
 
@@ -248,10 +289,11 @@ INSERT INTO `dosen` (`id_dosen`, `id_user`, `nidn`, `email`, `nama`) VALUES
 (38, 40, '922078101', 'yulitasalim@umi.ac.id', 'Yulita Salim, S.Kom.,M.T.'),
 (39, 41, '31056905', 'hjharlindal@umi.ac.id', 'Dr. Hj. Harlinda L., S.Kom.,M.M.,M.Kom'),
 (40, 42, '916108403', 'poetrilokapitasari@umi.ac.id', 'Poetri Lestari Lokapitasari Belluano, S.Kom.,M.T'),
-(42, 57, '3123123', 'insert_email_2@umi.ac.id', 'insert_dosen_2'),
+(42, 57, '3123122', 'insert_dosen_2_edit@umi.ac.id', 'insert_dosen_2_edit'),
 (43, 59, '43214321', 'insert_email_3@umi.ac.id', 'insert_dosen_3'),
 (44, 60, 'insert_nam', 'insert_email_dosen_4@umi.ac.id', 'insert_nama_dosen_4'),
-(50, 74, 'inset_nama', 'inset_email_dosen_9@umi.ac.id', 'inset_nama_dosen_9');
+(50, 74, 'inset_nama', 'inset_email_dosen_9@umi.ac.id', 'inset_nama_dosen_9'),
+(56, 90, '123312987', 'insert_dosen_4_edited@umi.ac.id', 'insert_dosen_4_edited');
 
 -- --------------------------------------------------------
 
@@ -382,7 +424,9 @@ INSERT INTO `laboratorium` (`id_laboratorium`, `nama_laboratorium`, `kapasitas`)
 (4, 'Data Science', 25),
 (5, 'Computer Vision', 25),
 (6, 'Microcontroller', 25),
-(7, 'Computer Network', 15);
+(7, 'Computer Network', 15),
+(12, 'Lab 1_edited', 50),
+(13, 'Lab 2', 321);
 
 -- --------------------------------------------------------
 
@@ -1620,7 +1664,7 @@ INSERT INTO `user` (`id_user`, `email`, `password`, `role`) VALUES
 (53, '13120210004@umi.ac.id', '*51117F55AF7589B9DD630C762EDDE8C3183873EF', 'asisten'),
 (54, '13020200318@umi.ac.id', '*51117F55AF7589B9DD630C762EDDE8C3183873EF', 'asisten'),
 (55, '13020210053@umi.ac.id', '*51117F55AF7589B9DD630C762EDDE8C3183873EF', 'asisten'),
-(57, 'insert_email_2@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
+(57, 'insert_dosen_2_edit@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
 (59, 'insert_email_3@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
 (60, 'insert_email_dosen_4@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
 (65, 'insert_nama_dosen_5@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
@@ -1631,7 +1675,8 @@ INSERT INTO `user` (`id_user`, `email`, `password`, `role`) VALUES
 (75, 'insert_email_dosen_10@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
 (79, 'inset_email_dosen_10@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
 (80, 'inset_email_dosen_11@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen'),
-(89, 'kakawaltamppan@umi.ac.id', '*51117F55AF7589B9DD630C762EDDE8C3183873EF', 'asisten');
+(89, 'awalarifin_edited@umi.ac.id', '*51117F55AF7589B9DD630C762EDDE8C3183873EF', 'asisten'),
+(90, 'insert_dosen_4_edited@umi.ac.id', '*2E00CBB4EA2AD213A8D40B19680B8D0D81B284DA', 'dosen');
 
 -- --------------------------------------------------------
 
@@ -1791,7 +1836,7 @@ ALTER TABLE `asisten`
 -- AUTO_INCREMENT for table `dosen`
 --
 ALTER TABLE `dosen`
-  MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `frekuensi`
@@ -1809,7 +1854,7 @@ ALTER TABLE `kehadiran`
 -- AUTO_INCREMENT for table `laboratorium`
 --
 ALTER TABLE `laboratorium`
-  MODIFY `id_laboratorium` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_laboratorium` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `mahasiswa`
@@ -1851,7 +1896,7 @@ ALTER TABLE `tugas`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- Constraints for dumped tables
@@ -1876,37 +1921,11 @@ ALTER TABLE `dosen`
   ADD CONSTRAINT `fk1_dosen_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `frekuensi`
---
-ALTER TABLE `frekuensi`
-  ADD CONSTRAINT `fk1_frekuensi_dosen` FOREIGN KEY (`id_dosen`) REFERENCES `dosen` (`id_dosen`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk2_frekuensi_asisten1` FOREIGN KEY (`id_asisten1`) REFERENCES `asisten` (`id_asisten`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk3_frekuensi_asisten2` FOREIGN KEY (`id_asisten2`) REFERENCES `asisten` (`id_asisten`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk4_laboratorium` FOREIGN KEY (`id_laboratorium`) REFERENCES `laboratorium` (`id_laboratorium`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk5_mata_kuliah` FOREIGN KEY (`id_matkul`) REFERENCES `mata_kuliah` (`id_matkul`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Constraints for table `mengajar`
 --
 ALTER TABLE `mengajar`
   ADD CONSTRAINT `fk1_mengajar_dosen` FOREIGN KEY (`id_dosen`) REFERENCES `dosen` (`id_dosen`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk2_mengajar_mata_kuliah` FOREIGN KEY (`id_matkul`) REFERENCES `mata_kuliah` (`id_matkul`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `penilaian_frekuensi`
---
-ALTER TABLE `penilaian_frekuensi`
-  ADD CONSTRAINT `fk1_nilai_frekuensi_frekuensi` FOREIGN KEY (`id_frekuensi`) REFERENCES `frekuensi` (`id_frekuensi`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk2_nilai_frekuensi_mahasiswa` FOREIGN KEY (`id_mahasiswa`) REFERENCES `mahasiswa` (`id_mahasiswa`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk3_nilai_kehadiran` FOREIGN KEY (`id_kehadiran`) REFERENCES `kehadiran` (`id_kehadiran`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk4_nilai_tugas` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id_tugas`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `praktikum`
---
-ALTER TABLE `praktikum`
-  ADD CONSTRAINT `fk1_praktikum_mahasiswa` FOREIGN KEY (`id_mahasiswa`) REFERENCES `mahasiswa` (`id_mahasiswa`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk1_praktikum_mata_kuliah` FOREIGN KEY (`id_matkul`) REFERENCES `mata_kuliah` (`id_matkul`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

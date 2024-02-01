@@ -66,4 +66,20 @@ class User_model {
         }
     }
 
+    public function changePassword($data) {
+        $query = 'UPDATE ' . $this->table .
+                    ' SET
+                        password = password(:password)
+                      WHERE
+                        id_user = :id_user';
+        
+        $this->db->query($query);
+        $this->db->bind('password', $data['password_new']);
+        $this->db->bind('id_user', $_SESSION['id_user']);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
 }
