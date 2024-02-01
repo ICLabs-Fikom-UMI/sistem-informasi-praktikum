@@ -40,6 +40,7 @@ $(document).ready(function() {
   $('#btnAddDataDosen').on('click', function() {
     $('#formModalLabel').html('Tambah Data dan Akun Dosen');
     $('.modal-footer button[type=submit]').html('Tambah Data');
+    $('.modal-body form').attr('action', 'https://localhost/sistem-informasi-praktikum/public/asistendandosen/adddosen');
     $('#nidn').val(null);
     $('#nama').val('');
     $('#email').val('');
@@ -48,13 +49,13 @@ $(document).ready(function() {
   $('.btnEditDataDosen').on('click', function() {
     $('#formModalLabel').html('Edit Data Dosen');
     $('.modal-footer button[type=submit]').html('Edit Data');
-    $('.modal-body form').attr('action', 'http://localhost/sistem-informasi-praktikum/public/asistendandosen/editdata/Dosen');
+    $('.modal-body form').attr('action', 'https://localhost/sistem-informasi-praktikum/public/asistendandosen/editdata/Dosen');
 
     const id_user = $(this).data('id');
     console.log(id_user);
     
     $.ajax({
-      url: 'http://localhost/sistem-informasi-praktikum/public/asistendandosen/getdatabyiduser/dosen',
+      url: 'https://localhost/sistem-informasi-praktikum/public/asistendandosen/getdatabyiduser/dosen',
       data: {id : id_user},
       method: 'post',
       dataType: 'json',
@@ -70,6 +71,7 @@ $(document).ready(function() {
   $('#btnAddDataAsisten').on('click', function() {
     $('#formModalLabel').html('Tambah Data dan Akun Asisten');
     $('.modal-footer button[type=submit]').html('Tambah Data');
+    $('.modal-body form').attr('action', 'https://localhost/sistem-informasi-praktikum/public/asistendandosen/addasisten');
     $('#nim').val(null);
     $('#nama').val('');
     $('#email').val('');
@@ -78,13 +80,13 @@ $(document).ready(function() {
   $('.btnEditDataAsisten').on('click', function() {
     $('#formModalLabel').html('Edit Data Asisten');
     $('.modal-footer button[type=submit]').html('Edit Data');
-    $('.modal-body form').attr('action', 'http://localhost/sistem-informasi-praktikum/public/asistendandosen/editdata/Asisten');
+    $('.modal-body form').attr('action', 'https://localhost/sistem-informasi-praktikum/public/asistendandosen/editdata/Asisten');
 
     const id_user = $(this).data('id');
     console.log(id_user);
     
     $.ajax({
-      url: 'http://localhost/sistem-informasi-praktikum/public/asistendandosen/getdatabyiduser/Asisten',
+      url: 'https://localhost/sistem-informasi-praktikum/public/asistendandosen/getdatabyiduser/Asisten',
       data: {id : id_user},
       method: 'post',
       dataType: 'json',
@@ -100,6 +102,7 @@ $(document).ready(function() {
   $('#btnAddLab').on('click', function() {
     $('#formModalLabel').html('Tambah Laboratorium');
     $('.modal-footer button[type=submit]').html('Tambah Data');
+    $('.modal-body form').attr('action', 'https://localhost/sistem-informasi-praktikum/public/laboratorium/addlaboratorium');
     $('#nama_laboratorium').val('');
     $('#kapasitas').val(null);
   });
@@ -107,20 +110,20 @@ $(document).ready(function() {
   $('.btnEditLab').on('click', function() {
     $('#formModalLabel').html('Edit Data Laboratorium');
     $('.modal-footer button[type=submit]').html('Edit Data');
-    $('.modal-body form').attr('action', 'http://localhost/sistem-informasi-praktikum/public/laboratorium/editdata');
+    $('.modal-body form').attr('action', 'https://localhost/sistem-informasi-praktikum/public/laboratorium/editdata');
 
     const id = $(this).data('id');
     console.log(id);
 
     $.ajax({
-      url: 'http://localhost/sistem-informasi-praktikum/public/laboratorium/getdatabyid',
+      url: 'https://localhost/sistem-informasi-praktikum/public/laboratorium/getdatabyid',
       data: {id : id},
       method: 'post',
       dataType: 'json',
       success: function(data) {
         $('#nama_laboratorium').val(data.nama_laboratorium);
         $('#kapasitas').val(data.kapasitas);
-        $('#id').val(data.id);
+        $('#id').val(data.id_laboratorium);
       }
     });
   });

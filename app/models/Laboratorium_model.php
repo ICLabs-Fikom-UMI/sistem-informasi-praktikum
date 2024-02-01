@@ -52,17 +52,12 @@ class Laboratorium_model {
     }
 
     public function editData($data) {
-        $query = 'UPDATE ' . $this->table . 
-                    ' SET 
-                        nama_laboratorium = :nama_laboratorium,
-                        kapasitas = :kapasitas
-                      WHERE
-                        id_laboratorium = :id_laboratorium';
+        $query = 'CALL edit_laboratorium(:id_laboratorium, :nama_laboratorium, :kapasitas)';
 
         $this->db->query($query); 
         $this->db->bind('nama_laboratorium', $data['nama_laboratorium']);
         $this->db->bind('kapasitas', $data['kapasitas']);
-        $this->db->bind('id_laboratorium', $data['id'])
+        $this->db->bind('id_laboratorium', $data['id']);
 
         $this->db->execute();
 
