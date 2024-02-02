@@ -16,4 +16,19 @@ class DataFrekuensi extends Controller {
         $this->view('dataFrekuensi/index', $data);
         $this->view('templates/footer');
     }
+
+    public function addDataFrekuensi() {
+        $this->checkLoginSession();
+        $this->checkRoleAndRedirect('admin', '/daftarnilai');
+
+        $data['title'] = 'Tambah Frekuensi';
+        $data['header'] = 'Tambah Frekuensi';
+        $data['detail'] = 'Dapat menambahkan Frekuensi';
+
+        $this->view('templates/header', $data);
+        $this->view('templates/sidebar', $data);
+        $this->view('templates/headerProfile', $data);
+        $this->view('dataFrekuensi/addfrekuensi');
+        $this->view('templates/footer');
+    }
 }

@@ -20,20 +20,17 @@ class Login extends Controller {
 
         $role = $this->model('User_model')->getRoleByEmail($email);
 
-        echo var_dump($_POST);
-        echo "<br></br>";
-
         $id_user = $this->model('User_model')->validateLogin($email, $password);
 
         if ($id_user) {
-            echo "Berhasil Login";
-
             $is_password_default = $this->model('User_model')->isDefaultPassword($password);
             // [PENTINGJ] hapus tanda (!) negasi untuk sementara untuk mengabaikan password default
             if (!$is_password_default) {
-                // header('Location: passworddefault.php');
-                echo "Password Default";
-                exit();
+                $data['title'] = 'Password Default';
+                $this->view('templates/header', $data);
+                $this->view('login/passworddefault');
+                $this->view('templates/footer');
+                exit;
             }
             else {
                 $_SESSION['id_user'] = $id_user;
@@ -53,6 +50,15 @@ class Login extends Controller {
         $data['title'] = 'Login';
         $this->view('templates/header', $data);
         $this->view('login/changepassword');
+        $this->view('templates/footer');
+    }
+
+    public function passwordDefault() {
+        $this->checkLoginSession();
+        
+        $data['title'] = 'Login';
+        $this->view('templates/header', $data);
+        $this->view('login/passworddefault');
         $this->view('templates/footer');
     }
     

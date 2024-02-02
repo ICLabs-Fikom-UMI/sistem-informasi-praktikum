@@ -1,4 +1,5 @@
 <div class="content">
+    <button class="btn btn-primary btnExport">Export to Excel</button>
     <?php if($_SESSION['role_user'] != 'dosen') {?>
     <div class="daftar-matkul d-flex flex-column mb-4 p-2">
         <span class="text-matkul mb-2">Mata Kuliah</span>
