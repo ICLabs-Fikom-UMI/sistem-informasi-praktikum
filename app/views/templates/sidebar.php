@@ -13,6 +13,11 @@
           <li>
             <a href="<?= BASEURL?>/DaftarNilai"><img src="<?= BASEURL ?>/icons/daftar-nilai.svg" alt="Icon 1" />Daftar Nilai</a>
           </li>
+          <?php if ($_SESSION['role_user'] == 'dosen') : ?>
+          <li>
+            <a href="<?= BASEURL?>/daftarperkuliahan"><img src="<?= BASEURL ?>/icons/data-frekuensi.svg" alt="Icon 1" />Daftar Perkuliahan</a>
+          </li>
+          <?php endif?>
           <?php if ($_SESSION['role_user'] == 'admin') : ?>
           <li>
             <a href="<?= BASEURL?>/AsistenDanDosen"><img src="<?= BASEURL ?>/icons/asisten-dan-dosen.svg" alt="Icon 1" />Asisten dan Dosen</a>
