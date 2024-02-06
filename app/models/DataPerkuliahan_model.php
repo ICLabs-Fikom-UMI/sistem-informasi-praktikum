@@ -25,18 +25,18 @@ class DataPerkuliahan_model {
         return $this->db->single();
     }
 
-    public function addData($data, $daftar_nim_mhs) {
+    public function addData($data, $id_mahasiswa) {
         $query = 'INSERT INTO kuliah(id_mahasiswa, id_dosen, id_matkul, kelas)
-                    VALUE (:id_mahasiswa, :id_dosen, :id_matkul, :kelas)';
+                    VALUES (:id_mahasiswa, :id_dosen, :id_matkul, :kelas)';
 
-        foreach($daftar_nim_mhs as $nim):
-            echo $nim . '<br>';        
+        $this->db->query($query);
+        $this->db->bind('id_mahasiswa', $id_mahasiswa);
+        $this->db->bind('id_dosen', $data['nama_dosen']);
+        $this->db->bind('id_matkul', $data['mata_kuliah']);
+        $this->db->bind('kelas', $data['kelas']);
 
-        // foreach($daftar_nim_mhs as $nim):
-        //     echo $nim . ' ';
-        //     echo $data['nama_dosen'] . ' ';
-        //     echo $data['mata_kuliah'] . ' ';
-        //     echo $data['kelas'] . '<br>';
-        endforeach;
+        $this->db->execute();
+
+        return $this->db->rowCount();
     }
 }

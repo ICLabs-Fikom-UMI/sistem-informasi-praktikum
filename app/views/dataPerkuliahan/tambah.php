@@ -10,7 +10,7 @@
         <input type="hidden" name="id" id="id">
         <div class="form-group mb-3">
             <label for="nama_dosen">Nama Dosen</label>
-            <select class="form-select" id="nama_dosen" name="nama_dosen" aria-label="Default select example">
+            <select class="form-select" id="dosen" name="nama_dosen" aria-label="Default select example">
                 <option selected>Pilih dosen</option>
                 <?php foreach($data['dosen'] as $dosen): ?>
                 <option value="<?= $dosen['id_dosen']?>"><?= $dosen['nama']?></option>

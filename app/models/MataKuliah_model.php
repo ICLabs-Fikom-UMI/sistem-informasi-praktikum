@@ -17,4 +17,6 @@ class Matakuliah_model {
         
         return $this->db->resultSet();
     }
+
+    public function 
 }
