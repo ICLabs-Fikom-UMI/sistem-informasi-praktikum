@@ -12,23 +12,16 @@
       <table id="dataTable" class="table table-striped" style="width:100%">
         <thead>
             <tr>
-                <th>Kode Frekuensi</th>
+                <th>No</th>
                 <th>Mata Kuliah</th>
-                <th>Jadwal</th>
-                <th>Ruangan</th>
-                <th>Dosen</th>
-                <th>Asisten 1</th>
-                <th>Asisten 2</th>
-                <th>Status</th>
+                <th>Kelas</th>
+                <th>Total Mahasiswa</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach($data['frekuensi'] as $frekuensi) : ?>
                 <tr>
-                    <td><?= $frekuensi['kode_frekuensi']?></td>
-                    <td><?= $frekuensi['nama_matkul']?></td>
-                    <td><?= $frekuensi['hari'] . ', ' . $frekuensi['jam_mulai'] . ' - ' . $frekuensi['jam_selesai'];?></td>
                     <td><?= $frekuensi['nama_laboratorium']?></td>
                     <td><?= $frekuensi['nama_dosen']?></td>
                     <td><?= $frekuensi['asisten1']?></td>

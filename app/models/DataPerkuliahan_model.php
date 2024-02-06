@@ -24,4 +24,19 @@ class DataPerkuliahan_model {
         
         return $this->db->single();
     }
+
+    public function addData($data, $daftar_nim_mhs) {
+        $query = 'INSERT INTO kuliah(id_mahasiswa, id_dosen, id_matkul, kelas)
+                    VALUE (:id_mahasiswa, :id_dosen, :id_matkul, :kelas)';
+
+        foreach($daftar_nim_mhs as $nim):
+            echo $nim . '<br>';        
+
+        // foreach($daftar_nim_mhs as $nim):
+        //     echo $nim . ' ';
+        //     echo $data['nama_dosen'] . ' ';
+        //     echo $data['mata_kuliah'] . ' ';
+        //     echo $data['kelas'] . '<br>';
+        endforeach;
+    }
 }
