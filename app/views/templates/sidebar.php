@@ -13,7 +13,7 @@
           <li>
             <a href="<?= BASEURL?>/DaftarNilai"><img src="<?= BASEURL ?>/icons/daftar-nilai.svg" alt="Icon 1" />Daftar Nilai</a>
           </li>
-          <?php if ($_SESSION['role_user'] == 'dosen') : ?>
+          <?php if ($_SESSION['role_user'] != 'asisten') : ?>
           <li>
             <a href="<?= BASEURL?>/daftarperkuliahan"><img src="<?= BASEURL ?>/icons/data-frekuensi.svg" alt="Icon 1" />Daftar Perkuliahan</a>
           </li>

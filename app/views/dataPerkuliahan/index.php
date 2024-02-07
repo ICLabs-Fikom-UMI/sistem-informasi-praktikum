@@ -14,6 +14,7 @@
         <thead>
             <tr>
                 <th>No</th>
+                <?php if ($_SESSION['role_user'] == 'admin') echo '<th>Nama Dosen</th>';?>
                 <th>Mata Kuliah</th>
                 <th>Kelas</th>
                 <th>Total Mahasiswa</th>
@@ -26,6 +27,9 @@
                 foreach($data['perkuliahan'] as $perkuliahan) : ?>
                 <tr>
                     <td><?= $i++?></td>
+                    <?php if ($_SESSION['role_user'] == 'admin'):?>
+                        <td><?= $perkuliahan['nama_dosen']?></td>
+                    <?php endif?>
                     <td><?= $perkuliahan['nama_matkul']?></td>
                     <td><?= $perkuliahan['kelas']?></td>
                     <td><?= $perkuliahan['total_mhs']?></td>
@@ -40,6 +44,7 @@
         <tfoot>
             <tr>
                 <th>No</th>
+                <?php if ($_SESSION['role_user'] == 'admin') echo '<th>Nama Dosen</th>';?>
                 <th>Mata Kuliah</th>
                 <th>Kelas</th>
                 <th>Total Mahasiswa</th>

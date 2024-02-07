@@ -3,7 +3,7 @@
 class DaftarPerkuliahan extends Controller {
     public function index() {
         $this->checkLoginSession();
-        $this->checkRoleAndRedirect('dosen', '/daftarnilai');
+        // $this->checkRoleAndRedirect('dosen', '/daftarnilai');
 
         $data['title'] = 'Perkuliahan';
         $data['header'] = 'Data Perkuliahan';
@@ -20,7 +20,7 @@ class DaftarPerkuliahan extends Controller {
 
     public function tambah() {
         $this->checkLoginSession();
-        $this->checkRoleAndRedirect('dosen', '/daftarnilai');
+        // $this->checkRoleAndRedirect('dosen', '/daftarnilai');
 
         $data['title'] = 'Tambah Perkuliahan';
         $data['header'] = 'Data Perkuliahan';
@@ -37,7 +37,7 @@ class DaftarPerkuliahan extends Controller {
 
     public function tambahData() {
         $this->checkLoginSession();
-        $this->checkRoleAndRedirect('dosen', '/daftarnilai');
+        // $this->checkRoleAndRedirect('dosen', '/daftarnilai');
 
         $daftar_nim_mhs = preg_split('/\s+/', $_POST['daftar_mahasiswa']);
         $list_id_mhs = [];
