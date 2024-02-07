@@ -8,7 +8,7 @@
             </div>
             <div class="modal-footer border-0 justify-content-center">
                 <button id="close" type="button" class="btn btn-secondary w-25" data-bs-dismiss="modal">Batal</button>
-                <a class="btn btn-primary w-25" id="confirm" href="#">Ya</a>
+                <a class="btn btn-primary w-25" id="confirm" href="#">Ya</a> 
             </div>
             </div>
         </div>

@@ -21,22 +21,14 @@
             </tr>
         </thead>
         <tbody>
+            <?php 
+                $i = 1; 
+                foreach($data['perkuliahan'] as $perkuliahan) : ?>
                 <tr>
-                    <td>Ha</td>
-                    <td>Ha</td>
-                    <td>Ha</td>
-                    <td>Ha</td>
-                    <td>
-                        <a class="btn btnEditDataDosen" role="button" data-bs-toggle="modal" data-bs-target="#formModal" data-id="<?= $dosen['id_user']?>"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
-                        <a class="btn" role="button" onclick="deleteData('asistendandosen', 'deletedosen', '<?= $dosen['id_user']?>')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
-                        <a class="btn" role="button" onclick="resetPassword('asistendandosen', 'resetpassword', '<?= $dosen['id_user']?>', 'asisten')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/detail.svg" alt=""></a>
-                    </td>
-                </tr>
-            <?php foreach($data['perkuliahan'] as $perkuliahan) : ?>
-                <tr>
-                    <td><?= $perkuliahan['mata_kuliah']?></td>
+                    <td><?= $i++?></td>
+                    <td><?= $perkuliahan['nama_matkul']?></td>
                     <td><?= $perkuliahan['kelas']?></td>
-                    <td><?= $perkuliahan['total_mahasisa']?></td>
+                    <td><?= $perkuliahan['total_mhs']?></td>
                     <td>
                         <a class="btn btnEditDataDosen" role="button" data-bs-toggle="modal" data-bs-target="#formModal" data-id="<?= $dosen['id_user']?>"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
                         <a class="btn" role="button" onclick="deleteData('asistendandosen', 'deletedosen', '<?= $dosen['id_user']?>')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
