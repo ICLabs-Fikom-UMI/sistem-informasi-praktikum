@@ -8,7 +8,8 @@ class DaftarPerkuliahan extends Controller {
         $data['title'] = 'Perkuliahan';
         $data['header'] = 'Data Perkuliahan';
         $data['detail'] = 'Daftar Matakuliah, Kelas, dan Mahasiswa yang diampu';
-        $data['perkuliahan'] = $this->model('Matakuliah_model')->getDataGroupByMatkulKelas();
+        $id_dosen = $this->model('Dosen_model')->getIdDosen($_SESSION['id_user']);
+        $data['perkuliahan'] = $this->model('Matakuliah_model')->getDataGroupByMatkulKelas($id_dosen['id_dosen']);
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);

@@ -18,10 +18,16 @@ class Matakuliah_model {
         return $this->db->resultSet();
     }
 
-    public function getDataGroupByMatkulKelas() {
+    public function getDataGroupByMatkulKelas($id_dosen) {
         $query = 'SELECT * FROM vw_data_matkul_group_by_matkul_kelas';
-
+        
         $this->db->query($query);
+        
+        if (isset($id_dosen)) {
+            $query = $query . ' WHERE id_dosen = :id_dosen';
+            $this->db->query($query);
+            $this->db->bind('id_dosen', $id_dosen);
+        }
         
         return $this->db->resultSet();
     }
