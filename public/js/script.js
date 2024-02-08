@@ -139,4 +139,34 @@ $(document).ready(function() {
 
       XLSX.writeFile(wb, 'table_data.xlsx');
   });
+
+  $('#mata_kuliah').on('change', function() {
+    var singkatan = {
+      'Teknik Informatika': 'TI',
+      'Sistem Informasi': 'SI'
+    }
+
+    const id_matkul = $(this).val();
+
+    $.ajax({
+      url: 'https://localhost/sistem-informasi-praktikum/public/matakuliah/getdatabyid',
+      data: {id : id_matkul},
+      method: 'post',
+      dataType: 'json',
+      success: function(data_matkul) {
+
+        $.ajax({
+          url: 'https://localhost/sistem-informasi-praktikum/public/datafrekuensi/getdatabyidmatkul',
+          data: {id : id_matkul},
+          method: 'post',
+          dataType: 'json',
+          success: function(data_frek) {
+            $('#kode_frekuensi').val(singkatan[data_matkul.jurusan] + '_' + data_matkul.singkatan + ' - ' + (data_frek.total + 1));
+          }
+        });
+        
+      }
+    });
+  });
+
 });

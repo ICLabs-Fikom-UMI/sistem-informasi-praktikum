@@ -12,6 +12,15 @@ class Matakuliah_model {
         return $this->table;
     }
 
+    public function getDataById($id_matkul) {
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE id_matkul = :id_matkul';
+        
+        $this->db->query($query);
+        $this->db->bind('id_matkul', $id_matkul);
+
+        return $this->db->single();
+    }
+
     public function getAllMataKuliah() {
         $this->db->query('SELECT * FROM ' . $this->table);
         

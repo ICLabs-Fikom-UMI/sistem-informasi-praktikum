@@ -60,4 +60,13 @@ class DataFrekuensi_model {
         
         return $this->db->rowCount();
     }
+
+    public function getNumOfDataByIdMatkul($id_matkul) {
+        $query = 'SELECT count(*) as total FROM ' . $this->table . ' WHERE id_matkul = :id_matkul';
+
+        $this->db->query($query);
+        $this->db->bind('id_matkul', $id_matkul);
+
+        return $this->db->single();
+    }
 }

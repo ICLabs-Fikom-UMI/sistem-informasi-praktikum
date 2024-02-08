@@ -36,4 +36,8 @@ class DataFrekuensi extends Controller {
         $this->view('dataFrekuensi/tambah', $data);
         $this->view('templates/footer');
     }
+
+    public function getDataByIdMatkul() {
+        echo json_encode($this->model('DataFrekuensi_model')->getNumOfDataByIdMatkul($_POST['id']));
+    }
 }

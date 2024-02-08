@@ -14,7 +14,7 @@
             <select class="form-select" id="mata_kuliah" name="mata_kuliah" aria-label="Default select example">
                 <option selected>Pilih matakuliah</option>
                 <?php foreach($data['mata_kuliah'] as $mata_kuliah): ?>
-                    <option value="<?= $mata_kuliah['id_matkul']?>"><?= $mata_kuliah['nama_matkul']?></option>
+                    <option value="<?= $mata_kuliah['id_matkul']?>"><?= $mata_kuliah['kode_matkul']?> - <?= $mata_kuliah['nama_matkul']?></option>
                 <?php endforeach?>
             </select>
         </div>
@@ -87,14 +87,12 @@
                     <option value="12:00">12:00</option>
                     <option value="15:00">15:00</option>
                     <option value="16:00">16:00</option>
-                    <option value="18:00">18:00</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="laboratorium">Jam Selesai</label>
                 <select class="form-select" id="laboratorium" name="laboratorium" aria-label="Default select example">
                     <option selected>Pilih Jam Selesai</option>
-                    <option value="08:00">08:00</option>
                     <option value="10:00">10:00</option>
                     <option value="12:00">12:00</option>
                     <option value="15:00">15:00</option>

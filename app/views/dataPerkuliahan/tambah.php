@@ -23,7 +23,7 @@
             <select class="form-select" id="mata_kuliah" name="mata_kuliah" aria-label="Default select example">
                 <option selected>Pilih matakuliah</option>
                 <?php foreach($data['mata_kuliah'] as $mata_kuliah): ?>
-                <option value="<?= $mata_kuliah['id_matkul']?>"><?= $mata_kuliah['nama_matkul']?></option>
+                <option value="<?= $mata_kuliah['id_matkul']?>"><?= $mata_kuliah['kode_matkul']?> - <?= $mata_kuliah['nama_matkul']?></option>
                 <?php endforeach?>
             </select>
         </div>
