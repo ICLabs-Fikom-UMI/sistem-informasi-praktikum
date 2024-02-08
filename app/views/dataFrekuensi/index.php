@@ -5,7 +5,7 @@
                 <?php Flasher::flash(); ?>
             </div>
         </div>
-        <a id="btnAddDataFrekuensi" href="<?= BASEURL?>/datafrekuensi/adddatafrekuensi" type="button" class="btn btn-primary">Tambah Frekuensi</a>
+        <a id="btnAddDataFrekuensi" href="<?= BASEURL?>/datafrekuensi/tambah" type="button" class="btn btn-primary">Tambah Frekuensi</a>
     </div>
 
     <div class="tabel-dosen">

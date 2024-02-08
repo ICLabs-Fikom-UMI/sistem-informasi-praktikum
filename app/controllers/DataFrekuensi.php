@@ -17,7 +17,7 @@ class DataFrekuensi extends Controller {
         $this->view('templates/footer');
     }
 
-    public function addDataFrekuensi() {
+    public function tambah() {
         $this->checkLoginSession();
         $this->checkRoleAndRedirect('admin', '/daftarnilai');
 
@@ -25,10 +25,15 @@ class DataFrekuensi extends Controller {
         $data['header'] = 'Tambah Frekuensi';
         $data['detail'] = 'Dapat menambahkan Frekuensi';
 
+        $data['mata_kuliah'] = $this->model('MataKuliah_model')->getAllMataKuliah();
+        $data['dosen'] = $this->model('Dosen_model')->getAllDosen();
+        $data['asisten'] = $this->model('Asisten_model')->getAllAsisten();
+        $data['laboratorium'] = $this->model('Laboratorium_model')->getAllLaboratorium();
+
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
         $this->view('templates/headerProfile', $data);
-        $this->view('dataFrekuensi/addfrekuensi');
+        $this->view('dataFrekuensi/tambah', $data);
         $this->view('templates/footer');
     }
 }
