@@ -21,7 +21,7 @@
 
         <div class="form-group mb-3">
             <label for="kode_frekuensi">Kode Frekuensi</label>
-            <input type="text" class="form-control" id="kode_frekuensi" name="kode_frekuensi" placeholder="TI_ALPRO - 1">
+            <input type="text" class="form-control" id="kode_frekuensi" name="kode_frekuensi" disabled>
         </div>
 
         <div class="form-group mb-3">
@@ -59,9 +59,16 @@
             <select class="form-select" id="laboratorium" name="laboratorium" aria-label="Default select example">
                 <option selected>Pilih Laboratorium</option>
                 <?php foreach($data['laboratorium'] as $laboratorium): ?>
-                <option value="<?= $laboratorium['id_laboratorium']?>"><?= $laboratorium['nama_laboratorium']?></option>
+                    <option value="<?= $laboratorium['id_laboratorium']?>"><?= $laboratorium['nama_laboratorium']?></option>
                 <?php endforeach?>
             </select>
+        </div>
+        
+        <div class="form-group mb-3">
+            <div class="form-group">
+                <label for="kapasitas">Kapasitas</label>
+                <input type="text" class="form-control" id="kapasitas" name="kapasitas">
+            </div>
         </div>
 
         <div class="form-group mb-3 d-flex flex-row justify-content-between">
@@ -102,12 +109,6 @@
             </div>
         </div>
 
-        <div class="form-group mb-3">
-            <div class="form-group">
-                <label for="kapasitas">Kapasitas</label>
-                <input type="text" class="form-control" id="kapasitas" name="kapasitas" placeholder="25">
-            </div>
-        </div>
     </div>
     <div class="modal-footer d-flex justify-content-center align-items-center gap-3">
         <button type="button" class="btn btn-secondary w-25" data-dismiss="modal">Close</button>

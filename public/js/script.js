@@ -169,4 +169,18 @@ $(document).ready(function() {
     });
   });
 
+  $('#laboratorium').on('change', function() {
+    const id_laboratorium = $(this).val();
+
+    $.ajax({
+      url: 'https://localhost/sistem-informasi-praktikum/public/laboratorium/getdatabyid',
+      data: {id : id_laboratorium},
+      method: 'post',
+      dataType: 'json',
+      success: function(data) {
+        $('#kapasitas').val(parseInt(data.kapasitas));
+      }
+    });
+  });
+
 });
