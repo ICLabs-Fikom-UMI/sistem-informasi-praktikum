@@ -48,14 +48,19 @@ class DataFrekuensi extends Controller {
             exit;
         }
         $last_inserted = $this->model('DataFrekuensi_model')->getDataByKodeFrekuensi($_POST['kode_frekuensi']);
-        $kuliah_data = $this->model('DataPerkuliahan_model')->getDataForPenilaian($last_inserted['id_frekuensi'], $last_inserted['id_matkul'], $last_inserted['id_dosen']);
+        $kuliah_data = $this->model('DataPerkuliahan_model')->getDataForPenilaian($last_inserted['id_matkul'], $last_inserted['id_dosen'], $_POST['kapasitas']);
+
+        if (empty($kuliah_data)) {
+            // TODO: BUATKAN PENGHAPUSAN DATA frekuensi 
+            echo "kosong";
+        }
 
         // insert data tabel penilaian, kehadiran, tugas
         foreach ($kuliah_data as $kuliah):
             try {
-                $penilaian = $this->model('PenilaianFrekuensi_model')->addData($last_inserted['id_frekuensi'], $kuliah['id_mahasiswa']);
-                $kehadiran = $this->model('Kehadiran_model')->addData($last_inserted['id_frekuensi'], $kuliah['id_mahasiswa']);
-                $tugas = $this->model('Tugas_model')->addData($last_inserted['id_frekuensi'], $kuliah['id_mahasiswa']);
+                $penilaian = $this->model('PenilaianFrekuensi_model')->addData($last_inserted['id_frekuensi'], $kuliah['id_mahasiswa'], $_POST['kapasitas']);
+                $kehadiran = $this->model('Kehadiran_model')->addData($last_inserted['id_frekuensi'], $kuliah['id_mahasiswa'], $_POST['kapasitas']);
+                $tugas = $this->model('Tugas_model')->addData($last_inserted['id_frekuensi'], $kuliah['id_mahasiswa'], $_POST['kapasitas']);
             }
             catch (Exception $e) {
                 echo 'Fail Insert data : ' . $last_inserted['id_frekuensi'] . ' : ' . $kuliah['id_mahasiswa'] . 'Error : ' . $e->getMessage() . '<br>';

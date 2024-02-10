@@ -40,13 +40,13 @@ class DataPerkuliahan_model {
         return $this->db->rowCount();
     }
 
-    public function getDataForPenilaian($id_frekuensi, $id_matkul, $id_dosen) {
-        $query = 'SELECT * FROM ' . $this->table . 
-                    ' WHERE (id_matkul = :id_matkul) AND (id_dosen = :id_dosen)';
+    public function getDataForPenilaian($id_matkul, $id_dosen, $limit) {
+        $query = 'CALL get_kuliah_with_filter(:id_dosen, :id_matkul, :limit)';
         
         $this->db->query($query);
         $this->db->bind('id_matkul', $id_matkul);
         $this->db->bind('id_dosen', $id_dosen);
+        $this->db->bind('limit', $limit);
         
         return $this->db->resultSet();
     }

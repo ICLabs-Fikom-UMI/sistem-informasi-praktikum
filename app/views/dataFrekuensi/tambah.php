@@ -67,7 +67,7 @@
         <div class="form-group mb-3">
             <div class="form-group">
                 <label for="kapasitas">Kapasitas</label>
-                <input type="text" class="form-control" id="kapasitas" name="kapasitas">
+                <input type="number" class="form-control" id="kapasitas" name="kapasitas">
             </div>
         </div>
 

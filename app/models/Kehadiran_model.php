@@ -16,7 +16,7 @@ class Kehadiran_model {
         return $this->db->resultSet();
     }
 
-    public function addData($id_frekuensi, $id_mahasiswa) {
+    public function addData($id_frekuensi, $id_mahasiswa, $limit) {
         $query = 'INSERT INTO ' . $this->table . '(id_frekuensi, id_mahasiswa)
                     VALUES (:id_frekuensi, :id_mahasiswa)';
         
