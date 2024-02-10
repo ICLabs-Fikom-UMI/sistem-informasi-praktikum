@@ -8,6 +8,14 @@ class PenilaianFrekuensi_model {
         $this->db = new Database;
     }
 
+    public function getAllData() {
+        $query = 'SELECT * FROM ' . $this->table;
+
+        $this->db->query($query);
+
+        return $this->db->resultSet();
+    }
+
     public function addData($id_frekuensi, $id_mahasiswa) {
         $query = 'INSERT INTO ' . $this->table . '(id_frekuensi, id_mahasiswa)
                     VALUES (:id_frekuensi, :id_mahasiswa)';

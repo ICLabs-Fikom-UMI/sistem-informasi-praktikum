@@ -54,7 +54,7 @@ class DataFrekuensi extends Controller {
         foreach ($kuliah_data as $kuliah):
             try {
                 $penilaian = $this->model('PenilaianFrekuensi_model')->addData($last_inserted['id_frekuensi'], $kuliah['id_mahasiswa']);
-                // $kehadiran = $this->model('Kehadiran_model')->addData($last_inserted['id_frekuensi'], $kuliah['id_mahasiswa']);
+                $kehadiran = $this->model('Kehadiran_model')->addData($last_inserted['id_frekuensi'], $kuliah['id_mahasiswa']);
                 $tugas = $this->model('Tugas_model')->addData($last_inserted['id_frekuensi'], $kuliah['id_mahasiswa']);
             }
             catch (Exception $e) {

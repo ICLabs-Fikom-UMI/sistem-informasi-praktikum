@@ -9,6 +9,9 @@ class DaftarNilai extends Controller {
         $data['header'] = 'Daftar Nilai Praktikum';
         $data['detail'] = 'Semua Daftar Nilai';
         $data['frekuensi'] = $this->model('DataFrekuensi_model')->getDataFrekuensiByIdMatkul(10);
+        $data['frekuensi']['penilaian_frekuensi'] = $this->model('PenilaianPraktikum_model')->getAllData();
+        $data['frekuensi']['kehadiran'] = $this->model('Kehadiran_model')->getAllData();
+        $data['frekuensi']['tugas'] = $this->model('Tugas_model')->getAllData();
         $data['mata_kuliah'] = $this->model('MataKuliah_model')->getAllMataKuliah();
 
         // var_dump($_SESSION); var_dump($_GET['url']);
