@@ -6,7 +6,7 @@
 
         <div class="perkuliahan-form">
 
-        <form action="<?= BASEURL; ?>/daftarperkuliahan/tambahdata" method="post">
+        <form action="<?= BASEURL; ?>/datafrekuensi/tambahdata" method="post">
         <input type="hidden" name="id" id="id">
         
         <div class="form-group mb-3">
@@ -21,12 +21,12 @@
 
         <div class="form-group mb-3">
             <label for="kode_frekuensi">Kode Frekuensi</label>
-            <input type="text" class="form-control" id="kode_frekuensi" name="kode_frekuensi" disabled>
+            <input type="text" class="form-control" id="kode_frekuensi" name="kode_frekuensi" readonly>
         </div>
 
         <div class="form-group mb-3">
-            <label for="nama_dosen">Nama Dosen</label>
-            <select class="form-select" id="dosen" name="nama_dosen" aria-label="Default select example">
+            <label for="dosen">Nama Dosen</label>
+            <select class="form-select" id="dosen" name="dosen" aria-label="Default select example">
                 <option selected>Pilih dosen</option>
                 <?php foreach($data['dosen'] as $dosen): ?>
                 <option value="<?= $dosen['id_dosen']?>"><?= $dosen['nama']?></option>
@@ -71,10 +71,10 @@
             </div>
         </div>
 
-        <div class="form-group mb-3 d-flex flex-row justify-content-between">
-            <div class="form-group">
-                <label for="laboratorium">Hari</label>
-                <select class="form-select" id="laboratorium" name="laboratorium" aria-label="Default select example">
+        <div class="form-group mb-3 d-flex gap-3">
+            <div class="form-group flex-fill">
+                <label for="hari">Hari</label>
+                <select class="form-select" id="hari" name="hari" aria-label="Default select example">
                     <option selected>Pilih Hari</option>
                     <option value="Senin">Senin</option>
                     <option value="Selasa">Selasa</option>
@@ -85,26 +85,14 @@
                     <option value="Minggu">Minggu</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label for="laboratorium">Jam Mulai</label>
-                <select class="form-select" id="laboratorium" name="laboratorium" aria-label="Default select example">
-                    <option selected>Pilih Jam Selesai</option>
-                    <option value="08:00">08:00</option>
-                    <option value="10:00">10:00</option>
-                    <option value="12:00">12:00</option>
-                    <option value="15:00">15:00</option>
-                    <option value="16:00">16:00</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="laboratorium">Jam Selesai</label>
-                <select class="form-select" id="laboratorium" name="laboratorium" aria-label="Default select example">
-                    <option selected>Pilih Jam Selesai</option>
-                    <option value="10:00">10:00</option>
-                    <option value="12:00">12:00</option>
-                    <option value="15:00">15:00</option>
-                    <option value="16:00">16:00</option>
-                    <option value="18:00">18:00</option>
+            <div class="form-group flex-fill">
+                <label for="jam">Jam</label>
+                <select class="form-select" id="jam" name="jam" aria-label="Default select example">
+                    <option selected>Pilih Jam</option>
+                    <option value="08:00:00 - 10:00:00">08:00 - 10:00</option>
+                    <option value="10:00:00 - 12:00:00">10:00 - 12:00</option>
+                    <option value="13:00:00 - 15:00:00">13:00 - 15:00</option>
+                    <option value="16:00:00 - 18:00:00">16:00 - 18:00</option>
                 </select>
             </div>
         </div>

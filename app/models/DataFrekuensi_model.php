@@ -69,4 +69,38 @@ class DataFrekuensi_model {
 
         return $this->db->single();
     }
+    
+    public function addData($data) {
+        $jam = explode(' - ', $data['jam']);
+        $jam_mulai = $jam[0];
+        $jam_selesai = $jam[1];
+
+        $query = 'INSERT INTO ' . $this->table . '(kode_frekuensi, id_dosen, id_asisten1, id_asisten2, id_laboratorium, id_matkul, hari, jam_mulai, jam_selesai)
+                    VALUES (:kode_frekuensi, :id_dosen, :id_asisten1, :id_asisten2, :id_laboratorium, :id_matkul, :hari, :jam_mulai, :jam_selesai)';
+        
+        $this->db->query($query);
+        $this->db->bind('kode_frekuensi', $data['kode_frekuensi']);
+        $this->db->bind('id_dosen', $data['dosen']);
+        $this->db->bind('id_asisten1', $data['asisten_1']);
+        $this->db->bind('id_asisten2', $data['asisten_2']);
+        $this->db->bind('id_laboratorium', $data['laboratorium']);
+        $this->db->bind('id_matkul', $data['mata_kuliah']);
+        $this->db->bind('hari', $data['hari']);
+        $this->db->bind('jam_mulai', $jam_mulai);
+        $this->db->bind('jam_selesai', $jam_selesai);
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
+    public function getDataByKodeFrekuensi($kode_frekuensi) {
+        $query = 'SELECT * FROM ' . $this->table .
+                    ' WHERE kode_frekuensi = :kode_frekuensi';
+        
+        $this->db->query($query);
+        $this->db->bind('kode_frekuensi', $kode_frekuensi);
+
+        return $this->db->single();
+    }
+
 }

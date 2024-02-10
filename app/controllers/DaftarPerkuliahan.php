@@ -45,7 +45,6 @@ class DaftarPerkuliahan extends Controller {
         foreach ($daftar_nim_mhs as $nim):
             try {
                 $mhs = $this->model('Mahasiswa_model')->getDataByNIM($nim);
-                echo $mhs['id_mahasiswa'];
                 $added = $this->model('DataPerkuliahan_model')->addData($_POST, $mhs['id_mahasiswa']);
             }
             catch (Exception $e) {
