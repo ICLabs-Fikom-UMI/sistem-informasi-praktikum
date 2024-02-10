@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 08, 2024 at 04:05 PM
+-- Generation Time: Feb 10, 2024 at 09:13 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.3.2
 
@@ -110,6 +110,17 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `edit_laboratorium` (IN `p_id_labora
 			kapasitas = p_kapasitas
         WHERE
 			id_laboratorium = p_id_laboratorium;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_kuliah_with_filter` (IN `p_id_dosen` INT, IN `p_id_matkul` INT, IN `p_limit` INT)   BEGIN
+    SELECT * from kuliah 
+	where   (id_dosen = p_id_dosen) and 
+			(id_matkul = p_id_matkul) and 
+            id_mahasiswa not in(
+				select id_mahasiswa from penilaian_frekuensi 
+					where id_frekuensi IN (select id_frekuensi from frekuensi where id_matkul = p_id_matkul)
+			)
+	LIMIT p_limit;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_frek_filter_id_dosen` (IN `id_dosen_param` INT)   BEGIN
@@ -321,66 +332,29 @@ CREATE TABLE `frekuensi` (
 --
 
 INSERT INTO `frekuensi` (`id_frekuensi`, `kode_frekuensi`, `id_dosen`, `id_asisten1`, `id_asisten2`, `id_laboratorium`, `id_matkul`, `hari`, `jam_mulai`, `jam_selesai`, `status`) VALUES
-(1, 'TI_ALPRO-1', 27, 4, 2, 1, 10, 'Kamis', '08:00:00', '10:00:00', 'Belum'),
-(2, 'TI_ALPRO-2', 27, 8, 7, 2, 10, 'Kamis', '08:00:00', '10:00:00', 'Belum'),
-(3, 'TI_ALPRO-3', 27, 13, 5, 1, 10, 'Kamis', '13:00:00', '15:00:00', 'Belum'),
-(4, 'TI_ALPRO-4', 27, 10, 9, 2, 10, 'Kamis', '13:00:00', '15:00:00', 'Belum'),
-(5, 'TI_ALPRO-5', 31, 3, 10, 1, 11, 'Senin', '10:00:00', '12:00:00', 'Belum'),
-(6, 'TI_PTI-1', 28, 3, 8, 2, 12, 'Sabtu', '08:00:00', '10:00:00', 'Belum'),
-(7, 'TI_PTI-2', 28, 6, 4, 1, 12, 'Sabtu', '08:00:00', '10:00:00', 'Belum'),
-(8, 'TI_PTI-3', 28, 1, 6, 2, 12, 'Jumat', '10:00:00', '12:00:00', 'Belum'),
-(9, 'TI_PTI-4', 29, 3, 7, 1, 12, 'Jumat', '10:00:00', '12:00:00', 'Belum'),
-(10, 'TI_PTI-5', 30, 1, 7, 1, 12, 'Rabu', '08:00:00', '10:00:00', 'Belum'),
-(11, 'TI_SD-1', 27, 8, 5, 3, 13, 'Senin', '16:00:00', '18:00:00', 'Belum'),
-(12, 'TI_SD-2', 27, 2, 4, 4, 13, 'Senin', '16:00:00', '18:00:00', 'Belum'),
-(13, 'TI_SD-3', 27, 12, 10, 3, 13, 'Rabu', '13:00:00', '15:00:00', 'Belum'),
-(14, 'TI_SD-5', 32, 2, 4, 3, 13, 'Senin', '08:00:00', '10:00:00', 'Belum'),
-(15, 'TI_SD-6', 32, 2, 9, 4, 13, 'Senin', '08:00:00', '10:00:00', 'Belum'),
-(16, 'TI_BD2-1', 34, 3, 11, 3, 14, 'Kamis', '13:00:00', '15:00:00', 'Belum'),
-(17, 'TI_BD2-2', 34, 7, 12, 4, 14, 'Kamis', '13:00:00', '15:00:00', 'Belum'),
-(18, 'TI_BD2-3', 34, 4, 4, 3, 14, 'Senin', '13:00:00', '15:00:00', 'Belum'),
-(19, 'TI_BD2-4', 34, 10, 1, 4, 14, 'Senin', '13:00:00', '15:00:00', 'Belum'),
-(20, 'TI_BD2-5', 34, 11, 4, 3, 14, 'Kamis', '16:00:00', '18:00:00', 'Belum'),
-(21, 'TI_BD2-6', 34, 7, 11, 4, 14, 'Kamis', '16:00:00', '18:00:00', 'Belum'),
-(22, 'TI_MICRO-1', 35, 10, 4, 5, 15, 'Selasa', '16:00:00', '18:00:00', 'Belum'),
-(23, 'TI_MICRO-2', 35, 1, 5, 6, 15, 'Selasa', '08:00:00', '10:00:00', 'Belum'),
-(24, 'TI_MICRO-3', 35, 10, 8, 7, 15, 'Selasa', '10:00:00', '12:00:00', 'Belum'),
-(25, 'TI_MICRO-4', 35, 8, 5, 8, 15, 'Jumat', '16:00:00', '18:00:00', 'Belum'),
-(26, 'TI_MICRO-5', 35, 12, 7, 9, 15, 'Sabtu', '13:00:00', '15:00:00', 'Belum'),
-(27, 'TI_MICRO-6', 35, 12, 1, 10, 15, 'Sabtu', '16:00:00', '18:00:00', 'Belum'),
-(28, 'TI_MICRO-7', 36, 4, 4, 11, 15, 'Selasa', '13:00:00', '15:00:00', 'Belum'),
-(29, 'SI_STI-1', 37, 6, 6, 5, 16, 'Senin', '08:00:00', '10:00:00', 'Belum'),
-(30, 'SI_STI-2', 37, 11, 10, 6, 16, 'Senin', '10:00:00', '12:00:00', 'Belum'),
-(31, 'SI_STI-3', 37, 5, 8, 7, 16, 'Selasa', '13:00:00', '15:00:00', 'Belum'),
-(32, 'SI_STI-4', 38, 10, 4, 8, 16, 'Rabu', '08:00:00', '10:00:00', 'Belum'),
-(33, 'SI_STI-5', 38, 10, 12, 9, 16, 'Rabu', '10:00:00', '12:00:00', 'Belum'),
-(34, 'SI_PBO-1', 39, 7, 9, 10, 17, 'Senin', '13:00:00', '15:00:00', 'Belum'),
-(35, 'SI_PBO-2', 39, 1, 1, 11, 17, 'Senin', '15:00:00', '17:00:00', 'Belum'),
-(36, 'SI_PBO-3', 39, 1, 1, 12, 17, 'Selasa', '08:00:00', '10:00:00', 'Belum'),
-(37, 'SI_PBO-4', 39, 2, 7, 13, 17, 'Selasa', '10:00:00', '12:00:00', 'Belum'),
-(38, 'SI_PBO-5', 40, 13, 8, 14, 17, 'Rabu', '13:00:00', '15:00:00', 'Belum'),
-(39, 'SI_PBO-6', 40, 11, 6, 15, 17, 'Rabu', '15:00:00', '17:00:00', 'Belum'),
-(40, 'SI_PBO-7', 40, 9, 13, 16, 17, 'Kamis', '08:00:00', '10:00:00', 'Belum'),
-(41, 'SI_PBO-8', 40, 12, 8, 17, 17, 'Kamis', '10:00:00', '12:00:00', 'Belum'),
-(42, 'SI_PBO-9', 41, 5, 12, 18, 17, 'Jumat', '13:00:00', '15:00:00', 'Belum'),
-(43, 'SI_PBO-10', 41, 9, 5, 19, 17, 'Jumat', '15:00:00', '17:00:00', 'Belum'),
-(44, 'SI_PBO-11', 41, 10, 9, 20, 17, 'Sabtu', '08:00:00', '10:00:00', 'Belum'),
-(45, 'SI_PBO-12', 41, 3, 10, 21, 17, 'Sabtu', '10:00:00', '12:00:00', 'Belum'),
-(46, 'SI_PBD-1', 42, 5, 8, 22, 18, 'Senin', '08:00:00', '10:00:00', 'Belum'),
-(47, 'SI_PBD-2', 42, 9, 9, 23, 18, 'Senin', '10:00:00', '12:00:00', 'Belum'),
-(48, 'SI_PBD-3', 42, 7, 6, 24, 18, 'Selasa', '13:00:00', '15:00:00', 'Belum'),
-(49, 'SI_PBD-4', 43, 7, 3, 25, 18, 'Rabu', '08:00:00', '10:00:00', 'Belum'),
-(50, 'SI_PBD-5', 43, 7, 13, 26, 18, 'Rabu', '10:00:00', '12:00:00', 'Belum'),
-(51, 'SI_PBD-6', 43, 5, 10, 27, 18, 'Kamis', '13:00:00', '15:00:00', 'Belum'),
-(52, 'SI_PBD-7', 43, 12, 2, 28, 18, 'Jumat', '08:00:00', '10:00:00', 'Belum'),
-(53, 'SI_PBD-8', 44, 11, 10, 29, 18, 'Jumat', '10:00:00', '12:00:00', 'Belum'),
-(54, 'SI_PBD-9', 44, 3, 9, 30, 18, 'Sabtu', '13:00:00', '15:00:00', 'Belum'),
-(55, 'SI_PBD-10', 44, 1, 13, 31, 18, 'Sabtu', '15:00:00', '17:00:00', 'Belum'),
-(56, 'SI_AI-1', 45, 11, 3, 32, 19, 'Senin', '08:00:00', '10:00:00', 'Belum'),
-(57, 'SI_AI-2', 45, 4, 10, 33, 19, 'Senin', '10:00:00', '12:00:00', 'Belum'),
-(58, 'SI_AI-3', 45, 3, 6, 34, 19, 'Selasa', '13:00:00', '15:00:00', 'Belum'),
-(59, 'SI_AI-4', 45, 11, 10, 35, 19, 'Rabu', '08:00:00', '10:00:00', 'Belum'),
-(60, 'SI_AI-5', 46, 3, 8, 36, 19, 'Rabu', '10:00:00', '12:00:00', 'Belum');
+(1, 'TI_MICRO - 1', 24, 6, 10, 6, 14, 'Senin', '08:00:00', '10:00:00', 'Belum'),
+(2, 'TI_MICRO - 2', 14, 2, 10, 6, 14, 'Senin', '10:00:00', '12:00:00', 'Belum'),
+(3, 'TI_MICRO - 3', 0, 5, 10, 6, 14, 'Senin', '13:00:00', '15:00:00', 'Belum'),
+(4, 'TI_MICRO - 4', 24, 7, 12, 6, 14, 'Selasa', '10:00:00', '12:00:00', 'Belum'),
+(5, 'TI_ALPRO1 - 1', 8, 1, 2, 1, 10, 'Senin', '10:00:00', '12:00:00', 'Belum'),
+(6, 'TI_ALPRO1 - 2', 27, 2, 3, 3, 10, 'Rabu', '10:00:00', '12:00:00', 'Belum'),
+(7, 'TI_ALPRO1 - 3', 27, 9, 8, 2, 10, 'Rabu', '10:00:00', '12:00:00', 'Belum'),
+(8, 'TI_ALPRO1 - 4', 27, 11, 12, 6, 10, 'Rabu', '13:00:00', '15:00:00', 'Belum'),
+(9, 'TI_ALPRO1 - 5', 27, 2, 13, 6, 10, 'Rabu', '16:00:00', '18:00:00', 'Belum'),
+(10, 'TI_ALPRO1 - 6', 27, 9, 11, 4, 10, 'Jumat', '13:00:00', '15:00:00', 'Belum'),
+(11, 'TI_ALPRO1 - 7', 27, 7, 9, 0, 10, 'Pilih Hari', '00:00:00', NULL, 'Belum'),
+(12, 'TI_ALPRO1 - 8', 27, 7, 9, 0, 10, 'Pilih Hari', '00:00:00', NULL, 'Belum'),
+(13, 'TI_ALPRO1 - 9', 27, 7, 9, 0, 10, 'Pilih Hari', '00:00:00', NULL, 'Belum'),
+(14, 'TI_ALPRO1 - 10', 27, 7, 9, 0, 10, 'Pilih Hari', '00:00:00', NULL, 'Belum'),
+(15, 'TI_SD - 1', 27, 7, 9, 0, 12, 'Pilih Hari', '00:00:00', NULL, 'Belum'),
+(16, 'TI_SD - 2', 27, 7, 9, 0, 12, 'Pilih Hari', '00:00:00', NULL, 'Belum'),
+(17, 'TI_SD - 3', 27, 7, 9, 0, 12, 'Pilih Hari', '00:00:00', NULL, 'Belum'),
+(18, 'TI_SD - 4', 27, 7, 9, 3, 12, 'Pilih Hari', '00:00:00', NULL, 'Belum'),
+(19, 'TI_SD - 5', 27, 7, 9, 3, 12, 'Pilih Hari', '00:00:00', NULL, 'Belum'),
+(20, 'TI_SD - 6', 27, 7, 9, 3, 12, 'Pilih Hari', '00:00:00', NULL, 'Belum'),
+(21, 'TI_SD - 7', 27, 0, 0, 3, 12, 'Pilih Hari', '00:00:00', NULL, 'Belum'),
+(22, 'TI_SD - 8', 27, 0, 0, 3, 12, 'Pilih Hari', '00:00:00', NULL, 'Belum'),
+(23, 'TI_SD - 9', 27, 0, 0, 3, 12, 'Pilih Hari', '00:00:00', NULL, 'Belum');
 
 -- --------------------------------------------------------
 
@@ -390,6 +364,8 @@ INSERT INTO `frekuensi` (`id_frekuensi`, `kode_frekuensi`, `id_dosen`, `id_asist
 
 CREATE TABLE `kehadiran` (
   `id_kehadiran` int(11) NOT NULL,
+  `id_frekuensi` int(11) NOT NULL,
+  `id_mahasiswa` int(11) NOT NULL,
   `kehadiran_1` char(1) DEFAULT NULL,
   `kehadiran_2` char(1) DEFAULT NULL,
   `kehadiran_3` char(1) DEFAULT NULL,
@@ -401,6 +377,235 @@ CREATE TABLE `kehadiran` (
   `kehadiran_9` char(1) DEFAULT NULL,
   `kehadiran_10` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `kehadiran`
+--
+
+INSERT INTO `kehadiran` (`id_kehadiran`, `id_frekuensi`, `id_mahasiswa`, `kehadiran_1`, `kehadiran_2`, `kehadiran_3`, `kehadiran_4`, `kehadiran_5`, `kehadiran_6`, `kehadiran_7`, `kehadiran_8`, `kehadiran_9`, `kehadiran_10`) VALUES
+(1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 1, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 1, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 1, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 1, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(9, 1, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 1, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(11, 1, 11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(12, 1, 12, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(13, 1, 13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(14, 1, 14, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(15, 1, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(16, 1, 16, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(17, 1, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(18, 1, 18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(19, 1, 19, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(20, 1, 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(21, 1, 21, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(22, 1, 22, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(23, 1, 23, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(24, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(25, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(26, 2, 137, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(27, 2, 138, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(28, 2, 139, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(29, 2, 140, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(30, 2, 141, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(31, 2, 142, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(32, 2, 143, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(33, 2, 144, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(34, 2, 145, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(35, 2, 146, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(36, 2, 147, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(37, 2, 148, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(38, 2, 149, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(39, 2, 150, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(40, 2, 151, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(41, 2, 152, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(42, 2, 153, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(43, 2, 154, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(44, 2, 155, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(45, 2, 156, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(46, 2, 157, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(47, 2, 158, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(48, 2, 159, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(49, 2, 160, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(50, 2, 161, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(51, 4, 47, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(52, 4, 48, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(53, 4, 49, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(54, 4, 50, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(55, 4, 51, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(56, 4, 52, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(57, 4, 53, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(58, 4, 54, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(59, 4, 55, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(60, 4, 56, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(61, 4, 57, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(62, 4, 58, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(63, 4, 59, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(64, 4, 60, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(65, 4, 61, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(66, 4, 62, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(67, 4, 63, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(68, 4, 64, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(69, 4, 65, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(70, 4, 66, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(71, 4, 67, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(72, 4, 68, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(73, 4, 69, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(74, 4, 70, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(75, 4, 71, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(76, 6, 641, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(77, 6, 642, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(78, 6, 643, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(79, 6, 644, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(80, 6, 645, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(81, 6, 646, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(82, 6, 647, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(83, 6, 648, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(84, 6, 649, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(85, 6, 650, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(86, 6, 651, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(87, 6, 652, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(88, 6, 653, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(89, 6, 654, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(90, 6, 655, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(91, 6, 656, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(92, 6, 657, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(93, 6, 658, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(94, 6, 659, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(95, 6, 660, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(96, 6, 661, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(97, 6, 662, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(98, 6, 663, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(99, 6, 664, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(100, 6, 665, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(101, 6, 666, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(102, 6, 667, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(103, 6, 668, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(104, 6, 669, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(105, 6, 670, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(106, 6, 671, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(107, 6, 672, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(108, 6, 673, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(109, 6, 674, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(110, 6, 675, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(111, 7, 676, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(112, 7, 677, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(113, 7, 678, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(114, 7, 679, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(115, 7, 680, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(116, 7, 681, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(117, 7, 682, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(118, 7, 683, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(119, 7, 684, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(120, 7, 685, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(121, 7, 686, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(122, 7, 687, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(123, 7, 688, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(124, 7, 689, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(125, 7, 690, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(126, 7, 691, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(127, 7, 692, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(128, 7, 693, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(129, 7, 694, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(130, 7, 695, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(131, 7, 696, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(132, 7, 697, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(133, 7, 698, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(134, 7, 699, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(135, 8, 700, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(136, 8, 701, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(137, 8, 702, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(138, 8, 703, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(139, 8, 704, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(140, 8, 705, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(141, 8, 706, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(142, 8, 707, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(143, 8, 708, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(144, 8, 709, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(145, 8, 710, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(146, 8, 711, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(147, 8, 712, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(148, 8, 713, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(149, 8, 714, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(150, 8, 715, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(151, 8, 716, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(152, 8, 718, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(153, 8, 719, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(154, 8, 720, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(155, 8, 721, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(156, 8, 722, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(157, 8, 723, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(158, 8, 724, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(159, 8, 725, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(160, 9, 726, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(161, 9, 727, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(162, 9, 728, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(163, 9, 729, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(164, 9, 730, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(165, 9, 731, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(166, 9, 732, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(167, 9, 733, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(168, 9, 734, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(169, 9, 735, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(170, 9, 736, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(171, 9, 737, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(172, 9, 738, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(173, 9, 739, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(174, 9, 740, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(175, 9, 741, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(176, 9, 742, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(177, 21, 290, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(178, 21, 291, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(179, 21, 292, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(180, 21, 293, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(181, 21, 294, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(182, 21, 295, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(183, 21, 296, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(184, 21, 297, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(185, 21, 298, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(186, 21, 299, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(187, 21, 300, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(188, 21, 301, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(189, 21, 302, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(190, 21, 303, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(191, 21, 304, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(192, 21, 305, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(193, 21, 306, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(194, 21, 307, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(195, 21, 308, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(196, 21, 309, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(197, 21, 310, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(198, 21, 311, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(199, 21, 312, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(200, 21, 313, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(201, 21, 314, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(202, 21, 315, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(203, 21, 316, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(204, 21, 317, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(205, 21, 318, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(206, 21, 319, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(207, 21, 320, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(208, 21, 321, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(209, 21, 322, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(210, 21, 323, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(211, 21, 324, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(212, 22, 325, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(213, 22, 326, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(214, 22, 327, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(215, 22, 328, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(216, 22, 329, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(217, 22, 330, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(218, 22, 331, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(219, 22, 332, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(220, 22, 333, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(221, 22, 334, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(222, 22, 335, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(223, 22, 336, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1338,7 +1543,85 @@ INSERT INTO `kuliah` (`id_kuliah`, `id_mahasiswa`, `id_dosen`, `id_matkul`, `kel
 (962, 230, 14, 14, 'B2'),
 (963, 231, 14, 14, 'B2'),
 (964, 232, 14, 14, 'B2'),
-(979, 541, 14, 14, 'B3');
+(979, 541, 14, 14, 'B3'),
+(988, 5578, 14, 14, 'B3'),
+(989, 5579, 14, 14, 'B3'),
+(990, 5580, 14, 14, 'B3'),
+(991, 5581, 14, 14, 'B3'),
+(992, 5582, 14, 14, 'B3'),
+(993, 5583, 14, 14, 'B3'),
+(994, 5584, 14, 14, 'B3'),
+(995, 5585, 14, 14, 'B3'),
+(996, 5586, 14, 14, 'B3'),
+(997, 5587, 14, 14, 'B3'),
+(998, 5588, 14, 14, 'B3'),
+(999, 5589, 14, 14, 'B3'),
+(1000, 5590, 14, 14, 'B3'),
+(1001, 5591, 14, 14, 'B3'),
+(1002, 541, 14, 14, 'B3'),
+(1003, 5592, 14, 14, 'B3'),
+(1004, 5593, 14, 14, 'B3'),
+(1005, 5594, 14, 14, 'B3'),
+(1006, 5595, 14, 14, 'B3'),
+(1007, 5596, 14, 14, 'B3'),
+(1008, 5597, 14, 14, 'B3'),
+(1009, 5598, 14, 14, 'B3'),
+(1010, 5599, 14, 14, 'B3'),
+(1011, 997, 22, 15, 'A1'),
+(1012, 998, 22, 15, 'A1'),
+(1013, 999, 22, 15, 'A1'),
+(1014, 1000, 22, 15, 'A1'),
+(1015, 1001, 22, 15, 'A1'),
+(1016, 1002, 22, 15, 'A1'),
+(1017, 1003, 22, 15, 'A1'),
+(1018, 1004, 22, 15, 'A1'),
+(1019, 1005, 22, 15, 'A1'),
+(1020, 1006, 22, 15, 'A1'),
+(1021, 1007, 22, 15, 'A1'),
+(1022, 1008, 22, 15, 'A1'),
+(1023, 1009, 22, 15, 'A1'),
+(1024, 1010, 22, 15, 'A1'),
+(1025, 1011, 22, 15, 'A1'),
+(1026, 1012, 22, 15, 'A1'),
+(1027, 1013, 22, 15, 'A1'),
+(1028, 1014, 22, 15, 'A1'),
+(1029, 1015, 22, 15, 'A1'),
+(1030, 1016, 22, 15, 'A1'),
+(1031, 1017, 22, 15, 'A1'),
+(1032, 1018, 22, 15, 'B1'),
+(1033, 1019, 22, 15, 'B1'),
+(1034, 1020, 22, 15, 'B1'),
+(1035, 1021, 22, 15, 'B1'),
+(1036, 1022, 22, 15, 'B1'),
+(1037, 1023, 22, 15, 'B1'),
+(1038, 1024, 22, 15, 'B1'),
+(1039, 1025, 22, 15, 'B1'),
+(1040, 1026, 22, 15, 'B1'),
+(1041, 1027, 22, 15, 'B1'),
+(1042, 1028, 22, 15, 'B1'),
+(1043, 1029, 22, 15, 'B1'),
+(1044, 1030, 22, 15, 'B1'),
+(1045, 1031, 22, 15, 'B1'),
+(1046, 1032, 22, 15, 'B1'),
+(1047, 1033, 22, 15, 'B1'),
+(1048, 1034, 22, 15, 'B1'),
+(1049, 1035, 22, 15, 'B1'),
+(1050, 1036, 22, 15, 'B1'),
+(1051, 1037, 22, 15, 'B1'),
+(1052, 1038, 22, 15, 'B1'),
+(1053, 1039, 22, 15, 'B1'),
+(1054, 1040, 22, 15, 'B1'),
+(1055, 1041, 22, 15, 'B1'),
+(1056, 1042, 22, 15, 'B1'),
+(1057, 1043, 22, 15, 'B1'),
+(1058, 1044, 22, 15, 'B1'),
+(1059, 1045, 22, 15, 'B1'),
+(1060, 1046, 22, 15, 'B1'),
+(1061, 1047, 22, 15, 'B1'),
+(1062, 1048, 22, 15, 'B1'),
+(1063, 1049, 22, 15, 'B1'),
+(1064, 1050, 22, 15, 'B1'),
+(1065, 1051, 22, 15, 'B1');
 
 -- --------------------------------------------------------
 
@@ -3565,30 +3848,37 @@ CREATE TABLE `mata_kuliah` (
   `kode_matkul` char(10) NOT NULL,
   `nama_matkul` varchar(100) DEFAULT NULL,
   `jurusan` varchar(100) DEFAULT NULL,
-  `tahun_ajaran` enum('Ganjil','Genap') DEFAULT NULL
+  `tahun_ajaran` enum('Ganjil','Genap') DEFAULT NULL,
+  `singkatan` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `mata_kuliah`
 --
 
-INSERT INTO `mata_kuliah` (`id_matkul`, `kode_matkul`, `nama_matkul`, `jurusan`, `tahun_ajaran`) VALUES
-(1, '1303PPA207', 'Basis Data I', 'Teknik Informatika', 'Ganjil'),
-(2, '1303PPA205', 'Algoritma & Pemrograman 2', 'Teknik Informatika', 'Ganjil'),
-(3, '1303KKA203', 'Elektronika Dasar', 'Teknik Informatika', 'Ganjil'),
-(4, '1303KKA403', 'Pemrograman Berorientasi Objek', 'Teknik Informatika', 'Ganjil'),
-(5, '1303KKA408', 'Pemrograman Web', 'Teknik Informatika', 'Ganjil'),
-(6, '1303KKA407', 'Jaringan Komputer', 'Teknik Informatika', 'Ganjil'),
-(7, '1', 'Algoritma dan Struktur Data', 'Sistem Informasi', 'Ganjil'),
-(8, '2', 'Pemrograman Mobile', 'Sistem Informasi', 'Ganjil'),
-(9, '3', 'Multimedia', 'Sistem Informasi', 'Ganjil'),
-(10, '1303PPA105', 'Algoritma & Pemrograman 1', 'Teknik Informatika', 'Genap'),
-(11, '1303PPA104', 'Pengantar Teknologi Informasi', 'Teknik Informatika', 'Genap'),
-(12, '1303PPA302', 'Struktur Data', 'Teknik Informatika', 'Genap'),
-(13, '1303PPA304', 'Basis Data II', 'Teknik Informatika', 'Genap'),
-(14, '1303KKA504', 'Microcontroller', 'Teknik Informatika', 'Genap'),
-(15, '1313KKB109', 'Sistem dan Teknologi Informasi', 'Sistem Informasi', 'Genap'),
-(16, '1313KKB306', 'Jaringan Komputer', 'Sistem Informasi', 'Genap');
+INSERT INTO `mata_kuliah` (`id_matkul`, `kode_matkul`, `nama_matkul`, `jurusan`, `tahun_ajaran`, `singkatan`) VALUES
+(1, '1303PPA207', 'Basis Data I', 'Teknik Informatika', 'Ganjil', 'BD1'),
+(2, '1303PPA205', 'Algoritma & Pemrograman 2', 'Teknik Informatika', 'Ganjil', 'ALPRO2'),
+(3, '1303KKA203', 'Elektronika Dasar', 'Teknik Informatika', 'Ganjil', 'ED'),
+(4, '1303KKA403', 'Pemrograman Berorientasi Objek', 'Teknik Informatika', 'Ganjil', 'PBO'),
+(5, '1303KKA408', 'Pemrograman Web', 'Teknik Informatika', 'Ganjil', 'WEB'),
+(6, '1303KKA407', 'Jaringan Komputer', 'Teknik Informatika', 'Ganjil', 'JARKOM'),
+(7, '1313KKB205', 'Algoritma & Struktur Data', 'Sistem Informasi', 'Genap', 'ASD'),
+(8, '1313KKB407', 'Pemrograman Mobile', 'Sistem Informasi', 'Genap', 'MOBILE'),
+(9, '1313KKB604', 'Multimedia System', 'Sistem Informasi', 'Genap', 'MS'),
+(10, '1303PPA105', 'Algoritma & Pemrograman 1', 'Teknik Informatika', 'Genap', 'ALPRO1'),
+(11, '1303PPA104', 'Pengantar Teknologi Informasi', 'Teknik Informatika', 'Genap', 'PTI'),
+(12, '1303PPA302', 'Struktur Data', 'Teknik Informatika', 'Genap', 'SD'),
+(13, '1303PPA304', 'Basis Data II', 'Teknik Informatika', 'Genap', 'BD2'),
+(14, '1303KKA504', 'Microcontroller', 'Teknik Informatika', 'Genap', 'MICRO'),
+(15, '1313KKB109', 'Sistem dan Teknologi Informasi', 'Sistem Informasi', 'Genap', 'STI'),
+(16, '1313KKB306', 'Jaringan Komputer', 'Sistem Informasi', 'Genap', 'JARKOM'),
+(17, '1303KKA713', 'Pemrograman Mobile', 'Teknik Informatika', 'Ganjil', 'MOBILE'),
+(18, '1313KKB107', 'Algoritma Pemrograman', 'Sistem Informasi', 'Ganjil', 'ALPRO'),
+(19, '1313PPB507', 'Aplikasi Akuntansi', 'Sistem Informasi', 'Ganjil', 'AA'),
+(20, '1313KKB503', 'Sistem Operasi', 'Sistem Informasi', 'Ganjil', 'SO'),
+(21, '1313KKB402', 'Desain Grafis', 'Sistem Informasi', 'Genap', 'DG'),
+(22, '1313KKB401', 'Pemrograman berorientasi Objek', 'Sistem Informasi', 'Ganjil', 'PBO');
 
 -- --------------------------------------------------------
 
@@ -3612,12 +3902,264 @@ CREATE TABLE `penilaian_frekuensi` (
   `id_penilaian_frekuensi` int(11) NOT NULL,
   `id_frekuensi` int(11) NOT NULL,
   `id_mahasiswa` int(11) NOT NULL,
-  `id_kehadiran` int(11) NOT NULL,
-  `id_tugas` int(11) NOT NULL,
   `MID` int(3) DEFAULT NULL,
-  `project` int(3) DEFAULT NULL,
-  `nilai_akhir` int(3) DEFAULT NULL
+  `project` int(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `penilaian_frekuensi`
+--
+
+INSERT INTO `penilaian_frekuensi` (`id_penilaian_frekuensi`, `id_frekuensi`, `id_mahasiswa`, `MID`, `project`) VALUES
+(1, 1, 1, NULL, NULL),
+(2, 1, 2, NULL, NULL),
+(3, 1, 3, NULL, NULL),
+(4, 1, 4, NULL, NULL),
+(5, 1, 5, NULL, NULL),
+(6, 1, 6, NULL, NULL),
+(7, 1, 7, NULL, NULL),
+(8, 1, 8, NULL, NULL),
+(9, 1, 9, NULL, NULL),
+(10, 1, 10, NULL, NULL),
+(11, 1, 11, NULL, NULL),
+(12, 1, 12, NULL, NULL),
+(13, 1, 13, NULL, NULL),
+(14, 1, 14, NULL, NULL),
+(15, 1, 15, NULL, NULL),
+(16, 1, 16, NULL, NULL),
+(17, 1, 17, NULL, NULL),
+(18, 1, 18, NULL, NULL),
+(19, 1, 19, NULL, NULL),
+(20, 1, 20, NULL, NULL),
+(21, 1, 21, NULL, NULL),
+(22, 1, 22, NULL, NULL),
+(23, 1, 23, NULL, NULL),
+(24, 1, 1, NULL, NULL),
+(25, 1, 2, NULL, NULL),
+(26, 2, 137, NULL, NULL),
+(27, 2, 138, NULL, NULL),
+(28, 2, 139, NULL, NULL),
+(29, 2, 140, NULL, NULL),
+(30, 2, 141, NULL, NULL),
+(31, 2, 142, NULL, NULL),
+(32, 2, 143, NULL, NULL),
+(33, 2, 144, NULL, NULL),
+(34, 2, 145, NULL, NULL),
+(35, 2, 146, NULL, NULL),
+(36, 2, 147, NULL, NULL),
+(37, 2, 148, NULL, NULL),
+(38, 2, 149, NULL, NULL),
+(39, 2, 150, NULL, NULL),
+(40, 2, 151, NULL, NULL),
+(41, 2, 152, NULL, NULL),
+(42, 2, 153, NULL, NULL),
+(43, 2, 154, NULL, NULL),
+(44, 2, 155, NULL, NULL),
+(45, 2, 156, NULL, NULL),
+(46, 2, 157, NULL, NULL),
+(47, 2, 158, NULL, NULL),
+(48, 2, 159, NULL, NULL),
+(49, 2, 160, NULL, NULL),
+(50, 2, 161, NULL, NULL),
+(51, 4, 47, NULL, NULL),
+(52, 4, 48, NULL, NULL),
+(53, 4, 49, NULL, NULL),
+(54, 4, 50, NULL, NULL),
+(55, 4, 51, NULL, NULL),
+(56, 4, 52, NULL, NULL),
+(57, 4, 53, NULL, NULL),
+(58, 4, 54, NULL, NULL),
+(59, 4, 55, NULL, NULL),
+(60, 4, 56, NULL, NULL),
+(61, 4, 57, NULL, NULL),
+(62, 4, 58, NULL, NULL),
+(63, 4, 59, NULL, NULL),
+(64, 4, 60, NULL, NULL),
+(65, 4, 61, NULL, NULL),
+(66, 4, 62, NULL, NULL),
+(67, 4, 63, NULL, NULL),
+(68, 4, 64, NULL, NULL),
+(69, 4, 65, NULL, NULL),
+(70, 4, 66, NULL, NULL),
+(71, 4, 67, NULL, NULL),
+(72, 4, 68, NULL, NULL),
+(73, 4, 69, NULL, NULL),
+(74, 4, 70, NULL, NULL),
+(75, 4, 71, NULL, NULL),
+(76, 6, 641, NULL, NULL),
+(77, 6, 642, NULL, NULL),
+(78, 6, 643, NULL, NULL),
+(79, 6, 644, NULL, NULL),
+(80, 6, 645, NULL, NULL),
+(81, 6, 646, NULL, NULL),
+(82, 6, 647, NULL, NULL),
+(83, 6, 648, NULL, NULL),
+(84, 6, 649, NULL, NULL),
+(85, 6, 650, NULL, NULL),
+(86, 6, 651, NULL, NULL),
+(87, 6, 652, NULL, NULL),
+(88, 6, 653, NULL, NULL),
+(89, 6, 654, NULL, NULL),
+(90, 6, 655, NULL, NULL),
+(91, 6, 656, NULL, NULL),
+(92, 6, 657, NULL, NULL),
+(93, 6, 658, NULL, NULL),
+(94, 6, 659, NULL, NULL),
+(95, 6, 660, NULL, NULL),
+(96, 6, 661, NULL, NULL),
+(97, 6, 662, NULL, NULL),
+(98, 6, 663, NULL, NULL),
+(99, 6, 664, NULL, NULL),
+(100, 6, 665, NULL, NULL),
+(101, 6, 666, NULL, NULL),
+(102, 6, 667, NULL, NULL),
+(103, 6, 668, NULL, NULL),
+(104, 6, 669, NULL, NULL),
+(105, 6, 670, NULL, NULL),
+(106, 6, 671, NULL, NULL),
+(107, 6, 672, NULL, NULL),
+(108, 6, 673, NULL, NULL),
+(109, 6, 674, NULL, NULL),
+(110, 6, 675, NULL, NULL),
+(111, 7, 676, NULL, NULL),
+(112, 7, 677, NULL, NULL),
+(113, 7, 678, NULL, NULL),
+(114, 7, 679, NULL, NULL),
+(115, 7, 680, NULL, NULL),
+(116, 7, 681, NULL, NULL),
+(117, 7, 682, NULL, NULL),
+(118, 7, 683, NULL, NULL),
+(119, 7, 684, NULL, NULL),
+(120, 7, 685, NULL, NULL),
+(121, 7, 686, NULL, NULL),
+(122, 7, 687, NULL, NULL),
+(123, 7, 688, NULL, NULL),
+(124, 7, 689, NULL, NULL),
+(125, 7, 690, NULL, NULL),
+(126, 7, 691, NULL, NULL),
+(127, 7, 692, NULL, NULL),
+(128, 7, 693, NULL, NULL),
+(129, 7, 694, NULL, NULL),
+(130, 7, 695, NULL, NULL),
+(131, 7, 696, NULL, NULL),
+(132, 7, 697, NULL, NULL),
+(133, 7, 698, NULL, NULL),
+(134, 7, 699, NULL, NULL),
+(135, 8, 700, NULL, NULL),
+(136, 8, 701, NULL, NULL),
+(137, 8, 702, NULL, NULL),
+(138, 8, 703, NULL, NULL),
+(139, 8, 704, NULL, NULL),
+(140, 8, 705, NULL, NULL),
+(141, 8, 706, NULL, NULL),
+(142, 8, 707, NULL, NULL),
+(143, 8, 708, NULL, NULL),
+(144, 8, 709, NULL, NULL),
+(145, 8, 710, NULL, NULL),
+(146, 8, 711, NULL, NULL),
+(147, 8, 712, NULL, NULL),
+(148, 8, 713, NULL, NULL),
+(149, 8, 714, NULL, NULL),
+(150, 8, 715, NULL, NULL),
+(151, 8, 716, NULL, NULL),
+(152, 8, 718, NULL, NULL),
+(153, 8, 719, NULL, NULL),
+(154, 8, 720, NULL, NULL),
+(155, 8, 721, NULL, NULL),
+(156, 8, 722, NULL, NULL),
+(157, 8, 723, NULL, NULL),
+(158, 8, 724, NULL, NULL),
+(159, 8, 725, NULL, NULL),
+(160, 9, 726, NULL, NULL),
+(161, 9, 727, NULL, NULL),
+(162, 9, 728, NULL, NULL),
+(163, 9, 729, NULL, NULL),
+(164, 9, 730, NULL, NULL),
+(165, 9, 731, NULL, NULL),
+(166, 9, 732, NULL, NULL),
+(167, 9, 733, NULL, NULL),
+(168, 9, 734, NULL, NULL),
+(169, 9, 735, NULL, NULL),
+(170, 9, 736, NULL, NULL),
+(171, 9, 737, NULL, NULL),
+(172, 9, 738, NULL, NULL),
+(173, 9, 739, NULL, NULL),
+(174, 9, 740, NULL, NULL),
+(175, 9, 741, NULL, NULL),
+(176, 9, 742, NULL, NULL),
+(177, 21, 290, NULL, NULL),
+(178, 21, 291, NULL, NULL),
+(179, 21, 292, NULL, NULL),
+(180, 21, 293, NULL, NULL),
+(181, 21, 294, NULL, NULL),
+(182, 21, 295, NULL, NULL),
+(183, 21, 296, NULL, NULL),
+(184, 21, 297, NULL, NULL),
+(185, 21, 298, NULL, NULL),
+(186, 21, 299, NULL, NULL),
+(187, 21, 300, NULL, NULL),
+(188, 21, 301, NULL, NULL),
+(189, 21, 302, NULL, NULL),
+(190, 21, 303, NULL, NULL),
+(191, 21, 304, NULL, NULL),
+(192, 21, 305, NULL, NULL),
+(193, 21, 306, NULL, NULL),
+(194, 21, 307, NULL, NULL),
+(195, 21, 308, NULL, NULL),
+(196, 21, 309, NULL, NULL),
+(197, 21, 310, NULL, NULL),
+(198, 21, 311, NULL, NULL),
+(199, 21, 312, NULL, NULL),
+(200, 21, 313, NULL, NULL),
+(201, 21, 314, NULL, NULL),
+(202, 21, 315, NULL, NULL),
+(203, 21, 316, NULL, NULL),
+(204, 21, 317, NULL, NULL),
+(205, 21, 318, NULL, NULL),
+(206, 21, 319, NULL, NULL),
+(207, 21, 320, NULL, NULL),
+(208, 21, 321, NULL, NULL),
+(209, 21, 322, NULL, NULL),
+(210, 21, 323, NULL, NULL),
+(211, 21, 324, NULL, NULL),
+(212, 22, 325, NULL, NULL),
+(213, 22, 326, NULL, NULL),
+(214, 22, 327, NULL, NULL),
+(215, 22, 328, NULL, NULL),
+(216, 22, 329, NULL, NULL),
+(217, 22, 330, NULL, NULL),
+(218, 22, 331, NULL, NULL),
+(219, 22, 332, NULL, NULL),
+(220, 22, 333, NULL, NULL),
+(221, 22, 334, NULL, NULL),
+(222, 22, 335, NULL, NULL),
+(223, 22, 336, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `temp`
+--
+
+CREATE TABLE `temp` (
+  `id` int(11) NOT NULL,
+  `c` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `temp`
+--
+
+INSERT INTO `temp` (`id`, `c`) VALUES
+(1, 'nas'),
+(2, 'nas'),
+(3, 'halo'),
+(4, 'halo'),
+(5, 'halo'),
+(6, 'halo'),
+(7, 'halo'),
+(8, 'halo'),
+(9, 'nas');
 
 -- --------------------------------------------------------
 
@@ -3627,6 +4169,8 @@ CREATE TABLE `penilaian_frekuensi` (
 
 CREATE TABLE `tugas` (
   `id_tugas` int(11) NOT NULL,
+  `id_frekuensi` int(11) NOT NULL,
+  `id_mahasiswa` int(11) NOT NULL,
   `tugas_1` int(3) DEFAULT NULL,
   `tugas_2` int(3) DEFAULT NULL,
   `tugas_3` int(3) DEFAULT NULL,
@@ -3636,6 +4180,235 @@ CREATE TABLE `tugas` (
   `tugas_7` int(3) DEFAULT NULL,
   `tugas_8` int(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tugas`
+--
+
+INSERT INTO `tugas` (`id_tugas`, `id_frekuensi`, `id_mahasiswa`, `tugas_1`, `tugas_2`, `tugas_3`, `tugas_4`, `tugas_5`, `tugas_6`, `tugas_7`, `tugas_8`) VALUES
+(1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 1, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 1, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 1, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 1, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(9, 1, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 1, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(11, 1, 11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(12, 1, 12, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(13, 1, 13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(14, 1, 14, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(15, 1, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(16, 1, 16, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(17, 1, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(18, 1, 18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(19, 1, 19, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(20, 1, 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(21, 1, 21, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(22, 1, 22, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(23, 1, 23, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(24, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(25, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(26, 2, 137, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(27, 2, 138, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(28, 2, 139, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(29, 2, 140, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(30, 2, 141, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(31, 2, 142, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(32, 2, 143, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(33, 2, 144, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(34, 2, 145, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(35, 2, 146, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(36, 2, 147, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(37, 2, 148, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(38, 2, 149, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(39, 2, 150, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(40, 2, 151, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(41, 2, 152, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(42, 2, 153, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(43, 2, 154, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(44, 2, 155, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(45, 2, 156, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(46, 2, 157, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(47, 2, 158, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(48, 2, 159, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(49, 2, 160, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(50, 2, 161, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(51, 4, 47, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(52, 4, 48, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(53, 4, 49, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(54, 4, 50, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(55, 4, 51, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(56, 4, 52, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(57, 4, 53, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(58, 4, 54, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(59, 4, 55, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(60, 4, 56, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(61, 4, 57, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(62, 4, 58, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(63, 4, 59, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(64, 4, 60, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(65, 4, 61, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(66, 4, 62, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(67, 4, 63, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(68, 4, 64, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(69, 4, 65, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(70, 4, 66, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(71, 4, 67, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(72, 4, 68, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(73, 4, 69, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(74, 4, 70, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(75, 4, 71, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(76, 6, 641, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(77, 6, 642, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(78, 6, 643, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(79, 6, 644, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(80, 6, 645, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(81, 6, 646, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(82, 6, 647, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(83, 6, 648, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(84, 6, 649, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(85, 6, 650, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(86, 6, 651, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(87, 6, 652, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(88, 6, 653, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(89, 6, 654, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(90, 6, 655, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(91, 6, 656, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(92, 6, 657, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(93, 6, 658, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(94, 6, 659, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(95, 6, 660, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(96, 6, 661, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(97, 6, 662, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(98, 6, 663, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(99, 6, 664, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(100, 6, 665, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(101, 6, 666, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(102, 6, 667, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(103, 6, 668, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(104, 6, 669, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(105, 6, 670, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(106, 6, 671, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(107, 6, 672, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(108, 6, 673, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(109, 6, 674, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(110, 6, 675, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(111, 7, 676, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(112, 7, 677, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(113, 7, 678, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(114, 7, 679, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(115, 7, 680, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(116, 7, 681, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(117, 7, 682, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(118, 7, 683, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(119, 7, 684, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(120, 7, 685, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(121, 7, 686, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(122, 7, 687, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(123, 7, 688, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(124, 7, 689, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(125, 7, 690, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(126, 7, 691, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(127, 7, 692, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(128, 7, 693, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(129, 7, 694, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(130, 7, 695, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(131, 7, 696, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(132, 7, 697, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(133, 7, 698, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(134, 7, 699, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(135, 8, 700, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(136, 8, 701, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(137, 8, 702, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(138, 8, 703, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(139, 8, 704, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(140, 8, 705, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(141, 8, 706, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(142, 8, 707, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(143, 8, 708, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(144, 8, 709, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(145, 8, 710, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(146, 8, 711, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(147, 8, 712, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(148, 8, 713, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(149, 8, 714, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(150, 8, 715, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(151, 8, 716, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(152, 8, 718, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(153, 8, 719, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(154, 8, 720, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(155, 8, 721, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(156, 8, 722, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(157, 8, 723, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(158, 8, 724, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(159, 8, 725, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(160, 9, 726, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(161, 9, 727, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(162, 9, 728, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(163, 9, 729, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(164, 9, 730, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(165, 9, 731, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(166, 9, 732, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(167, 9, 733, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(168, 9, 734, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(169, 9, 735, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(170, 9, 736, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(171, 9, 737, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(172, 9, 738, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(173, 9, 739, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(174, 9, 740, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(175, 9, 741, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(176, 9, 742, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(177, 21, 290, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(178, 21, 291, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(179, 21, 292, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(180, 21, 293, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(181, 21, 294, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(182, 21, 295, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(183, 21, 296, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(184, 21, 297, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(185, 21, 298, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(186, 21, 299, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(187, 21, 300, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(188, 21, 301, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(189, 21, 302, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(190, 21, 303, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(191, 21, 304, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(192, 21, 305, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(193, 21, 306, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(194, 21, 307, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(195, 21, 308, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(196, 21, 309, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(197, 21, 310, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(198, 21, 311, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(199, 21, 312, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(200, 21, 313, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(201, 21, 314, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(202, 21, 315, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(203, 21, 316, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(204, 21, 317, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(205, 21, 318, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(206, 21, 319, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(207, 21, 320, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(208, 21, 321, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(209, 21, 322, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(210, 21, 323, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(211, 21, 324, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(212, 22, 325, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(213, 22, 326, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(214, 22, 327, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(215, 22, 328, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(216, 22, 329, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(217, 22, 330, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(218, 22, 331, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(219, 22, 332, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(220, 22, 333, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(221, 22, 334, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(222, 22, 335, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(223, 22, 336, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -3826,7 +4599,9 @@ ALTER TABLE `frekuensi`
 -- Indexes for table `kehadiran`
 --
 ALTER TABLE `kehadiran`
-  ADD PRIMARY KEY (`id_kehadiran`);
+  ADD PRIMARY KEY (`id_kehadiran`),
+  ADD KEY `fk1_kehadiran_frekuensi_idx` (`id_frekuensi`),
+  ADD KEY `fk2_kehadiran_mahasiswa_idx` (`id_mahasiswa`);
 
 --
 -- Indexes for table `kuliah`
@@ -3870,16 +4645,22 @@ ALTER TABLE `mengajar`
 --
 ALTER TABLE `penilaian_frekuensi`
   ADD PRIMARY KEY (`id_penilaian_frekuensi`),
-  ADD KEY `fk3_nilai_kehadiran_idx` (`id_kehadiran`),
-  ADD KEY `fk4_nilai_tugas_idx` (`id_tugas`),
-  ADD KEY `fk2_nilai_frekuensi_mahasiswa_idx` (`id_mahasiswa`),
-  ADD KEY `fk1_nilai_frekuensi_frekuensi` (`id_frekuensi`);
+  ADD KEY `fk1_nilai_frekuensi_frekuensi` (`id_frekuensi`),
+  ADD KEY `fk2_penilaian_frek_mahasiswa_idx` (`id_mahasiswa`);
+
+--
+-- Indexes for table `temp`
+--
+ALTER TABLE `temp`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tugas`
 --
 ALTER TABLE `tugas`
-  ADD PRIMARY KEY (`id_tugas`);
+  ADD PRIMARY KEY (`id_tugas`),
+  ADD KEY `fk1_tugas_frekuensi_idx` (`id_frekuensi`),
+  ADD KEY `fk2_tugas_mahasiswa_idx` (`id_mahasiswa`);
 
 --
 -- Indexes for table `user`
@@ -3914,19 +4695,19 @@ ALTER TABLE `dosen`
 -- AUTO_INCREMENT for table `frekuensi`
 --
 ALTER TABLE `frekuensi`
-  MODIFY `id_frekuensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id_frekuensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `kehadiran`
 --
 ALTER TABLE `kehadiran`
-  MODIFY `id_kehadiran` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kehadiran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=224;
 
 --
 -- AUTO_INCREMENT for table `kuliah`
 --
 ALTER TABLE `kuliah`
-  MODIFY `id_kuliah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=988;
+  MODIFY `id_kuliah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1066;
 
 --
 -- AUTO_INCREMENT for table `laboratorium`
@@ -3944,7 +4725,7 @@ ALTER TABLE `mahasiswa`
 -- AUTO_INCREMENT for table `mata_kuliah`
 --
 ALTER TABLE `mata_kuliah`
-  MODIFY `id_matkul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_matkul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `mengajar`
@@ -3956,13 +4737,19 @@ ALTER TABLE `mengajar`
 -- AUTO_INCREMENT for table `penilaian_frekuensi`
 --
 ALTER TABLE `penilaian_frekuensi`
-  MODIFY `id_penilaian_frekuensi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_penilaian_frekuensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=224;
+
+--
+-- AUTO_INCREMENT for table `temp`
+--
+ALTER TABLE `temp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tugas`
 --
 ALTER TABLE `tugas`
-  MODIFY `id_tugas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=224;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -3993,6 +4780,13 @@ ALTER TABLE `dosen`
   ADD CONSTRAINT `fk1_dosen_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Constraints for table `kehadiran`
+--
+ALTER TABLE `kehadiran`
+  ADD CONSTRAINT `fk1_kehadiran_frekuensi` FOREIGN KEY (`id_frekuensi`) REFERENCES `frekuensi` (`id_frekuensi`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk2_kehadiran_mahasiswa` FOREIGN KEY (`id_mahasiswa`) REFERENCES `mahasiswa` (`id_mahasiswa`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `kuliah`
 --
 ALTER TABLE `kuliah`
@@ -4006,6 +4800,20 @@ ALTER TABLE `kuliah`
 ALTER TABLE `mengajar`
   ADD CONSTRAINT `fk1_mengajar_dosen` FOREIGN KEY (`id_dosen`) REFERENCES `dosen` (`id_dosen`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk2_mengajar_mata_kuliah` FOREIGN KEY (`id_matkul`) REFERENCES `mata_kuliah` (`id_matkul`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `penilaian_frekuensi`
+--
+ALTER TABLE `penilaian_frekuensi`
+  ADD CONSTRAINT `fk1_penilaian_frek_frekuensi` FOREIGN KEY (`id_frekuensi`) REFERENCES `frekuensi` (`id_frekuensi`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk2_penilaian_frek_mahasiswa` FOREIGN KEY (`id_mahasiswa`) REFERENCES `mahasiswa` (`id_mahasiswa`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tugas`
+--
+ALTER TABLE `tugas`
+  ADD CONSTRAINT `fk1_tugas_frekuensi` FOREIGN KEY (`id_frekuensi`) REFERENCES `frekuensi` (`id_frekuensi`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk2_tugas_mahasiswa` FOREIGN KEY (`id_mahasiswa`) REFERENCES `mahasiswa` (`id_mahasiswa`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
