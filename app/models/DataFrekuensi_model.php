@@ -103,4 +103,21 @@ class DataFrekuensi_model {
         return $this->db->single();
     }
 
+    public function deleteData($id_frekuensi) {
+        $this->db->query('SET foreign_key_checks = 0');
+        $this->db->execute();
+
+        $query = 'DELETE FROM ' . $this->table . ' WHERE id_frekuensi = :id_frekuensi';
+        
+        $this->db->query($query);
+        $this->db->bind('id_frekuensi', $id_frekuensi);
+        $this->db->execute();
+        $result = $this->db->rowCount();
+
+        $this->db->query('SET foreign_key_checks = 1');
+        $this->db->execute();
+
+        return $result;
+    }
+
 }
