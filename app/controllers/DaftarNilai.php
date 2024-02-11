@@ -10,6 +10,7 @@ class DaftarNilai extends Controller {
         $data['detail'] = 'Semua Daftar Nilai';
         $data['frekuensi'] = $this->model('DataFrekuensi_model')->getDataFrekuensiByIdMatkul(10);
         $data['mata_kuliah'] = $this->model('MataKuliah_model')->getAllMataKuliah();
+        $data['penilaian'] = $this->model('PenilaianFrekuensi_model')->getAllMergerData();
 
         // var_dump($_SESSION); var_dump($_GET['url']);
         
@@ -32,6 +33,7 @@ class DaftarNilai extends Controller {
         $data['detail'] = 'Semua Daftar Nilai';
         $data['frekuensi'] = $this->model('DataFrekuensi_model')->getDataFrekuensiByIdMatkul($id_matkul);
         $data['mata_kuliah'] = $this->model('MataKuliah_model')->getAllMataKuliah();
+        $data['penilaian'] = $this->model('PenilaianFrekuensi_model')->getAllMergerData();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);

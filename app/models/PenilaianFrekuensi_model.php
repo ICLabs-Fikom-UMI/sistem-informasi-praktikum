@@ -28,4 +28,12 @@ class PenilaianFrekuensi_model {
 
         return $this->db->rowCount();
     }
+
+    public function getAllMergerData() {
+        $query = 'SELECT * FROM vw_temp';
+
+        $this->db->query($query);
+        
+        return $this->db->resultSet();
+    }
 }

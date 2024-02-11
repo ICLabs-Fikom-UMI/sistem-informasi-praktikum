@@ -83,25 +83,15 @@
                 </tr>
             </thead>
             <tbody>
-                <?php for ($i = 0; $i < 25; $i++) { ?>
+                <?php 
+                    foreach($data['penilaian'] as $penilaian):
+                ?>
                     <tr>
-                        <td><?= $i+1;?></td>
-                        <td><?= ($_SESSION['role_user'] != 'dosen') ? "<input type='text' value='13020210134'>" : "13020210134"; ?></td>
-                        <td><?= ($_SESSION['role_user'] != 'dosen') ? "<input type='text' value='Muhammad Rendi Syaputra'>" : "Muhammad Rendi Syaputra"; ?></td>
-                        <td><?= ($_SESSION['role_user'] != 'dosen') ? "<input type='text' value='A1'>" : "A1"; ?></td>
-                        <!-- Kolom JUMLAH PERTEMUAN -->
-                        <?php for ($j = 0; $j < 10; $j++) { ?>
-                            <td><?= ($_SESSION['role_user'] != 'dosen') ? "<input type='text' value='H'>" : "H"; ?></td>
-                        <?php } ?>
-                            <!-- Kolom NILAI TUGAS -->
-                        <?php for ($k = 0; $k < 8; $k++) { ?>
-                            <td><?= ($_SESSION['role_user'] != 'dosen') ? "<input type='number' value='100'>" : "85"; ?></td>
-                        <?php } ?>
-                        <td><?= ($_SESSION['role_user'] != 'dosen') ? "<input type='number' value='90'>" : "90"; ?></td>
-                        <td><?= ($_SESSION['role_user'] != 'dosen') ? "<input type='number' value='100'>" : "100"; ?></td>
-                        <td></td>
+                        <?php foreach(array_values($penilaian) as $values):?>
+                            <td><?= $values?></td>
+                        <?php endforeach;?>
                     </tr>
-                <?php } ?>
+                <?php endforeach;?>
             </tbody>
         </table>
 

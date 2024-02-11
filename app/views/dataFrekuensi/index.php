@@ -28,7 +28,7 @@
                 <tr>
                     <td><?= $frekuensi['kode_frekuensi']?></td>
                     <td><?= $frekuensi['nama_matkul']?></td>
-                    <td><?= $frekuensi['hari'] . ',' . $frekuensi['jam_mulai'] . ' - ' . $frekuensi['jam_selesai'];?></td>
+                    <td><?= $frekuensi['hari'] . ', ' . $frekuensi['jam_mulai'] . ' - ' . $frekuensi['jam_selesai'];?></td>
                     <td><?= $frekuensi['nama_laboratorium']?></td>
                     <td><?= $frekuensi['nama_dosen']?></td>
                     <td><?= $frekuensi['asisten1']?></td>
