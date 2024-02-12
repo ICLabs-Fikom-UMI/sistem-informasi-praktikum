@@ -186,7 +186,43 @@ $(document).ready(function() {
   // Main Feature
   $('.penilaian').on('change', function() {
     // check response
+    // temp
     console.log('class : ' + $(this).attr('class'));
     console.log('id    : ' + $(this).attr('id'));
+    console.log('-');
+    console.log();
+
+
+    const tag_attr = $(this).attr('id').split('-');
+    const id_penilaian = tag_attr[tag_attr.length - 1];
+    const column = tag_attr[0] + (tag_attr.length == 3 ? '_' + tag_attr[1] : '');
+    const models = {
+      'kehadiran': 'Kehadiran_model',
+      'tugas': 'Tugas_model',
+      'mid': 'PenilaianFrekuensi_model',
+      'project': 'PenilaianFrekuensi_model'
+    };
+    const model = models[tag_attr[0]];
+
+    // temp
+    console.log('id_penilaian : ' + id_penilaian);
+    console.log('column : ' + column);
+    console.log('momdel : ' + model);
+
+    const new_value = $(this).val();
+
+    $.ajax({
+      url: 'https://localhost/sistem-informasi-praktikum/public/daftarnilai/updatenilai',
+      data: {
+        model: model,
+        id : id_penilaian,
+        column: column,
+        new_value: new_value
+      },
+      method: 'post',
+      success: function(response) {
+        console.log('success update data : ' + response);
+      }
+    });
   });
 });

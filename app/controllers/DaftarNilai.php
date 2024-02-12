@@ -54,4 +54,8 @@ class DaftarNilai extends Controller {
             exit;
         }
     }
+
+    public function updatenilai() {
+        $this->model($_POST['model'])->updateData($_POST['column'], $_POST['id'], $_POST['new_value']);
+    }
 }

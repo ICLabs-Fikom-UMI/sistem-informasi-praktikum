@@ -28,4 +28,18 @@ class Tugas_model {
 
         return $this->db->rowCount();
     }
+
+    public function updateData($column, $id_penilaian, $new_value) {
+        $query = 'UPDATE ' . $this-> table . ' 
+                        SET ' . $column . ' = :new_value
+                        WHERE id_tugas = :id_penilaian';
+
+        $this->db->query($query);
+        $this->db->bind('new_value', $new_value);
+        $this->db->bind('id_penilaian', $id_penilaian);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
 }
