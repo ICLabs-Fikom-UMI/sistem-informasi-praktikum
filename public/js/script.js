@@ -183,4 +183,10 @@ $(document).ready(function() {
     });
   });
 
+  // Main Feature
+  $('.penilaian').on('change', function() {
+    // check response
+    console.log('class : ' + $(this).attr('class'));
+    console.log('id    : ' + $(this).attr('id'));
+  });
 });

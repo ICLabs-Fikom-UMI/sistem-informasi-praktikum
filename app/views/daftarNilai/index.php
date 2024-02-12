@@ -62,8 +62,8 @@
             <thead>
                 <tr>
                     <th rowspan="2">No</th>
-                    <th rowspan="2">Stambuk</th>
-                    <th rowspan="2"">Nama Mahasiswa</th>
+                    <th rowspan="2" style="width: 125px">Stambuk</th>
+                    <th rowspan="2" style="width: 300px">Nama Mahasiswa</th>
                     <th rowspan="2">Kelas</th>
                     <th colspan="10">Jumlah Pertemuan</th>
                     <th colspan="8">Nilai Tugas</th>
@@ -84,12 +84,69 @@
             </thead>
             <tbody>
                 <?php 
+                    $no = 1;
                     foreach($data['penilaian'] as $penilaian):
+                        if ($penilaian['id_frekuensi'] != $frek['id_frekuensi'])
+                            continue;
                 ?>
                     <tr>
-                        <?php foreach(array_values($penilaian) as $values):?>
-                            <td><?= $values?></td>
-                        <?php endforeach;?>
+                        <td><?= $no++?></td>
+                        <td><?= $penilaian['nim']?></td>
+                        <td style='text-align: left;'><?= $penilaian['nama']?></td>
+                        <td><?= $penilaian['kelas']?></td>
+
+                        <!-- Kehadiran 1 - 10 -->
+                        <!-- TODO: Buatkan ID dan CLASS yang cocok dan berguna -->
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
+                            <td>
+                                <?php if ($_SESSION['role_user'] != 'dosen'): ?>
+                                    <input id="kehadiran-<?= $i?>-<?= $penilaian['id_penilaian_frekuensi']?>"
+                                           class="penilaian kehadiran kehadiran-<?= $i?> id-penilaian-<?= $penilaian['id_penilaian_frekuensi']?>"
+                                           type='text'
+                                           value='<?= $penilaian["kehadiran_$i"]; ?>'>
+                                <?php else: ?>
+                                    <?= $penilaian["kehadiran_$i"]; ?>
+                                <?php endif; ?>
+                            </td>
+                        <?php endfor; ?>
+
+                        <!-- Tugas 1 - 8 -->
+                        <?php for ($i = 1; $i <= 8; $i++): ?>
+                            <td>
+                                <?php if ($_SESSION['role_user'] != 'dosen'): ?>
+                                    <input id="tugas-<?= $i?>-<?= $penilaian['id_penilaian_frekuensi']?>"
+                                           class="penilaian tugas tugas-<?= $i?> id-penilaian-<?= $penilaian['id_penilaian_frekuensi']?>"
+                                           type='text'
+                                           value='<?= $penilaian["tugas_$i"]; ?>'>
+                                <?php else: ?>
+                                    <?= $penilaian["tugas_$i"]; ?>
+                                <?php endif; ?>
+                            </td>
+                        <?php endfor; ?>
+
+                        <td>
+                            <?php if ($_SESSION['role_user'] != 'dosen'): ?>
+                                    <input id="mid-<?= $penilaian['id_penilaian_frekuensi']?>"
+                                           class="penilaian mid"
+                                           type='text'
+                                           value='<?= $penilaian["mid"]; ?>'>
+                            <?php else: ?>
+                                <?= $penilaian['mid']; ?>
+                            <?php endif; ?>
+                        </td>
+
+                        <td>
+                            <?php if ($_SESSION['role_user'] != 'dosen'): ?>
+                                    <input id="project-<?= $penilaian['id_penilaian_frekuensi']?>"
+                                           class="penilaian project"
+                                           type='text'
+                                           value='<?= $penilaian["project"]; ?>'>
+                            <?php else: ?>
+                                <?= $penilaian['project']; ?>
+                            <?php endif; ?>
+                        </td>
+
+                        <td></td>
                     </tr>
                 <?php endforeach;?>
             </tbody>

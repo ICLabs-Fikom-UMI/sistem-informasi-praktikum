@@ -29,8 +29,8 @@ class PenilaianFrekuensi_model {
         return $this->db->rowCount();
     }
 
-    public function getAllMergerData() {
-        $query = 'SELECT * FROM vw_temp';
+    public function getAllMergerData($id_matkul) {
+        $query = 'SELECT * FROM vw_temp' . (isset($id_matkul) ? ' WHERE id_matkul = ' . $id_matkul : '');
 
         $this->db->query($query);
         
