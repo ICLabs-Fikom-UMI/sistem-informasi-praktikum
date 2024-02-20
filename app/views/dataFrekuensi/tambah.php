@@ -1,7 +1,7 @@
 <div class="container border p-2 rounded d-flex flex-rowi w-100 h-100 gap-5">
     <div class="data-perkuliahan border rounded p-2 flex-fill d-flex flex-column">
         <div class="text-center mb-5">
-            <h3>Data Perkuliahan</h3>
+            <h3>Data Frekuensi</h3>
         </div>
 
         <div class="perkuliahan-form">

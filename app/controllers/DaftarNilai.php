@@ -11,6 +11,7 @@ class DaftarNilai extends Controller {
         $data['frekuensi'] = $this->model('DataFrekuensi_model')->getDataFrekuensiByIdMatkul(10);
         $data['mata_kuliah'] = $this->model('MataKuliah_model')->getAllMataKuliah();
         $data['penilaian'] = $this->model('PenilaianFrekuensi_model')->getAllMergerData(10);
+        var_dump($data['penilaian']);
 
         // var_dump($_SESSION); var_dump($_GET['url']);
         

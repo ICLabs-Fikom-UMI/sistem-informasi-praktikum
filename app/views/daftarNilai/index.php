@@ -31,10 +31,10 @@
                     <span>Hari / Jam</span> 
                 </div>
                 <div class="frek-value d-flex flex-column">
-                    <span><?= $frek['kode_matkul']?></span> 
-                    <span><?= $frek['nama_matkul']?></span> 
-                    <span><?= $frek['kode_frekuensi']?></span> 
-                    <span><?= $frek['hari'] . ', ' . $frek['jam_mulai'] . ' - ' . $frek['jam_selesai'];?></span>
+                    <span>: <?= $frek['kode_matkul']?></span> 
+                    <span>: <?= $frek['nama_matkul']?></span> 
+                    <span>: <?= $frek['kode_frekuensi']?></span> 
+                    <span>: <?= $frek['hari'] . ', ' . $frek['jam_mulai'] . ' - ' . $frek['jam_selesai'];?></span>
                 </div>
             </div>
             <div class="column-2 d-flex flex-row gap-3">
@@ -45,10 +45,10 @@
                     <span>Asisten 2</span> 
                 </div>
                 <div class="frek-value d-flex flex-column">
-                    <span><?= $frek['nama_laboratorium']?></span> 
-                    <span><?= $frek['nama_dosen']?></span> 
-                    <span><?= $frek['asisten1']?></span> 
-                    <span><?= $frek['asisten2']?></span> 
+                    <span>: <?= $frek['nama_laboratorium']?></span> 
+                    <span>: <?= $frek['nama_dosen']?></span> 
+                    <span>: <?= $frek['asisten1']?></span> 
+                    <span>: <?= $frek['asisten2']?></span> 
                 </div>
             </div>
             <?php if($_SESSION['role_user'] != 'dosen') {?>
