@@ -30,7 +30,7 @@ class PenilaianFrekuensi_model {
     }
 
     public function getAllMergerData($id_matkul) {
-        $query = 'SELECT * FROM vw_temp' . (isset($id_matkul) ? ' WHERE id_matkul = ' . $id_matkul : '');
+        $query = 'SELECT * FROM vw_nilai_mahasiswa' . (isset($id_matkul) ? ' WHERE id_matkul = ' . $id_matkul : '');
 
         $this->db->query($query);
         
@@ -49,5 +49,14 @@ class PenilaianFrekuensi_model {
         $this->db->execute();
 
         return $this->db->rowCount();
+    }
+
+    public function getDataPenilaianByIdFreks($id_frek) {
+        $query = 'SELECT * FROM vw_nilai_mahasiswa WHERE id_frekuensi IN ' . $id_frek;
+        var_dump($query);
+
+        $this->db->query($query);
+        
+        return $this->db->resultSet();
     }
 }
