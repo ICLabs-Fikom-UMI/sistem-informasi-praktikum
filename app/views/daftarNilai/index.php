@@ -1,22 +1,26 @@
 <div class="content">
-    <button class="btn btn-primary btnExport">Export to Excel</button>
     <?php if($_SESSION['role_user'] != 'dosen') {?>
-    <div class="daftar-matkul d-flex flex-column mb-4 p-2">
-        <span class="text-matkul mb-2">Mata Kuliah</span>
-        <div class="dropdown">
-            <button id="dropdownListMatkul" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <?php
-                    $dropdown_matkul = $data['frekuensi'][0]['nama_matkul'];
-                    echo (isset($dropdown_matkul) ? $dropdown_matkul : 'Pilih Mata Kuliah');
-                ?>
-            </button>
-            <ul class="dropdown-menu">
-                <?php foreach($data['mata_kuliah'] as $matkul) : ?>
-                <li>
-                    <a href="<?= BASEURL;?>/daftarnilai/selectMatkul/<?= $matkul['id_matkul']?>" class="dropdown-item dropdown-item-data" type="button"><?= $matkul['nama_matkul'];?></a>
-                </li>
-                <?php endforeach;?>
-            </ul>
+    <div class="d-flex flex-row align-items-end justify-content-between mb-4 p-2">
+        <div class="daftar-matkul">
+            <span class="text-matkul mb-2">Mata Kuliah</span>
+            <div class="dropdown">
+                <button id="dropdownListMatkul" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <?php
+                        $dropdown_matkul = $data['frekuensi'][0]['nama_matkul'];
+                        echo (isset($dropdown_matkul) ? $dropdown_matkul : 'Pilih Mata Kuliah');
+                    ?>
+                </button>
+                <ul class="dropdown-menu">
+                    <?php foreach($data['mata_kuliah'] as $matkul) : ?>
+                    <li>
+                        <a href="<?= BASEURL;?>/daftarnilai/selectMatkul/<?= $matkul['id_matkul']?>" class="dropdown-item dropdown-item-data" type="button"><?= $matkul['nama_matkul'];?></a>
+                    </li>
+                    <?php endforeach;?>
+                </ul>
+            </div>
+        </div>
+        <div class="print">
+            <button class="btn btn-primary btnExport">Export to Excel</button>
         </div>
     </div>
     <?php }?>
