@@ -80,17 +80,17 @@ class PenilaianFrekuensi_model {
         foreach ($keywords as $key => $kw) {
             $this->db->bind('keyword' . $key, "%" . $kw . "%");
         }
-        $data_frek = $this->db->resultSet();
-
-        $query = 'SELECT * FROM vw_nilai_mahasiswa WHERE ' . $likeConditions . 'GROUP BY id_frekuensi';
-
+        $data_penilaian = $this->db->resultSet();
+        
+        $query = 'SELECT * FROM vw_nilai_mahasiswa WHERE ' . $likeConditions . ' GROUP BY id_frekuensi';
+        
         $this->db->query($query);
-
+        
         foreach ($keywords as $key => $kw) {
             $this->db->bind('keyword' . $key, "%" . $kw . "%");
         }
         $unique_id_frek = $this->db->resultSet();
-
+        
         $data = [ 
             'data' => $data_penilaian,
             'unique_id_frek' => $unique_id_frek
