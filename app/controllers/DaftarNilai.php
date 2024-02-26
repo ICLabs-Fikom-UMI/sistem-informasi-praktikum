@@ -52,27 +52,51 @@ class DaftarNilai extends Controller {
     public function search() {
         $this->checkLoginSession();
 
+        $category = $_POST['search_category'];
         $keyword = $_POST['keyword'];
 
         $data['title'] = 'Daftar Nilai';
         $data['header'] = 'Cari Data Penilaian';
         $data['detail'] = 'Semua Daftar Nilai';
-        $data['frekuensi'] = $this->model('DataFrekuensi_model')->getDataFrekuensiByKeyword($keyword);
+        $data['frekuensi'] = $this->model('DataFrekuensi_model')->getDataFrekuensiByIdMatkul($id_matkul);
         $data['mata_kuliah'] = $this->model('MataKuliah_model')->getAllMataKuliah();
+        $data['penilaian'] = $this->model('PenilaianFrekuensi_model')->getAllMergerData($id_matkul);
 
-        $id_frek = array();
-        foreach($data['frekuensi'] as $frek):
-            array_push($id_frek, $frek['id_frekuensi']);
-        endforeach;
-        $id_frek = '(' . join(',', $id_frek) . ')';
+        if ($category == 'frekuensi') {
+            $data['frekuensi'] = $this->model('DataFrekuensi_model')->getDataFrekuensiByKeyword($keyword);
+    
+            $id_frek = array();
+            foreach($data['frekuensi'] as $frek):
+                array_push($id_frek, $frek['id_frekuensi']);
+            endforeach;
+            $id_frek = '(' . join(',', $id_frek) . ')';
+    
+            $data['penilaian'] = $this->model('PenilaianFrekuensi_model')->getDataPenilaianByIdFreks($id_frek);
+        }
+        else {
+            $data_penilaian = $this->model('PenilaianFrekuensi_model')->getDataPenilaianByMhs($keyword);
+            $data['penilaian'] = $data_penilaian['data'];
 
-        $data['penilaian'] = $this->model('PenilaianFrekuensi_model')->getDataPenilaianByIdFreks($id_frek);
+            $id_frek = array();
+
+            foreach($data_penilaian['unique_id_frek'] as $unique_id):
+                array_push($id_frek, $unique_id['id_frekuensi']);
+            endforeach;
+
+            $id_frek = '(' . join(',', $id_frek) . ')';
+            
+            $data['frekuensi'] = $this->model('DataFrekuensi_model')->getAllDataFrekuensi($id_frek);
+        }
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
         $this->view('templates/headerProfile', $data);
         $this->view('daftarNilai/index', $data);
         $this->view('templates/footer');
+    }
+
+    public function print() {
+        $this->view('daftarnilai/print');
     }
 
     public function changeStatus($id_frek) {

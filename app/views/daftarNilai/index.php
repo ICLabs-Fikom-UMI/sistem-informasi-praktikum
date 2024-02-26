@@ -22,21 +22,28 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <div class="small fw-light mb-2">Pencarian</div>
                     <form action="<?= BASEURL?>/daftarnilai/search" method="post">
-                        <div class="input-group">
-                            <input name="keyword" class="form-control border-end-0 rounded-start" type="search" placeholder="search, separate with ','">
-                            <button class="btn btn-outline-secondary bg-white border border-start-0 rounded-end" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
+                    <div class="small fw-light mb-2">Pencarian</div>
+                        <div class="input-group align-items-end gap-3">
+                            <div>
+                                <select class="form-select" id="search_category" name="search_category" aria-label="Default select example">
+                                    <option value="frekuensi" selected>Frekuensi</option>
+                                    <option value="praktikan">Praktikan</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <input name="keyword" class="form-control  rounded-start" type="search" placeholder="search, separate with ','">
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="print">
-            <button class="btn btn-primary btnExport">Export to Excel</button>
+        <div class="print d-inline-block">
+            <button class="btn btn-primary" onclick="window.location.href = '<?= BASEURL ?>/daftarnilai/print';">Print penilaian</button>
         </div>
+
     </div>
     <?php }?>
     <div class="frekuensi border p-2 rounded" <?php if ($_SESSION['role_user'] == 'dosen') echo 'style="max-height: calc(100vh - 130px)"'?>>

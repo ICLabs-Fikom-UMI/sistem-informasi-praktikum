@@ -18,8 +18,15 @@ class DataFrekuensi_model {
         return $this->db->resultSet();
     }
 
-    public function getAllDataFrekuensi() {
-        $this->db->query('SELECT * FROM vw_frek_data');
+    public function getAllDataFrekuensi($id_frekuensi) {
+        $query = 'SELECT * FROM vw_frek_data';
+
+        if (isset($id_frekuensi)) {
+            $condition = ' WHERE id_frekuensi IN ' . $id_frekuensi;
+            $query .= $condition;
+        }
+
+        $this->db->query($query);
 
         return $this->db->resultSet();
     }
@@ -141,7 +148,6 @@ class DataFrekuensi_model {
                                 ) LIKE :keyword' . $key;
         }
 
-        // Memasukkan kondisi LIKE ke dalam query utama
         $query = 'SELECT * FROM vw_frek_data WHERE ' . $likeConditions;
 
         $this->db->query($query);
