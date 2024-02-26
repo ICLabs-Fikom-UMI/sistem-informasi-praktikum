@@ -120,4 +120,36 @@ class DataFrekuensi_model {
         return $result;
     }
 
+    public function getDataFrekuensiByKeyword($keyword) {
+        $keywords = array_map('trim', explode(',', $keyword));
+        $likeConditions = '';
+
+        foreach ($keywords as $key => $kw) {
+            if ($key > 0) {
+                $likeConditions .= ' AND ';
+            }
+            $likeConditions .= ' CONCAT_WS("",
+                                    kode_frekuensi,
+                                    nama_dosen,
+                                    asisten1,
+                                    asisten2,
+                                    nama_laboratorium,
+                                    hari,
+                                    jam_mulai,
+                                    jam_selesai,
+                                    status
+                                ) LIKE :keyword' . $key;
+        }
+
+        // Memasukkan kondisi LIKE ke dalam query utama
+        $query = 'SELECT * FROM vw_frek_data WHERE ' . $likeConditions;
+
+        $this->db->query($query);
+
+        foreach ($keywords as $key => $kw) {
+            $this->db->bind('keyword' . $key, "%" . $kw . "%");
+        }
+
+        return $this->db->resultSet();
+    }
 }

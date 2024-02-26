@@ -49,6 +49,32 @@ class DaftarNilai extends Controller {
         $this->view('templates/footer');
     }
 
+    public function search() {
+        $this->checkLoginSession();
+
+        $keyword = $_POST['keyword'];
+
+        $data['title'] = 'Daftar Nilai';
+        $data['header'] = 'Cari Data Penilaian';
+        $data['detail'] = 'Semua Daftar Nilai';
+        $data['frekuensi'] = $this->model('DataFrekuensi_model')->getDataFrekuensiByKeyword($keyword);
+        $data['mata_kuliah'] = $this->model('MataKuliah_model')->getAllMataKuliah();
+
+        $id_frek = array();
+        foreach($data['frekuensi'] as $frek):
+            array_push($id_frek, $frek['id_frekuensi']);
+        endforeach;
+        $id_frek = '(' . join(',', $id_frek) . ')';
+
+        $data['penilaian'] = $this->model('PenilaianFrekuensi_model')->getDataPenilaianByIdFreks($id_frek);
+
+        $this->view('templates/header', $data);
+        $this->view('templates/sidebar', $data);
+        $this->view('templates/headerProfile', $data);
+        $this->view('daftarNilai/index', $data);
+        $this->view('templates/footer');
+    }
+
     public function changeStatus($id_frek) {
         if ($this->model('DataFrekuensi_model')->changeStatus($id_frek) > 0) {
             Flasher::setFlash('berhasil', 'diganti', 'success');

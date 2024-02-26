@@ -14,6 +14,7 @@ session_start();
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
     <link rel="stylesheet" href="<?= BASEURL; ?>/css/bootstrap/bootstrap.css">
     <link rel="stylesheet" href="<?= BASEURL; ?>/css/style.css">
 </head>

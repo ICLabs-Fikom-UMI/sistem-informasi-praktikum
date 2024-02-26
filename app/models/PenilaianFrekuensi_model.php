@@ -53,7 +53,6 @@ class PenilaianFrekuensi_model {
 
     public function getDataPenilaianByIdFreks($id_frek) {
         $query = 'SELECT * FROM vw_nilai_mahasiswa WHERE id_frekuensi IN ' . $id_frek;
-        var_dump($query);
 
         $this->db->query($query);
         

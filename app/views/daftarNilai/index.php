@@ -19,6 +19,21 @@
                 </ul>
             </div>
         </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="small fw-light mb-2">Pencarian</div>
+                    <form action="<?= BASEURL?>/daftarnilai/search" method="post">
+                        <div class="input-group">
+                            <input name="keyword" class="form-control border-end-0 rounded-start" type="search" placeholder="search, separate with ','">
+                            <button class="btn btn-outline-secondary bg-white border border-start-0 rounded-end" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="print">
             <button class="btn btn-primary btnExport">Export to Excel</button>
         </div>
