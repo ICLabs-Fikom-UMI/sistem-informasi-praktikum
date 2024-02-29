@@ -1,7 +1,7 @@
 <div class="content d-flex justify-content-around p-5 gap-3">
     <!-- List Dosen -->
     <div class="list-dosen mr-2 mb-3 w-100", style="max-width: 510px">
-        <div class="card border-dark">
+        <div class="card border">
             <div class="d-flex justify-content-between card-header align-items-center">
                 <div class="d-flex flex-column">
                     <h4>Dosen</h4>
@@ -24,7 +24,7 @@
 
     <!-- List Asisten -->
     <div class="list-asisten mb-3 w-100", style="max-width: 510px">
-        <div class="card border-dark">
+        <div class="card border">
             <div class="d-flex justify-content-between card-header align-items-center">
                 <div class="d-flex flex-column">
                     <h4>Asisten</h4>

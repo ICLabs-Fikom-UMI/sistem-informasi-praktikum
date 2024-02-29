@@ -53,7 +53,7 @@ dst"></textarea>
             <h3>Daftar Mahasiswa</h3>
         </div>
 
-      <table id="dataTable" class="table table-striped" style="width:100%">
+      <table id="dataTable" class="table table-striped daftar-mahasiswa" style="width:100%">
         <thead>
             <tr>
                 <th>No</th>
@@ -62,30 +62,7 @@ dst"></textarea>
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody>
-                <tr>
-                    <td>Ha</td>
-                    <td>Ha</td>
-                    <td>Ha</td>
-                    <td>
-                        <a class="btn btnEditDataDosen" role="button" data-bs-toggle="modal" data-bs-target="#formModal" data-id="<?= $dosen['id_user']?>"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
-                        <a class="btn" role="button" onclick="deleteData('asistendandosen', 'deletedosen', '<?= $dosen['id_user']?>')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
-                        <a class="btn" role="button" onclick="resetPassword('asistendandosen', 'resetpassword', '<?= $dosen['id_user']?>', 'asisten')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/detail.svg" alt=""></a>
-                    </td>
-                </tr>
-            <?php foreach($data['perkuliahan'] as $perkuliahan) : ?>
-                <tr>
-                    <td><?= $perkuliahan['mata_kuliah']?></td>
-                    <td><?= $perkuliahan['kelas']?></td>
-                    <td><?= $perkuliahan['total_mahasisa']?></td>
-                    <td>
-                        <a class="btn btnEditDataDosen" role="button" data-bs-toggle="modal" data-bs-target="#formModal" data-id="<?= $dosen['id_user']?>"><img src="<?= BASEURL;?>/icons/edit.svg" alt=""></a>
-                        <a class="btn" role="button" onclick="deleteData('asistendandosen', 'deletedosen', '<?= $dosen['id_user']?>')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/delete.svg" alt=""></a>
-                        <a class="btn" role="button" onclick="resetPassword('asistendandosen', 'resetpassword', '<?= $dosen['id_user']?>', 'asisten')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="<?= BASEURL;?>/icons/detail.svg" alt=""></a>
-                    </td>
-                </tr>
-            <?php endforeach;?>
-        </tbody>
+        <tbody></tbody>
         <tfoot>
             <tr>
                 <th>No</th>

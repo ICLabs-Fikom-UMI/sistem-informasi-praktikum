@@ -54,4 +54,8 @@ class DaftarPerkuliahan extends Controller {
 
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
+
+    public function getMhsByNim() {
+        echo json_encode($this->model('Mahasiswa_model')->getDataByNIM($_POST['nim']));
+    }
 }

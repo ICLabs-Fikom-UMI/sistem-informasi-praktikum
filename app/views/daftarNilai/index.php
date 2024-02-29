@@ -4,7 +4,7 @@
         <div class="daftar-matkul">
             <span class="text-matkul mb-2">Mata Kuliah</span>
             <div class="dropdown">
-                <button id="dropdownListMatkul" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <button id="dropdownListMatkul" class="btn border dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <?php
                         $dropdown_matkul = $data['frekuensi'][0]['nama_matkul'];
                         echo (isset($dropdown_matkul) ? $dropdown_matkul : 'Pilih Mata Kuliah');
@@ -13,7 +13,7 @@
                 <ul class="dropdown-menu">
                     <?php foreach($data['mata_kuliah'] as $matkul) : ?>
                     <li>
-                        <a href="<?= BASEURL;?>/daftarnilai/selectMatkul/<?= $matkul['id_matkul']?>" class="dropdown-item dropdown-item-data" type="button"><?= $matkul['nama_matkul'];?></a>
+                        <a href="<?= BASEURL;?>/daftarnilai/selectMatkul/<?= $matkul['id_matkul']?>" class="dropdown-item dropdown-item-data" type="button"><?= $matkul['nama_matkul'];?> (<?= $matkul['jumlah']?>)</a>
                     </li>
                     <?php endforeach;?>
                 </ul>

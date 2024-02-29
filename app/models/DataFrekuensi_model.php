@@ -18,13 +18,16 @@ class DataFrekuensi_model {
         return $this->db->resultSet();
     }
 
-    public function getAllDataFrekuensi($id_frekuensi) {
+    public function getAllDataFrekuensi() {
         $query = 'SELECT * FROM vw_frek_data';
 
-        if (isset($id_frekuensi)) {
-            $condition = ' WHERE id_frekuensi IN ' . $id_frekuensi;
-            $query .= $condition;
-        }
+        $this->db->query($query);
+
+        return $this->db->resultSet();
+    }
+
+    public function getAllDataFrekuensiByIdFrekuensi($id_frekuensi) {
+        $query = 'SELECT * FROM vw_frek_data WHERE id_frekuensi IN ' . $id_frekuensi;
 
         $this->db->query($query);
 
@@ -39,6 +42,14 @@ class DataFrekuensi_model {
         return $this->db->resultSet();
     }
 
+    public function getDataFrekuensiGroupByMatkul() {
+        $query = 'SELECT *, count(*) as jumlah FROM vw_frek_data GROUP BY kode_matkul';
+
+        $this->db->query($query);
+        
+        return $this->db->resultSet();
+    }
+
     public function getDataFrekuensiByIdMatkul($id_matkul) {
         $query = 'CALL proc_frek_filter_id_matkul(:id_matkul)';
         
@@ -47,7 +58,6 @@ class DataFrekuensi_model {
         
         return $this->db->resultSet();
     }
-
 
     public function getDataFrekuensiByIdDosen($id_dosen) {
         $query = 'CALL proc_frek_filter_id_dosen(:id_dosen)';
@@ -152,9 +162,9 @@ class DataFrekuensi_model {
 
         $this->db->query($query);
 
-        foreach ($keywords as $key => $kw) {
+        foreach ($keywords as $key => $kw):
             $this->db->bind('keyword' . $key, "%" . $kw . "%");
-        }
+        endforeach;
 
         return $this->db->resultSet();
     }

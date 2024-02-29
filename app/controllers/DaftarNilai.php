@@ -9,7 +9,7 @@ class DaftarNilai extends Controller {
         $data['header'] = 'Daftar Nilai Praktikum';
         $data['detail'] = 'Semua Daftar Nilai';
         $data['frekuensi'] = $this->model('DataFrekuensi_model')->getDataFrekuensiByIdMatkul(10);
-        $data['mata_kuliah'] = $this->model('MataKuliah_model')->getAllMataKuliah();
+        $data['mata_kuliah'] = $this->model('DataFrekuensi_model')->getDataFrekuensiGroupByMatkul();
         $data['penilaian'] = $this->model('PenilaianFrekuensi_model')->getAllMergerData(10);
 
         $this->view('templates/header', $data);
@@ -39,7 +39,7 @@ class DaftarNilai extends Controller {
         $data['header'] = 'Daftar Nilai Praktikum';
         $data['detail'] = 'Semua Daftar Nilai';
         $data['frekuensi'] = $this->model('DataFrekuensi_model')->getDataFrekuensiByIdMatkul($id_matkul);
-        $data['mata_kuliah'] = $this->model('MataKuliah_model')->getAllMataKuliah();
+        $data['mata_kuliah'] = $this->model('DataFrekuensi_model')->getDataFrekuensiGroupByMatkul();
         $data['penilaian'] = $this->model('PenilaianFrekuensi_model')->getAllMergerData($id_matkul);
 
         $this->view('templates/header', $data);
@@ -59,7 +59,7 @@ class DaftarNilai extends Controller {
         $data['header'] = 'Cari Data Penilaian';
         $data['detail'] = 'Semua Daftar Nilai';
         $data['frekuensi'] = $this->model('DataFrekuensi_model')->getDataFrekuensiByIdMatkul($id_matkul);
-        $data['mata_kuliah'] = $this->model('MataKuliah_model')->getAllMataKuliah();
+        $data['mata_kuliah'] = $this->model('DataFrekuensi_model')->getDataFrekuensiGroupByMatkul();
         $data['penilaian'] = $this->model('PenilaianFrekuensi_model')->getAllMergerData($id_matkul);
 
         if ($category == 'frekuensi') {
@@ -85,7 +85,7 @@ class DaftarNilai extends Controller {
 
             $id_frek = '(' . join(',', $id_frek) . ')';
             
-            $data['frekuensi'] = $this->model('DataFrekuensi_model')->getAllDataFrekuensi($id_frek);
+            $data['frekuensi'] = $this->model('DataFrekuensi_model')->getAllDataFrekuensiByIdFrekuensi($id_frek);
         }
 
         $this->view('templates/header', $data);

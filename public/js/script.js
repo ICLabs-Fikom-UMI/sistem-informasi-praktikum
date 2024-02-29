@@ -1,4 +1,6 @@
 $(document).ready(function() {
+  BASEURL = 'https://localhost/sistem-informasi-praktikum/public';
+
   function hitungNilaiAkhir() {
     $('.tabel-nilai tbody tr').each(function() {
       var totalPertemuan = 0;
@@ -209,8 +211,46 @@ $(document).ready(function() {
       },
       method: 'post',
       success: function(response) {
-        console.log('success update data : ' + response);
+        console.log('success update data');
       }
     });
   });
+
+  $('#daftar_mahasiswa').on('input', function() {
+    const nim_val = $(this).val();
+    const nim_arr = nim_val.split(/[\s,]+/);
+
+    table_body = $('table tbody');
+
+    for (let i = 0; i < nim_arr.length; i++) {
+      nim = nim_arr[i];
+
+      $.ajax({
+        url: 'https://localhost/sistem-informasi-praktikum/public/daftarperkuliahan/getmhsbynim',
+        data: {nim : nim},
+        method: 'post',
+        dataType: 'json',
+        success: function(data) {
+          id_mhs = data.id_mahasiswa;
+          nim_mhs = data.nim;
+          nama_mhs = data.nama;
+
+          if (nama_mhs != null) {
+            markup = `<tr>
+                          <td>${i+1}</td>
+                          <td>${nim_mhs}</td>
+                          <td>${nama_mhs}</td>
+                          <td>
+                              <a class="btn" role="button" onclick="deleteData('con', 'func', '${id_mhs}')" data-bs-toggle="modal" data-bs-target="#modalConfirm"><img src="${BASEURL}/icons/delete.svg" alt=""></a>
+                          </td>
+                      </tr>`;
+            table_body.append(markup);
+          }
+        }
+      });
+    }
+
+    $('table tbody').empty();
+  });
+
 });
