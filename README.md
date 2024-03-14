@@ -18,31 +18,31 @@ Ini adalah penjelasan mengenai aplikasi [sementara].
 ### **Fitur MVP Aplikasi**
 | User    | Fitur                            | Status |
 |------   |----------------------------------|--------|
-|         | Login                            | [X]    |
-|         | Logout                           | [X]    |
-|         | Ganti Password                   | [ ]    |
-|         | CRUD Semua Nilai Praktikan       | [X]    |
-|         | Reset Password Akun Dosen        | [X]    |
-|         | Reset Password Akun Asisten      | [X]    |
-| Admin   | CR Perkuliahan                   | [X]    |
-|         | UD Perkuliahan                   | [ ]    |
-|         | CRUD Akun dan Data Dosen         | [X]    |
-|         | CRUD Akun dan Data Asisten       | [X]    |
-|         | CRD Data Frekuensi               | [X]    |
-|         | U Data Frekuensi                 | [ ]    |
-|         | CRUD Data Laboratorium           | [X]    |
-|^^       | Pembobotan Nilai Akhir           | [X]    |
-|         | Login                            | [X]    |
-|         | Logout                           | [X]    |
-| Dosen   | Ganti Password                   | [ ]    |
-|         | Read Nilai Mahasiswa yang Diampu | [X]    |
-|         | CRD Perkuliahan                  | [X]    |
-|         | Update Perkuliahan               | [ ]    |
+| Admin   | Login                            | [X]    |
+|^^       | Logout                           | [X]    |
+|^^       | Ganti Password                   | [ ]    |
+|^^       | CRUD Semua Nilai Praktikan       | [X]    |
 |^^       | Reset Password Akun Dosen        | [X]    |
-|         | Login                            | [X]    |
-|         | Logout                           | [X]    |
-| Assiten | Ganti Password                   | [ ]    |
-|         | Kirim Nilai Akhir                | [X]    |
+|^^       | Reset Password Akun Asisten      | [X]    |
+|^^       | CR Perkuliahan                   | [X]    |
+|^^       | UD Perkuliahan                   | [ ]    |
+|^^       | CRUD Akun dan Data Dosen         | [X]    |
+|^^       | CRUD Akun dan Data Asisten       | [X]    |
+|^^       | CRD Data Frekuensi               | [X]    |
+|^^       | U Data Frekuensi                 | [ ]    |
+|^^       | CRUD Data Laboratorium           | [X]    |
+|^^       | Pembobotan Nilai Akhir           | [X]    |
+| Dosen   | Login                            | [X]    |
+|^^       | Logout                           | [X]    |
+|^^       | Ganti Password                   | [ ]    |
+|^^       | Read Nilai Mahasiswa yang Diampu | [X]    |
+|^^       | CRD Perkuliahan                  | [X]    |
+|^^       | Update Perkuliahan               | [ ]    |
+|^^       | Reset Password Akun Dosen        | [X]    |
+| Assiten | Login                            | [X]    |
+|^^       | Logout                           | [X]    |
+|^^       | Ganti Password                   | [ ]    |
+|^^       | Kirim Nilai Akhir                | [X]    |
 |^^       | CRUD Nilai Praktikan yang Diampu | [X]    |
 
 
