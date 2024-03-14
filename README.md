@@ -23,76 +23,76 @@ Ini adalah penjelasan mengenai aplikasi [sementara].
     <th>User</th> <th>Fitur</th> <th>Status</th>
   </tr>
   <tr>
-    <td rowspan="14">Admin</td> <td>Login</td> <td>[X]</td>
+    <td rowspan="14">Admin</td> <td>Login</td> <td>✅</td>
   </tr>
   <tr>
-    <td>Logout</td> <td>[X]</td>
+    <td>Logout</td> <td>✅</td>
   </tr>
   <tr>
-    <td>Ganti Password</td> <td>[ ]</td>
+    <td>Ganti Password</td> <td>❌</td>
   </tr>
   <tr>
-    <td>CRUD Semua Nilai Praktikan</td> <td>[X]</td>
+    <td>CRUD Semua Nilai Praktikan</td> <td>✅</td>
   </tr>
   <tr>
-    <td>Reset Password Akun Dosen</td> <td>[X]</td>
+    <td>Reset Password Akun Dosen</td> <td>✅</td>
   </tr>
   <tr>
-    <td>Reset Password Akun Asisten</td> <td>[X]</td>
+    <td>Reset Password Akun Asisten</td> <td>✅</td>
   </tr>
   <tr>
-    <td>CR Perkuliahan</td> <td>[X]</td>
+    <td>CR Perkuliahan</td> <td>✅</td>
   </tr>
   <tr>
-    <td>UD Perkuliahan</td> <td>[ ]</td>
+    <td>UD Perkuliahan</td> <td>❌</td>
   </tr>
   <tr>
-    <td>CRUD Akun dan Data Dosen</td> <td>[X]</td>
+    <td>CRUD Akun dan Data Dosen</td> <td>✅</td>
   </tr>
   <tr>
-    <td>CRUD Akun dan Data Asisten</td> <td>[X]</td>
+    <td>CRUD Akun dan Data Asisten</td> <td>✅</td>
   </tr>
   <tr>
-    <td>CRD Data Frekuensi</td> <td>[X]</td>
+    <td>CRD Data Frekuensi</td> <td>✅</td>
   </tr>
   <tr>
-    <td>U Data Frekuensi</td> <td>[ ]</td>
+    <td>U Data Frekuensi</td> <td>❌</td>
   </tr>
   <tr>
-    <td>CRUD Data Laboratorium</td> <td>[X]</td>
+    <td>CRUD Data Laboratorium</td> <td>✅</td>
   </tr>
   <tr>
-    <td>Pembobotan Nilai Akhir</td> <td>[X]</td>
+    <td>Pembobotan Nilai Akhir</td> <td>✅</td>
   </tr>
   <tr>
-    <td rowspan="6">Dosen</td> <td>Logout</td> <td>[X]</td>
+    <td rowspan="6">Dosen</td> <td>Logout</td> <td>✅</td>
   </tr>
   <tr>
-    <td>Ganti Password</td> <td>[ ]</td>
+    <td>Ganti Password</td> <td>❌</td>
   </tr>
   <tr>
-    <td>Read Nilai Mahasiswa yang Diampu</td> <td>[X]</td>
+    <td>Read Nilai Mahasiswa yang Diampu</td> <td>✅</td>
   </tr>
   <tr>
-    <td>CRD Perkuliahan</td> <td>[X]</td>
+    <td>CRD Perkuliahan</td> <td>✅</td>
   </tr>
   <tr>
-    <td>Update Perkuliahan</td> <td>[ ]</td>
+    <td>Update Perkuliahan</td> <td>❌</td>
   </tr>
   <tr>
-    <td>Reset Password Akun Dosen</td> <td>[X]</td>
+    <td>Reset Password Akun Dosen</td> <td>✅</td>
   </tr>
   <tr>
-    <td rowspan="5">Asisten</td> <td>Logout</td> <td>[X]</td>
+    <td rowspan="5">Asisten</td> <td>Logout</td> <td>✅</td>
   </tr>
   <tr>
-    <td>Ganti Password</td> <td>[ ]</td>
+    <td>Ganti Password</td> <td>❌</td>
   </tr>
   <tr>
-    <td>Kirim Nilai Akhir</td> <td>[X]</td>
+    <td>Kirim Nilai Akhir</td> <td>✅</td>
   </tr>
   <tr>
-    <td>CRUD Nilai Praktikan yang Diampu</td> <td>[X]</td>
+    <td>CRUD Nilai Praktikan yang Diampu</td> <td>✅</td>
   </tr>
 </table>
 
