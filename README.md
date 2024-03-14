@@ -1,69 +1,81 @@
-# SIPRAK - Sistem Informasi Praktikum
+# **SIPRAK - Sistem Informasi Praktikum**
 > [!NOTE]
 > Nasrullah - 13020210134
 
 
-### Deskripsi Aplikasi
-- Aplikasi ini muncul dari kekurangan-kekurangan sistem yang telah ada sebelumnya, seperti semua asisten dapat mengedit penilaian frekuensi dari asisten lain, pembobotan nilai yang masih manual dan penetapan status nilai fix atau belum yang masih manual yang nantinya akan dikirim ke masing-masing dosen yang mengampu.
-- Mempermudah pengelolaan penilaian praktikum.
-- PHP, jQuery, Bootstrap.
+
+### **Deskripsi Aplikasi**
+Ini adalah penjelasan mengenai aplikasi [sementara].
 
 
-### Fitur MVP Aplikasi
-- Pengisian Nilai Praktikum
-- Generate Jadwal Tiap Frekuensi
-- Pembobotan Nilai Akhir
+#### User
+* Admin
+* Dosen
+* Asisten
 
 
-### Penjelasan Mengenai Arsitektur MVC
-app\
-├── config\
-│   └── config.php\
-├── controllers\
-│   ├── AsistenDanDosen.php\
-│   ├── DaftarNilai.php\
-│   ├── DataFrekuensi.php\
-│   ├── Laboratorium.php\
-│   ├── Login.php\
-│   └── Settings.php\
-├── core\
-│   ├── App.php\
-│   ├── Controller.php\
-│   ├── Database.php\
-│   └── Flasher.php\
-├── init.php\
-├── models\
-│   ├── Asisten_model.php\
-│   ├── DataFrekuensi_model.php\
-│   ├── Dosen_model.php\
-│   ├── Laboratorium_model.php\
-│   └── Login_model.php\
-└── views\
-    ├── asistenDanDosen\
-    │   ├── asistenPage.php\
-    │   ├── dosenPage.php\
-    │   └── index.php\
-    ├── daftarNilai\
-    │   └── index.php\
-    ├── dataFrekuensi\
-    │   └── index.php\
-    ├── laboratorium\
-    │   └── index.php\
-    ├── login\
-    │   ├── change-default-password.php\
-    │   └── index.php\
-    ├── settings\
-    │   └── index.php\
-    └── templates\
-        ├── footer.php
-        ├── header.php\
-        ├── headerProfile.php\
-        └── sidebar.php\
 
-### LINK UML [Click here](https://drive.google.com/file/d/1f8IS6r13hGTsoHEPrlGKfqRiTcy7Nvp6/view?usp=sharing)
-### LINK ERD [Click here](https://drive.google.com/file/d/1DbKUbbk48IbHFtLxFLOD0VclwGNlEo5K/view?usp=sharing)
-### LINK UI/UX [Click here](https://www.figma.com/file/9mJhlKgAEgims5pORYLQxt/sistem-informasi-praktikum?type=design&node-id=0%3A1&mode=design&t=IldeGcBLsB6ZSZVn-1)
+### **Fitur MVP Aplikasi**
+| User    | Fitur                            | Status |
+|------   |----------------------------------|--------|
+|         | Login                            | [X]    |
+|         | Logout                           | [X]    |
+|         | Ganti Password                   | [ ]    |
+|         | CRUD Semua Nilai Praktikan       | [X]    |
+|         | Reset Password Akun Dosen        | [X]    |
+|         | Reset Password Akun Asisten      | [X]    |
+| Admin   | CR Perkuliahan                   | [X]    |
+|         | UD Perkuliahan                   | [ ]    |
+|         | CRUD Akun dan Data Dosen         | [X]    |
+|         | CRUD Akun dan Data Asisten       | [X]    |
+|         | CRD Data Frekuensi               | [X]    |
+|         | U Data Frekuensi                 | [ ]    |
+|         | CRUD Data Laboratorium           | [X]    |
+|^^       | Pembobotan Nilai Akhir           | [X]    |
+|         | Login                            | [X]    |
+|         | Logout                           | [X]    |
+| Dosen   | Ganti Password                   | [ ]    |
+|         | Read Nilai Mahasiswa yang Diampu | [X]    |
+|         | CRD Perkuliahan                  | [X]    |
+|         | Update Perkuliahan               | [ ]    |
+|^^       | Reset Password Akun Dosen        | [X]    |
+|         | Login                            | [X]    |
+|         | Logout                           | [X]    |
+| Assiten | Ganti Password                   | [ ]    |
+|         | Kirim Nilai Akhir                | [X]    |
+|^^       | CRUD Nilai Praktikan yang Diampu | [X]    |
+
+
+
+### **Dibuat Menggunakan**
+* [![MsSQL][MySQL.com]][MySQL-url]
+* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+* [![JQuery][JQuery.com]][JQuery-url]
+
+
+
+### **Penjelasan Mengenai Arsitektur MVC**
+
+
+
+### Assets
+* Link UML [Click here](https://drive.google.com/file/d/1f8IS6r13hGTsoHEPrlGKfqRiTcy7Nvp6/view?usp=sharing)
+* Link ERD [Click here](https://drive.google.com/file/d/1DbKUbbk48IbHFtLxFLOD0VclwGNlEo5K/view?usp=sharing)
+* Link UI/UX [Click here](https://www.figma.com/file/9mJhlKgAEgims5pORYLQxt/sistem-informasi-praktikum?type=design&node-id=0%3A1&mode=design&t=IldeGcBLsB6ZSZVn-1)
+
 
 
 > [!CAUTION]
 > PHP VERSION 8.3.2
+
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+
+[MySQL.com]: https://img.shields.io/badge/mysql-FF2D20?style=for-the-badge&logo=mysql&logoColor=white
+[MySQL-url]: https://www.mysql.com/
+[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com
+[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
+[JQuery-url]: https://jquery.com 
