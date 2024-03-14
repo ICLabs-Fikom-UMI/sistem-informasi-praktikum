@@ -16,34 +16,116 @@ Ini adalah penjelasan mengenai aplikasi [sementara].
 
 
 ### **Fitur MVP Aplikasi**
-| User    | Fitur                            | Status |
-|------   |----------------------------------|--------|
-| Admin   | Login                            | [X]    |
-|^^       | Logout                           | [X]    |
-|^^       | Ganti Password                   | [ ]    |
-|^^       | CRUD Semua Nilai Praktikan       | [X]    |
-|^^       | Reset Password Akun Dosen        | [X]    |
-|^^       | Reset Password Akun Asisten      | [X]    |
-|^^       | CR Perkuliahan                   | [X]    |
-|^^       | UD Perkuliahan                   | [ ]    |
-|^^       | CRUD Akun dan Data Dosen         | [X]    |
-|^^       | CRUD Akun dan Data Asisten       | [X]    |
-|^^       | CRD Data Frekuensi               | [X]    |
-|^^       | U Data Frekuensi                 | [ ]    |
-|^^       | CRUD Data Laboratorium           | [X]    |
-|^^       | Pembobotan Nilai Akhir           | [X]    |
-| Dosen   | Login                            | [X]    |
-|^^       | Logout                           | [X]    |
-|^^       | Ganti Password                   | [ ]    |
-|^^       | Read Nilai Mahasiswa yang Diampu | [X]    |
-|^^       | CRD Perkuliahan                  | [X]    |
-|^^       | Update Perkuliahan               | [ ]    |
-|^^       | Reset Password Akun Dosen        | [X]    |
-| Assiten | Login                            | [X]    |
-|^^       | Logout                           | [X]    |
-|^^       | Ganti Password                   | [ ]    |
-|^^       | Kirim Nilai Akhir                | [X]    |
-|^^       | CRUD Nilai Praktikan yang Diampu | [X]    |
+Berikut adalah tabel lengkap dengan pengisian bagian continued untuk pengguna Dosen dan Assisten:
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Fitur</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td rowspan="14">Admin</td>
+    <td>Login</td>
+    <td>[X]</td>
+  </tr>
+  <tr>
+    <td>Logout</td>
+    <td>[X]</td>
+  </tr>
+  <tr>
+    <td>Ganti Password</td>
+    <td>[ ]</td>
+  </tr>
+  <tr>
+    <td>CRUD Semua Nilai Praktikan</td>
+    <td>[X]</td>
+  </tr>
+  <tr>
+    <td>Reset Password Akun Dosen</td>
+    <td>[X]</td>
+  </tr>
+  <tr>
+    <td>Reset Password Akun Asisten</td>
+    <td>[X]</td>
+  </tr>
+  <tr>
+    <td>CR Perkuliahan</td>
+    <td>[X]</td>
+  </tr>
+  <tr>
+    <td>UD Perkuliahan</td>
+    <td>[ ]</td>
+  </tr>
+  <tr>
+    <td>CRUD Akun dan Data Dosen</td>
+    <td>[X]</td>
+  </tr>
+  <tr>
+    <td>CRUD Akun dan Data Asisten</td>
+    <td>[X]</td>
+  </tr>
+  <tr>
+    <td>CRD Data Frekuensi</td>
+    <td>[X]</td>
+  </tr>
+  <tr>
+    <td>U Data Frekuensi</td>
+    <td>[ ]</td>
+  </tr>
+  <tr>
+    <td>CRUD Data Laboratorium</td>
+    <td>[X]</td>
+  </tr>
+  <tr>
+    <td>Pembobotan Nilai Akhir</td>
+    <td>[X]</td>
+  </tr>
+  <tr>
+    <td rowspan="6">Dosen</td>
+    <td>Logout</td>
+    <td>[X]</td>
+  </tr>
+  <tr>
+    <td>Ganti Password</td>
+    <td>[ ]</td>
+  </tr>
+  <tr>
+    <td>Read Nilai Mahasiswa yang Diampu</td>
+    <td>[X]</td>
+  </tr>
+  <tr>
+    <td>CRD Perkuliahan</td>
+    <td>[X]</td>
+  </tr>
+  <tr>
+    <td>Update Perkuliahan</td>
+    <td>[ ]</td>
+  </tr>
+  <tr>
+    <td>Reset Password Akun Dosen</td>
+    <td>[X]</td>
+  </tr>
+  <tr>
+    <td rowspan="5">Asisten</td>
+    <td>Logout</td>
+    <td>[X]</td>
+  </tr>
+  <tr>
+    <td>Ganti Password</td>
+    <td>[ ]</td>
+  </tr>
+  <tr>
+    <td>Kirim Nilai Akhir</td>
+    <td>[X]</td>
+  </tr>
+  <tr>
+    <td>CRUD Nilai Praktikan yang Diampu</td>
+    <td>[X]</td>
+  </tr>
+</table>
+
+Sekarang tabel tersebut lengkap dengan fitur-fitur dan status-status yang sesuai dengan setiap pengguna.
 
 
 
